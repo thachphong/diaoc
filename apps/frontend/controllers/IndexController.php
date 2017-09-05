@@ -35,7 +35,7 @@ class IndexController extends PHOController
 			$sl = new Slide();
 			$param['slides'] = $sl->get_slides_list(0);
 			//$frontendCache->save( $param);
-			$cache2 = $this->createCache( ['lifetime' => 900 ]); // 1 ngay
+			$cache2 = $this->createCache( ['lifetime' => 900 ]); // 15 phut
 			$cacheKey2 = 'seachtopparam1.cache';
 			$search_pa = $cache2->get($cacheKey2);
 			if($search_pa === null){			

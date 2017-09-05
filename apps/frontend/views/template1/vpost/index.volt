@@ -37,7 +37,7 @@
                      {%endfor%}
                   </ul>
                </div>               
-               <div class="imgscroll" id="bx-pager">                  
+               <div class="imgselect_thumb" id="bx-pager">                  
                   <ul>
                      {%for key,img in imglist%}
                      <li><a data-slide-index="{{key}}"><img src="{{url.get('')}}{{img.img_path}}"></a></li>
@@ -218,7 +218,8 @@ if(post_address.length ==0){ post_address = "152 Vũ Phạm Hàm , Phường Yê
           animation: google.maps.Animation.DROP
       });
     var infowindow = new google.maps.InfoWindow;
-    infowindow.setContent(post_address);
+    var div_addr ='<div style="overflow: auto;width: 100%;">'+post_address+'</div>'
+    infowindow.setContent(div_addr);
         infowindow.open(map, markers[0]);  
 
       setTimeout(function(){$('#tab_detail_2').hide();},1000);

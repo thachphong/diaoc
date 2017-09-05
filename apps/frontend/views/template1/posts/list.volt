@@ -16,7 +16,8 @@
 								<th>Trạng thái</th>
 								<th>Ngày đăng</th>
 								<th>Ngày hết hạn</th>
-								<th>Thao tác</th>
+								<th>Sửa</th>
+								<th>Xóa</th>
 							</tr>
 							{%for item in list%}
 							<tr>
@@ -25,7 +26,8 @@
 								<td>{{item['status']}}</td>
 								<td>{{item['start_date']}}</td>
 								<td>{{item['end_date']}}</td>
-								<td><a href="{{url.get('posts/delete/')}}{{item['post_id']}}" class="btn_blue">Xóa</a></td>
+								<td><a href="{{url.get('dang-tin/')}}{{item['post_id']}}" class="btn_blue">Sửa</a></td>
+								<td><a href="{{url.get('posts/delete/')}}{{item['post_id']}}" class="btn_red_small">Xóa</a></td>
 							</tr>
 							{%endfor%}							
 						</table>

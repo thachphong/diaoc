@@ -27,6 +27,19 @@ class PostsController extends PHOController
     }
 	public function indexAction($id)
 	{
+		$cache = $this->createCache( ['lifetime' => 36000 ]); // 10 giờ
+		$cacheKey = 'param_dangtin.cache';
+		$result = $cache->get($cacheKey);
+		if($result === null){	
+			$result['categorys'] = Category::get_all();
+			$result['provincials'] = Provincial::get_all();
+			$result['districts'] = District::find();
+			$result['wards'] = Ward::find();
+			$result['streets'] = Street::find();
+			$result['directionals'] = Directional::find();
+			$result['units'] = Unit::find();
+			$cache->save($cacheKey,$result);
+		}
 				
 		if(strlen($id) == 0 || $id == 0){
 			$result['start_date'] = date('d/m/Y');
@@ -69,13 +82,7 @@ class PostsController extends PHOController
 			$result = $db->get_post_row($id);
 			$result['img_list']= $dbimg->get_img_bypost($id);
 		}
-		$result['categorys'] = Category::get_all();
-		$result['provincials'] = Provincial::get_all();
-		$result['districts'] = District::find();
-		$result['wards'] = Ward::find();
-		$result['streets'] = Street::find();
-		$result['directionals'] = Directional::find();
-		$result['units'] = Unit::find();
+		
 		$result['folder_tmp'] = uniqid("",true);
 		//PhoLog::debug_var('---info----','id:'.$id);
 		//PhoLog::debug_var('---info----',$result);

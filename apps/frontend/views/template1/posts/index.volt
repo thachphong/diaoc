@@ -304,7 +304,7 @@
 						<div class="row row-margin-bottom" style="margin-top:20px">
 							<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
 								<button class="btn_dangtin btn_red" id="btn_cancel"><i class="fa fa-times"></i>Hủy bỏ</button>
-								<button class="btn_dangtin" id="btn_preview" style="width:110px;"><i class="fa fa-eye"></i>Xem trước</button>
+								<!--<button class="btn_dangtin" id="btn_preview" style="width:110px;"><i class="fa fa-eye"></i>Xem trước</button>-->
 								<button class="btn_dangtin" id="btn_save" ><i class="fa fa-check-square-o"></i>Đăng tin</button>
 								<button id="mapsubmit" style="display:none">Tìm vị trí</button>
 							</div>
