@@ -18,10 +18,10 @@
             <div class="col-md-6 col-sm-6 col-xs-12" id="footer_col_2">
                 <div><img src="{{url.get('template1/images/dang_ky_bct.png')}}"> </div>
                 <ul class="mxh">
-                    <li><a><i class="fa fa-facebook-square"></i></a>
-                    <li><a><i class="fa fa-twitter-square"></i></a>
-                    <li><a><i class="fa fa-youtube-square"></i></a>
-                    <li><a><i class="fa fa-google-plus-square"></i></a>
+                    <li><a href="{{define['facebook_page']}}" target="_blank"><i class="fa fa-facebook-square"></i></a>
+                    <li><a href="{{define['tweet_page']}}" target="_blank"><i class="fa fa-twitter-square"></i></a>
+                    <li><a href="{{define['youtu_page']}}" target="_blank"><i class="fa fa-youtube-square"></i></a>
+                    <li><a href="{{define['google_page']}}" target="_blank"><i class="fa fa-google-plus-square"></i></a>
                 </ul>                
             </div>
          </div>
@@ -31,7 +31,7 @@
       		<div id="cfacebook" style="float: right;">
             <a href="javascript:;" class="chat_fb" onclick="return:false;"><i class="fa fa-facebook-square"></i> Hỗ trợ trực tuyến</a>
             <div class="fchat">
-            <div class="fb-page" data-tabs="messages" data-href="https://www.facebook.com/dongianthichthiclick/" data-width="250" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>
+            <div class="fb-page" data-tabs="messages" data-href="{{define['facebook_page']}}" data-width="250" data-height="400" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>
             </div>
           </div>
       	</div>

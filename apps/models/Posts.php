@@ -163,7 +163,9 @@ class Posts extends DBModel
 					m_provin_id = :m_provin_id,
 					m_district_id = :m_district_id,
 					m_ward_id = :m_ward_id,
+					m_street_id =:m_street_id,
 					price = :price,
+					unit_price =:unit_price,
 					acreage = :acreage,
 					content = :content,
 					upd_user = :user_id,
@@ -182,7 +184,7 @@ class Posts extends DBModel
 
 				where post_id =:post_id
 				";
-		$this->pho_execute($sql, PHOArray::filter($param, array(
+		$pasql = PHOArray::filter($param, array(
                     'post_id'
                     ,'post_name' 
                     ,'ctg_id'                               
@@ -193,6 +195,7 @@ class Posts extends DBModel
                     ,'m_district_id'
                     ,'m_ward_id'
                     ,'price'
+                    ,'unit_price'
                     ,'acreage'
                     ,'content'
                     ,'toilet_num'
@@ -205,7 +208,41 @@ class Posts extends DBModel
                     ,'facade_width'
                     ,'map_lat'
                     ,'map_lng'
-                    )));  
+                    ));
+		if(strlen($pasql['unit_price'])==0){
+			$pasql['unit_price'] =NULL;
+		}
+		if(strlen($pasql['price'])==0){
+			$pasql['price']=NULL;
+		}
+		if(strlen($pasql['m_ward_id'])==0){
+			$pasql['m_ward_id']=NULL;
+		}
+	    if(strlen($pasql['m_directional_id'])==0){
+			$pasql['m_directional_id']=NULL;
+		}
+	    if(strlen($pasql['acreage'])==0){
+			$pasql['acreage']=NULL;
+		}
+	    if(strlen($pasql['m_street_id'])==0){
+			$pasql['m_street_id']=NULL;
+		}
+	    if(strlen($pasql['toilet_num'])==0){
+			$pasql['toilet_num']=NULL;
+		}
+		if(strlen($pasql['room_num'])==0){
+			$pasql['room_num']=NULL;
+		}
+		if(strlen($pasql['floor_num'])==0){
+			$pasql['floor_num']=NULL;
+		}
+		if(strlen($pasql['street_width'])==0){
+			$pasql['street_width']=NULL;
+		}
+	    if(strlen($pasql['facade_width'])==0){
+			$pasql['facade_width']=NULL;
+		}
+		$this->pho_execute($sql, $pasql);  
         return TRUE;
 	}
 	public function get_list_new($post_type= '',$limit = 10){

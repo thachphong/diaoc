@@ -166,8 +166,8 @@ class News extends DBModel
                   n.des,
                   n.img_path,
                   n.add_date
-              from news n 
-              order by n.news_id desc
+              from news n where ctg_id <> 5
+              order by n.total_view desc
               limit $limit";
         return $this->pho_query($sql);
   }
