@@ -325,7 +325,7 @@ class Elements extends Component
 			}
 			$cache->save($cacheKey, $cdata);
 		}
-		PhoLog::debug_var('---checkdata---',$cdata);		
+		//PhoLog::debug_var('---checkdata---',$cdata);		
 		return $cdata;
 	}
     

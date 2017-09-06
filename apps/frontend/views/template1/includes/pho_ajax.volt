@@ -157,10 +157,12 @@ var Pho_direct= function(url){
 	location.href = url;
 }
 $body = $("body");
-
+var loading_flg =true;
 $(document).on({
-    ajaxStart: function() { $body.addClass("loading");    },
-    ajaxStop: function() { $body.removeClass("loading"); }    
+    ajaxStart: function() { 
+    	if(loading_flg){$body.addClass("loading");}    
+    },
+    ajaxStop: function() { $body.removeClass("loading");loading_flg=true }    
 });
 </script>
 <div class="modal_loading"></div>

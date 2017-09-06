@@ -27,17 +27,18 @@ class PostsController extends PHOController
     }
 	public function indexAction($id)
 	{
-		$cache = $this->createCache( ['lifetime' => 36000 ]); // 10 giờ
+		$cache = $this->createCache( ['lifetime' => 86400 ]); // 1 ngay
 		$cacheKey = 'param_dangtin.cache';
 		$result = $cache->get($cacheKey);
 		if($result === null){	
 			$result['categorys'] = Category::get_all();
 			$result['provincials'] = Provincial::get_all();
 			$result['districts'] = District::find();
-			$result['wards'] = Ward::find();
+			//$result['wards'] =array();//Ward::find();
 			$result['streets'] = Street::find();
 			$result['directionals'] = Directional::find();
 			$result['units'] = Unit::find();
+			//PhoLog::debug_var('ko cach');
 			$cache->save($cacheKey,$result);
 		}
 				
@@ -79,7 +80,8 @@ class PostsController extends PHOController
 		}else{
 			$db = new Posts();
 			$dbimg = new PostsImg();
-			$result = $db->get_post_row($id);
+			$data = $db->get_post_row($id);
+			$result = array_merge($result,$data);
 			$result['img_list']= $dbimg->get_img_bypost($id);
 		}
 		
@@ -88,6 +90,18 @@ class PostsController extends PHOController
 		//PhoLog::debug_var('---info----',$result);
 		$this->set_template_share();
 		$this->ViewVAR($result);	
+	}
+	public function wardsAction(){		
+		$ckey ="m_wards.cache";
+		$cache = $this->createCache(['lifetime' => 86400 ]); // 1 ngay
+		$data = $cache->get($ckey);
+		if($data === null){
+			$mw = new Ward();
+			$data['wards'] = $mw->get_rows();			
+			$cache->save($ckey,$data);
+		}	
+	
+		return $this->ViewJSON($data);
 	}
 	public function updateAction(){
 		try{

@@ -105,11 +105,8 @@
 							<label class="col-md-1 col-sm-1 col-xs-12 title_col">Đơn vị</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<label class="select_icon">
-									<select name="unit_price">
+									<select name="unit_price" id="unit_price">
 										<option value="">--Chọn đơn vị--</option>
-										{%for item in units%}
-											<option value="{{item.m_unit_id}}" {%if unit_price == item.m_unit_id%}selected{%endif%}>{{item.m_unit_name}}</option>
-										{%endfor%}
 									</select>
 								</label>
 							</div>							
@@ -324,6 +321,7 @@
 		var ward_list = Array();
 		var street_list = Array();
 		var category_list = Array();
+		var unit_list = Array();
 		{%for item in categorys%}
 			category_list.push(['{{item.ctg_id}}',"{{item.ctg_name}}",'{{item.parent_id}}']);
 		{%endfor%}
@@ -332,13 +330,12 @@
 			district_list.push(['{{item.m_district_id}}',"{{item.m_district_name}}",'{{item.m_provin_id}}']);
 		{%endfor%}
 
-		{%for item in wards%}
-			ward_list.push(['{{item.m_ward_id}}',"{{item.m_ward_name}}",'{{item.m_district_id}}']);
-		{%endfor%}
 		{%for item in streets%}
 			street_list.push(['{{item.m_street_id}}',"{{item.m_street_name}}",'{{item.m_ward_id}}']);
 		{%endfor%}
-
+		{%for item in units%}
+			unit_list.push(['{{item.m_unit_id}}',"{{item.m_unit_name}}",'{{item.m_type_id}}']);
+		{%endfor%}
 		$('.datetimepicker').datetimepicker({
           //format:'Y/m/d H:i',
           format:'d/m/Y',
@@ -347,7 +344,14 @@
           lang:'ru'
     	});
 		//console.log(district_list);
-		
+		function get_basic(){
+			loading_flg = false;
+	        jsion_ajax("{{url.get('posts/wards')}}" ,null,function(datas){               
+	            ward_list = datas.wards;  
+	            change_war_option('{{m_ward_id}}');
+	        });
+	    }
+	    setTimeout(get_basic(),10);
 		$(document).off('change','#m_provin_id');
 		$(document).on('change','#m_provin_id',function(){			
 			change_district_option('');
@@ -381,23 +385,23 @@
 			var option = '<option value="">--Chọn Phường/Xã--</option>';
 			$.each(ward_list,function(key,item){
 				//console.log(item);
-				if(val == item[2]){
-					if(m_ward_id == item[0]){
-						option +='<option value="'+item[0]+'" selected>'+item[1]+'</option>';
+				if(val == item['m_district_id']){
+					if(m_ward_id == item['m_ward_id']){
+						option +='<option value="'+item['m_ward_id']+'" selected>'+item['m_ward_name']+'</option>';
 					}else{
-						option +='<option value="'+item[0]+'">'+item[1]+'</option>';
+						option +='<option value="'+item['m_ward_id']+'">'+item['m_ward_name']+'</option>';
 					}					
 				}
 			});
 			$('#m_ward_id').empty();
 			$('#m_ward_id').append(option);		
 		};
-		change_war_option('{{m_ward_id}}');
+		//change_war_option('{{m_ward_id}}');
 		$(document).off('change','#m_ward_id');
 		$(document).on('change','#m_ward_id',function(){
 			var val = $(this).val();
 			var option = '<option value="">--Chọn Đường/Phố--</option>';
-			$.each(ward_list,function(key,item){
+			$.each(street_list,function(key,item){
 				//console.log(item);
 				if(val == item[2]){
 					option +='<option value="'+item[0]+'">'+item[1]+'</option>';
@@ -473,6 +477,7 @@
 		$(document).on('change','.m_type_id',function(){
 			//var val = $("input[name='m_type_id']:checked").val();
 			change_m_type_id('');
+			change_unit_price('');
 		});
 		function change_m_type_id(ctg_id){
 			var val = $("input[name='m_type_id']:checked").val();
@@ -491,6 +496,24 @@
 			$('#ctg_id').append(option);
 		}		
 		change_m_type_id('{{ctg_id}}');
+		function change_unit_price(m_unit_id){
+			var val = $("input[name='m_type_id']:checked").val();
+			var option = '<option value="">--Chọn đơn vị--</option>';			
+			$.each(unit_list,function(key,item){
+				//console.log(item);
+				if(val == item[2]){
+					if(m_unit_id == item[0]){
+						option +='<option value="'+item[0]+'" selected>'+item[1]+'</option>';
+					}else{
+						option +='<option value="'+item[0]+'">'+item[1]+'</option>';
+					}					
+				}
+			});
+			$('#unit_price').empty();
+			$('#unit_price').append(option);
+		}
+		change_unit_price('{{unit_price}}');
+		
 		function topFunction() {
 		    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
 		    document.documentElement.scrollTop = 0; // For IE and Firefox
@@ -600,6 +623,20 @@
             });
         });
 	});
+function jsion_ajax(url,data,done_fun){
+    $.ajax({
+        url: url,
+        data: data,
+        dataType: 'json',
+        success: function(datajsion) {
+            done_fun(datajsion);
+        },
+        error: function() {
+            alert('Lỗi Ajax !!!');
+        },      
+        type: 'POST'
+    });
+}
 var map, ele, mapH, mapW, addEle, mapL, mapN, mapZ;
 
 ele = 'maps_mapcanvas';
