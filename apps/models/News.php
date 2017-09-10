@@ -213,5 +213,9 @@ class News extends DBModel
   public function update_traffic($param){
 		$sql="select update_traffic_news(:news_id,:section_id,:time,:ip)";
 		return $this->pho_execute($sql,$param);
-	}
+  }
+  public function get_project_all(){
+  	  $sql="select news_id,news_name,news_no from news where ctg_id = 5 and del_flg =0";
+  	  return $this->pho_query($sql);
+  }
 }

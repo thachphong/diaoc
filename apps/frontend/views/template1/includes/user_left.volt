@@ -5,9 +5,9 @@
 	    <h3 class="title_2" style="text-align:center">{{login_info.user_name}}</h3>
 	</div>
 	<div class="huongdan">
-	    <div class="hd-title">
+	    <div class="pn_title">
 	    	<span class="bg_icon"><i class="fa fa-question-circle"></i></span>
-	        <h3><a>Thông tin tài khoản</a></h3>
+	        <h3>Thông tin tài khoản</h3>
 	    </div>
 	    <div class="row pn_background pn_border margin_top">
 	    <ul>

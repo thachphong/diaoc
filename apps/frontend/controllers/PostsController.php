@@ -19,6 +19,7 @@ use Multiple\Models\Unit;
 use Multiple\Models\Category;
 use Multiple\Library\FilePHP;
 use Multiple\PHOClass\PhoLog;
+use Multiple\Models\News;
 class PostsController extends PHOController
 {
 	public function initialize()
@@ -38,6 +39,8 @@ class PostsController extends PHOController
 			$result['streets'] = Street::find();
 			$result['directionals'] = Directional::find();
 			$result['units'] = Unit::find();
+			$ndb = new News();
+			$result['projects'] = $ndb->get_project_all();
 			//PhoLog::debug_var('ko cach');
 			$cache->save($cacheKey,$result);
 		}

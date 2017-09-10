@@ -15,7 +15,10 @@ class PostsView extends DBModel
     public $upd_datetime;
     public $add_user_id;
     public $upd_user_id;
-  
+    public $total_day;
+	public $price;
+	public $vat;
+	public $total_amount ;
     public function initialize()
     {
         $this->setSource("posts_view");
@@ -30,6 +33,10 @@ class PostsView extends DBModel
         $this->post_level = $param['post_level'];
         $this->add_user_id = $param['user_id'];
         $this->upd_user_id = $param['user_id'];
+        $this->total_day= $param['total_day'];
+		$this->price= $param['price'];
+		$this->vat= $param['vat'];
+		$this->total_amount = $param['total_amount'];
         //PhoLog::debug_var('date----',$param);
         //PhoLog::debug_var('date----','start:'.$this->start_date);
         //PhoLog::debug_var('date----','end:'.$this->end_date);
@@ -39,7 +46,11 @@ class PostsView extends DBModel
         $sql = "update posts_view
                     set start_date = :start_date,
                     end_date = :end_date,
-                    post_level = :post_level,                    
+                    post_level = :post_level,
+                    total_day =:total_day,
+                    price =:price,
+                    vat =:vat,
+                    total_amount =:total_amount,                    
                     upd_user_id = :user_id,                   
                     upd_datetime =now()
                 where post_view_id =:post_view_id
@@ -47,7 +58,11 @@ class PostsView extends DBModel
         $sql_par = PHOArray::filter($param, array(                  
                     'post_level'
                     ,'user_id'
-                    ,'post_view_id'                   
+                    ,'post_view_id'
+                    ,'total_day' 
+                    ,'price'
+                    ,'vat'
+                    ,'total_amount'                  
                     ));
         $sql_par['start_date']=\DateTime::createFromFormat('d/m/Y', $param['start_date'])->format('Y-m-d');
         $sql_par['end_date']=\DateTime::createFromFormat('d/m/Y', $param['end_date'])->format('Y-m-d');

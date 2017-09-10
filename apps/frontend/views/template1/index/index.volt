@@ -1,7 +1,16 @@
 {{ partial('includes/search') }}
+{% set banners= elements.get_banner()%}
 <div class="row">
-   <div class="container" id="content">            
-      <div class="col-md-8 col-sm-12 col-xs-12 margin_top">
+   <div class="banner_left">
+   		<a href="{{url.get(banners[0].link_page)}}">
+   			<img src="{{url.get(banners[0].img_path)}}" style="margin-bottom: 5px"/>
+   		</a>
+   		<a href="{{url.get(banners[1].link_page)}}">
+   			<img src="{{url.get(banners[1].img_path)}}"/>
+   		</a>
+   </div>
+   <div class="container" id="content">
+      <div class="col-md-8 col-sm-12 col-xs-12 margin_top no_padding_left">
          <div class="row margin_top" >
             <div class="pn_title">
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
@@ -13,7 +22,7 @@
                   <div class="row margin_top pn_background pn_border">
                      <div class="col-md-3 col-sm-3 col-xs-12 post_img">
                         <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}">
-                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/176x118/')}}{{item['img_path']}}{%endif%}" class="img_newlist">
+                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/150x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist">
                         </a>
                      </div>
                      <div class="col-md-9 col-sm-9 col-xs-12">
@@ -143,7 +152,7 @@
       </div>
       
       {{ javascript_include('template1/js/ImageScroll.js') }}
-      <script type="text/javascript">
+<script type="text/javascript">
 
 	  $('#imgs').imageScroll({
 	    orientation:"left",
@@ -152,12 +161,49 @@
 	    hoverPause:true,
 	    callback:function(){
 	      var ordinal = $(this).find("img").first().attr("src");
-	      <!-- console.log(ordinal); -->
+	      // console.log(ordinal); 
 	      $(this).next("span").text("CallbackDisplay: hidden "+ordinal+"!");
 	    }
 	  });
-
-	  </script>
+	  $(window).scroll(function() {
+		    var height = $(window).scrollTop();
+		    
+		    $('.banner_left').removeAttr("style");
+		    $('.banner_right').removeAttr("style");
+		    if(height  < 380) {
+		        // do something
+		        $('.banner_left').css('top',(380-height)+'px');
+		        $('.banner_right').css('top',(380-height)+'px');
+		    }else{
+		    	$('.banner_left').css('top','0px');
+		    	$('.banner_right').css('top','0px');
+		    }
+		    var wheight = $(document).height();
+		    var screen_height = window.innerHeight;
+		    var bottom = wheight - screen_height - 248;
+		    //console.log('height:'+height);
+		    //console.log('bottom:'+bottom);
+		    //console.log('bottom2:'+(height-bottom));
+		    if(height > bottom ){
+		    	$('.banner_left').removeAttr("style");
+		    	$('.banner_left').css('bottom',(height-bottom)+'px');
+		    	$('.banner_right').removeAttr("style");
+		    	$('.banner_right').css('bottom',(height-bottom)+'px');
+		    }
+		    //console.log(window.innerHeight);
+		    
+		    //248 bottom
+		    
+		}); 	
+</script>
       {{ partial('includes/right') }}
+   </div>
+   <div class="banner_right">
+   		<a href="{{url.get(banners[2].link_page)}}">
+   			<img src="{{url.get(banners[2].img_path)}}" style="margin-bottom: 5px"/>
+   		</a>
+   		<a href="{{url.get(banners[3].link_page)}}">
+   			<img src="{{url.get(banners[3].img_path)}}"/>
+   		</a>
    </div>
 </div>

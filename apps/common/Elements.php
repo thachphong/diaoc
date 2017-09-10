@@ -9,6 +9,8 @@ use Multiple\Models\Define;
 use Phalcon\Cache\Backend\File as BackFile;
 use Phalcon\Cache\Frontend\Data as FrontData;
 use Multiple\PHOClass\PhoLog;
+use Multiple\Models\Slide;
+
 /**
  * Elements
  *
@@ -326,6 +328,21 @@ class Elements extends Component
 			$cache->save($cacheKey, $cdata);
 		}
 		//PhoLog::debug_var('---checkdata---',$cdata);		
+		return $cdata;
+	}
+	public function get_banner(){
+    	$options = ['lifetime' => 86400 ]; // thoi gian tinh bang giay ,1 ngay
+        $frontendCache = new FrontData($options);   
+        $cache = new BackFile( $frontendCache,  ['cacheDir' => PHO_CACHE_DIR ]);
+
+        $cacheKey = 'banner.cache';
+        $cdata  = $cache->get($cacheKey);
+        if($cdata === NULL){
+			$model = new Slide();
+			$cdata = $model->get_slides_list(1); //1 la banner		
+			
+			$cache->save($cacheKey, $cdata);
+		}		
 		return $cdata;
 	}
     

@@ -1,6 +1,7 @@
 <div class="row">
 	<div class="container">
 		{{ partial('includes/user_left') }}
+		{% set define= elements.get_define()%}
 		<div class="col-md-9 col-sm-12 col-xs-12">
 			<div class="pn_posts">
 				<div class="pn_title">
@@ -87,16 +88,9 @@
 								</label>
 							</div>
 						</div>
-						<!-- <div class="row row-margin-bottom">
-							<label class="col-md-2 col-sm-2 col-xs-12 title_col"></label>
-							<div class="col-md-4 col-sm-4 col-xs-12">
-								<label class="select_icon">
-									<select>
-										<option>--Chọn Dự án--</option>
-									</select>
-								</label>
-							</div>							
-						</div> -->
+					    <!--<div class="row row-margin-bottom">
+														
+						</div>-->
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Giá</label>
 							<div class="col-md-4 col-sm-4 col-xs-12">
@@ -112,7 +106,18 @@
 							</div>							
 						</div>
 						<div class="row row-margin-bottom">
-							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Diện tích</label>
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col"></label>
+							<div class="col-md-4 col-sm-4 col-xs-12">
+								<label class="select_icon">
+									<select name="project_id" id="project_id">
+										<option value="">--Chọn Dự án--</option>
+										{%for item in projects%}
+										<option value="{{item['news_id']}}">{{item['news_name']}}</option>
+										{%endfor%}
+									</select>
+								</label>
+							</div>
+							<label class="col-md-1 col-sm-1 col-xs-12 title_col">Diện tích</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="number" name="acreage" value="{{acreage}}">
 							</div>
@@ -259,28 +264,28 @@
 							<div class="col-md-2 col-sm-2 col-xs-12">
 								<label class="control control-radio">
 							        Tin siêu vip
-							        <input type="radio" name="view[post_level]" {%if post_level ==3%}checked="checked"{%endif%} value="3" />
+							        <input type="radio" name="view[post_level]" {%if post_level ==3%}checked="checked"{%endif%} value="3" class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
 							<div class="col-md-2 col-sm-2 col-xs-12">
 								<label class="control control-radio">
 							        Tin vip
-							        <input type="radio" name="view[post_level]" value="2" {%if post_level ==2%}checked="checked"{%endif%}/>
+							        <input type="radio" name="view[post_level]" value="2" {%if post_level ==2%}checked="checked"{%endif%} class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
 							<div class="col-md-2 col-sm-2 col-xs-12">
 								<label class="control control-radio">
 							        Tin hot
-							        <input type="radio" name="view[post_level]" value="1" {%if post_level ==1%}checked="checked"{%endif%}/>
+							        <input type="radio" name="view[post_level]" value="1" {%if post_level ==1%}checked="checked"{%endif%} class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
 							<div class="col-md-2 col-sm-2 col-xs-12">
 								<label class="control control-radio">
 							        Tin thường
-							        <input type="radio" name="view[post_level]" value="0" {%if post_level ==0%}checked="checked"{%endif%}/>
+							        <input type="radio" name="view[post_level]" value="0" {%if post_level ==0%}checked="checked"{%endif%} class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>												
@@ -288,14 +293,47 @@
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Thời gian đăng từ  <span class="lab_red">(*)</span>:</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="" name="view[start_date]" class="datetimepicker" id="view_start" required value="{{start_date}}">
+								<input type="" name="view[start_date]" class="datetimepicker datepost" id="view_start" required value="{{start_date}}">
 								<label class="lab_red lab_invisible" id="view_start_error">Bạn cần nhập từ ngày!</label>
 							</div>	
 							<label class="col-md-1 col-sm-1 col-xs-12 title_col">Đến :</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
-								<input type="" name="view[end_date]" class="datetimepicker" id="view_end" required value="{{end_date}}">
+								<input type="" name="view[end_date]" class="datetimepicker datepost" id="view_end" required value="{{end_date}}">
 								<label class="lab_red lab_invisible" id="view_end_error">Bạn cần nhập đến ngày !</label>
-							</div>						
+							</div> 
+							<label class="col-md-3 col-sm-3 col-xs-12 title_col"><strong id="total_date">14 ngày</strong></label>						
+						</div>
+						<div class="row row-margin-bottom">
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Thành tiền</label>
+							<div class="col-md-8 col-sm-8 col-xs-12">
+								<input type="hidden" name="view[total_day]" id="view_total_day">
+								<input type="hidden" name="view[price]" id="view_price">
+								<input type="hidden" name="view[vat]" id="view_vat">
+								<input type="hidden" name="view[total_amount]" id="view_total_amount">
+								<table class="table table-bordered" style="font-size: 12px;">
+									<colgroup>
+										<col width="50%"/>
+										<col width="50%"/>
+									</colgroup>
+									<tr>
+										<td>Đơn giá</td>
+										<td id="view_price_post" style="text-align: right">{{define['tin_sieu_vip']}}</td>
+									</tr>
+									<tr>
+										<td>Phí dịch vụ đăng tin</td>
+										<td id="total_amt" style="text-align: right"></td>
+									</tr>
+									<tr>
+										<td>Phí bao gồm VAT(10%)</td>
+										<td id="total_vat" style="text-align: right"></td>
+									</tr>	
+									<tr>
+										<td>Tổng tiền</td>
+										<td id="total_all" style="text-align: right"></td>
+									</tr>
+								</table>
+							</div>
+							
 						</div>
 						</form>
 						<div class="row row-margin-bottom" style="margin-top:20px">
@@ -517,7 +555,7 @@
 		function topFunction() {
 		    document.body.scrollTop = 0; // For Chrome, Safari and Opera 
 		    document.documentElement.scrollTop = 0; // For IE and Firefox
-		}
+		}		
 		$(document).off('click','#btn_save'); 
         $(document).on('click','#btn_save',function(event){
         	var msg = check_validate_update();
@@ -622,7 +660,50 @@
                 
             });
         });
+        var thanh_tien= function(){
+        	var fdate = $('#view_start').val().split('/');
+        	var tdate = $('#view_end').val().split('/');
+        	var fromdate = new Date(fdate[2],fdate[1],fdate[0]);
+        	var todate = new Date(tdate[2],tdate[1],tdate[0]);
+        	var total_date = todate.getDate()- fromdate.getDate();
+        	$('#total_date').text(total_date + ' ngày');
+        	var post_level = $('input[name="view[post_level]"]:checked').val();
+        	var total_amt =0,vat=0,total=0,price=0;
+        	if(post_level ==3){
+        		price={{define['tin_sieu_vip']}};
+        	}else if(post_level ==2){
+        		price={{define['tin_vip']}};
+        	}else if(post_level ==1){
+        		price={{define['tin_hot']}};
+        	}else{
+        		price={{define['tin_thuong']}};
+        	}
+        	total_amt = price*total_date;
+        	vat = total_amt*0.1;
+        	total = total_amt + vat;
+        	$('#view_price_post').text(currency_format(price)+ ' VNĐ');
+        	$('#total_amt').text(currency_format(total_amt) + ' VNĐ');
+        	$('#total_vat').text(currency_format(vat) + ' VNĐ');
+        	$('#total_all').text(currency_format(total) + ' VNĐ');
+        	$('#view_total_day').val(total_date);
+        	$('#view_price').val(price);
+        	$('#view_vat').val(vat);
+        	$('#view_total_amount').val(total);
+        }
+        $(document).off('change','.post_level');
+		$(document).on('change','.post_level',function(){
+			thanh_tien();
+		});
+		$(document).off('change','.datepost');
+		$(document).on('change','.datepost',function(){
+			thanh_tien();
+		});
+		setTimeout(thanh_tien(),1000);
+		
 	});
+function currency_format(n) {
+    return n.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+};
 function jsion_ajax(url,data,done_fun){
     $.ajax({
         url: url,

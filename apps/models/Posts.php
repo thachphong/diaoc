@@ -38,6 +38,7 @@ class Posts extends DBModel
     public  $map_lat;
     public  $map_lng;
     public 	$total_view;
+    public  $project_id;
         
     public function initialize()
     {
@@ -144,7 +145,9 @@ class Posts extends DBModel
 	    if(strlen($param['facade_width'])>0){
 			$this->facade_width    = $param['facade_width'];
 		}
-	    
+	    if(strlen($param['project_id'])>0){
+			$this->project_id    = $param['project_id'];
+		}
 	    
 	    $this->map_lat = $param['map_lat'];
 	    $this->map_lng = $param['map_lng'];
@@ -180,6 +183,7 @@ class Posts extends DBModel
 					map_lat = :map_lat ,
 					map_lng = :map_lng,
 					m_type_id =:m_type_id,
+					project_id =:project_id,
 					upd_date =now()
 
 				where post_id =:post_id
@@ -208,6 +212,7 @@ class Posts extends DBModel
                     ,'facade_width'
                     ,'map_lat'
                     ,'map_lng'
+                    ,'project_id'
                     ));
 		if(strlen($pasql['unit_price'])==0){
 			$pasql['unit_price'] =NULL;
@@ -242,6 +247,10 @@ class Posts extends DBModel
 	    if(strlen($pasql['facade_width'])==0){
 			$pasql['facade_width']=NULL;
 		}
+		if(strlen($pasql['project_id'])==0){
+			$pasql['project_id']=NULL;
+		}
+		
 		$this->pho_execute($sql, $pasql);  
         return TRUE;
 	}

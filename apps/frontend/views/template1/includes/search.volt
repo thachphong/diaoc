@@ -119,13 +119,13 @@
                         </select>
                     </label>
                 </div>
-               <!--  <div class="col-md-2 col-sm-2 col-xs-12 no_padding">
+                <div class="col-md-2 col-sm-2 col-xs-12 no_padding">
                     <label class="select_icon">  
                         <select name="project">
                             <option value="">Dự án</option>
                         </select>
                     </label>
-                </div> -->
+                </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 no_padding">
                     <button class="btn_search"><span class="fa fa-search"></span><span style="margin-left:5px;">TÌM KIẾM</span></button>
                 </div>
@@ -157,7 +157,7 @@ $(document).ready(function() {
         $.each(category_list,function(key,item){
             //console.log(item);
             if(val == item[2]){                    
-                option +='<option value="'+item[0]+'">'+item[1]+'</option>';                                     
+                option +='<option value="'+item[0]+'">'+item[1]+'</option>';
             }
         });
         $('#ctg_id').empty();

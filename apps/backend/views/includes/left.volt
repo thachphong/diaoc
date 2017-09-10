@@ -63,7 +63,7 @@
                   <li><a href="{{url.get('useradm/list')}}"><i class="fa fa-group"></i> Tài khoản <span class="fa"></span></a></li>                  
                   <li><a><i class="fa fa-gear"></i> Cài đặt <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="{{url.get('define/list/1')}}">Thông tin công ty</a></li>                      
+                      <li><a href="{{url.get('define/list/1')}}">Thông tin công ty</a></li>                      			  <li><a href="{{url.get('define/list/5')}}">Đơn gia đăng tin</a></li>
                       <li><a href="{{url.get('define/list/2')}}">Fan page</a></li>
                       <li><a href="{{url.get('define/list/3')}}">Thông tin website</a></li>
                       <li><a href="{{url.get('define/list/4')}}">Khác</a></li>

@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-12 col-xs-12 margin_top">
+<div class="col-md-4 col-sm-12 col-xs-12 margin_top no_padding_right">
          <div class="row margin_top">
             <div class="pn_title">
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
