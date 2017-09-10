@@ -1,6 +1,9 @@
 :root{
     --main_color: #046743; /*#81b441;*/
-    --main_color_2:#016098;
+    --main_color_2: #016098;
+    --main_color_3: #2C6CBC;
+    --color_hover: #81b441;
+     --color_pn_header: #81b441;
 }
 @font-face {
     font-family: 'Roboto Bold';
@@ -31,7 +34,33 @@ a{
     color: #000;
 }
 a:hover{
-    color: var(--main_color_2);
+    color: var(--color_hover);
+}
+.container{
+	width: 1000px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+.no_padding_left{
+	padding-left: 0px;
+	padding-right: 10px;
+}
+.no_padding_right{
+	padding-left: 10px;
+	padding-right: 0px;
+}
+.banner_left{
+	width: 100px;
+    display: block;
+    position: fixed;
+    left: 64.5px;  
+}
+.banner_right{
+	width: 100px;
+    display: block;
+    position: fixed;
+    right: 64.5px;
+    /*top: 0px;*/
 }
 .row {
     margin-left: 0px;
@@ -63,7 +92,7 @@ ul.dang-tin-icon li a{
     font-size: 15px;
 }
 .menu_top .active{
-    background: var(--main_color_2);
+    background: var(--main_color_3);
 }
 #menu_footer .menu_top ul {
     font-family: 'Roboto Regular';
@@ -89,7 +118,7 @@ ul.dang-tin-icon li a{
     text-decoration: none;
 }
 .menu_top ul li a:hover {
-    background: var(--main_color_2);
+    background: var(--main_color_3);
     color: #ffffff;
 }
 #menu_footer .menu_top ul li a:hover {
@@ -109,7 +138,7 @@ ul.dang-tin-icon li a{
     line-height: 43px;
 }
 .menu_top li:hover li a:hover {
-    background: var(--main_color_2);
+    background: var(--main_color_3);
     color: #fff;
 }
 #.menu_top .dropDownMenu li ul li {
@@ -198,7 +227,7 @@ ul.dang-tin-icon li a{
     text-align: center;
     float: left;
     height: 246px;
-    background-image: url(../images/banner.png);
+    background-image: url(../images/banner.jpg);
     background-position: center top;
     background-size: 100% 246px;
     z-index: 100;
@@ -226,11 +255,11 @@ ul.dang-tin-icon li a{
     color: #fff;
 }
 .search_bg{
-    background: var(--main_color );  
+    background: var(--main_color_3 );  
     color: #ffffff;  
 }
 .search_tab .active{
-    background: var(--main_color ); 
+    background: var(--main_color_3 ); 
     color: #fff 
 }
 .search_condition{
@@ -252,7 +281,7 @@ input,textarea{
 }
 .btn_search{
     border: none;
-    background: var(--main_color_2);
+    background: var(--color_pn_header);
     color: #fff;
     padding: 8px;
     width: 100%;
@@ -299,7 +328,7 @@ input,textarea{
     /*background: rgba(89, 89, 89, 0.04);*/
 }
 .huongdan .hd-title,.pn_title {    
-    border-bottom: 1px solid var(--main_color );
+    border-bottom: 1px solid var(--color_pn_header );
 }
 .huongdan .hd-title h3{
     line-height: 30px;
@@ -315,7 +344,7 @@ input,textarea{
     padding-left: 10px;
 }
 .huongdan .bg_icon,.bg_icon{
-    background: var(--main_color );
+    background: var(--main_color_3 );
     height: 30px;
     width: 30px;
     float: left;
@@ -346,15 +375,20 @@ input,textarea{
     overflow: hidden;    
 }
 .pn_title h1,.pn_title h3{
-    width: 50%;
+    /*width: 50%;*/
     font-family: 'Roboto Condensed';
     text-transform: uppercase;
-    color: var(--main_color_2);
+    /*color: var(--main_color_2);*/
+    color: #fff;
     font-size: 14pt; 
     line-height: 30px;
-    padding: 0px 0px 0px 10px;
+    padding: 0px 10px 0px 10px;
     margin: 0px;
     display: inline-block;
+    background: var(--color_pn_header);
+}
+.pn_title .bg_icon{
+	display: none;
 }
 .pn_content .title_col{
     padding: 7px;
@@ -446,8 +480,8 @@ input,textarea{
     margin-top: 10px;
 }
 .img_newlist{
-    width: 176px;
-    max-height: 118px;
+    width: 154px;
+    max-height: 100px;
 }
 .pn_background{
     background: #fff;/*rgba(89, 89, 89, 0.04);  */
@@ -465,7 +499,11 @@ input,textarea{
     color: var(--main_color_2);
     font: bold 14px/22px tahoma;
     display: block;
-    height: 52px;
+    height: 48px;
+}
+a.post_title:hover{
+	color:var(--color_hover);
+	text-decoration: none;
 }
 .news_title{
     color: var(--main_color_2);
@@ -476,6 +514,7 @@ input,textarea{
 .icon_post label{
     width: 83px;
     padding-right: 3px;
+    margin-bottom: 4px;
 }
 .icon_post label span{
     float: right;
@@ -523,6 +562,10 @@ input,textarea{
     font-size: 13px;
     font-weight: bold;
     color: var(--main_color_2);
+}
+.viplist a:hover{
+	color: var(--color_hover);
+	text-decoration: none;
 }
 .read_more{
     float: right;
@@ -573,9 +616,9 @@ input,textarea{
     padding-left: 20px;
     display: block;
 }
-.newsboxrow .boxright a:hover,a.linkpost:hover{
+.newsboxrow .boxright a:hover,a.linkpost:hover,a.post_name:hover,.newsboxrow .boxleft a:hover{
     text-decoration: none;
-    color: var(--main_color );
+    color: var(--color_hover );
 }
 .newsboxrow .boxright{
     padding:10px 0px 10px 0px;
@@ -585,10 +628,12 @@ input,textarea{
     padding-bottom: 10px;   
 }
 .col_left{
-    padding-left: 0;    
+    padding-left: 0; 
+    padding-right:10px;   
 }
 .col_right{
-    padding-right: 0;    
+    padding-right: 0; 
+    padding-left: 10px;    
 }
 .colbox{
     padding: 5px;
@@ -833,21 +878,21 @@ a.link_color:hover{
     font-size: 13px;
     padding-right: 15px;
 }
-.imgscroll{
+.imgselect_thumb{
     display: block;   
     width: 100%;
     overflow:hidden;    
     position: relative;
     padding: 5px 5px 0px 5px;
 }
-.imgscroll ul{
+.imgselect_thumb ul{
     padding: 0px;
 }
-.imgscroll li{
+.imgselect_thumb li{
     display: inline-block;
     margin-right: 5px;
 }
-.imgscroll li img{
+.imgselect_thumb li img{
     width: 60px;
     height: 50px;
 }
@@ -865,19 +910,46 @@ a.link_color:hover{
     color: #fff !important;
     padding: 3px 5px;
 }
+.btn_red_small{
+	background: #cc0404;;
+    border: none;
+    color: #fff !important;
+    padding: 3px 5px;
+}
 .imgscroll{
 	display: block;
 	overflow: hidden;
 	width: 100%;
+    position: relative;
+    padding: 5px 5px 0px 5px;
 }
 .imgscroll ul{
 	display: block;
 	overflow: hidden;
 	height: 120px;
-	width: 150%
+	width: 150%;
+	padding: 0px;
 }
-ul.imgscroll li{
+.imgscroll li{
 	display: inline-block;
+	margin-right: 5px;
+}
+.imgscroll li img{
+    width: 60px;
+    height: 50px;
+}
+.left_menu_bottom ul{
+	list-style: none;
+	padding-left: 0px;
+}
+.left_menu_bottom ul li a{
+	font-size: 13px;
+	line-height: 24px;
+	color: var(--main_color_2);
+}
+.left_menu_bottom ul li a:hover{
+	text-decoration: none;
+	color: var(--color_hover);
 }
 /*.main_img{
     width: 100%;
