@@ -52,6 +52,15 @@
     margin-right: 10px;   
     color: var(--main_color);    
 }
+.fa-angle-double-righ-smallt:before {
+    content: "\f101";
+    font: normal normal normal 14px/1 FontAwesome;
+    float: left;
+    display: block;
+    padding-top: 4px;
+    margin-right: 10px;   
+    color: var(--color_hover);    
+}
 .post-pencil:before {
     content: "\f040";
     font-size: 20px;  
@@ -206,10 +215,15 @@
     margin-right: 5px;
 }
 .fa-save:before
-{    content: "\f0c7";
+{   content: "\f0c7";
 	font-size: 18px;
     color: #fff;;
     margin-right: 5px;
+}
+.fa-home:before {
+    content: "\f015";
+    font-size: 24px;
+    color: #fff;;
 }
 /*start radio botton*/
 .control {
