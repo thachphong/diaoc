@@ -459,7 +459,7 @@ input,textarea{
     margin-top: 1px;
     font-weight: bold;
 }
-.pn_content a.btn_upload{
+.pn_content a#btn_upload{
     border: none;
     background: var(--main_color_2);
     color: #fff;
