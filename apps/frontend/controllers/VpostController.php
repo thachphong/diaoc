@@ -28,29 +28,29 @@ class VpostController extends PHOController
 	public function indexAction($url)
 	{
 		try{	
-			PhoLog::debug_var('view----',__LINE__);
-			PhoLog::debug_var('view----',$url);
+			//PhoLog::debug_var('view----',__LINE__);
+			//PhoLog::debug_var('view----',$url);
 			$exp  = explode('_', $url)	;	
 			$id = $exp[count($exp)-1];
-			PhoLog::debug_var('view----',$id);
+			//PhoLog::debug_var('view----',$id);
 			
 			$db = new Posts();
 			$result = $db->get_vpost($id);
-			PhoLog::debug_var('view----',__LINE__);
+			//PhoLog::debug_var('view----',__LINE__);
 			$img = new PostsImg();
 			$result['imglist'] = $img->get_img_bypost($id);
 			//update traffic
-			PhoLog::debug_var('view----',__LINE__);
+			//PhoLog::debug_var('view----',__LINE__);
 			$time = time();
 			$traffic['time'] = $time;//-600;  //10phut		
 			$traffic['section_id'] = session_id();
-			PhoLog::debug_var('view----',__LINE__);
+			//PhoLog::debug_var('view----',__LINE__);
 			$traffic['ip'] = $this->get_client_ip_server();
 			$traffic['post_id'] =$id;
-			PhoLog::debug_var('view----',__LINE__);
+			//PhoLog::debug_var('view----',__LINE__);
 			$db->update_traffic($traffic);
-			PhoLog::debug_var('view----',__LINE__);
-			$this->set_template_share();
+			//PhoLog::debug_var('view----',__LINE__);
+			//$this->set_template_share();
 			$this->ViewVAR($result);	
 		} catch (\Exception $e) {
 			PhoLog::debug_var('---Error---',$e);

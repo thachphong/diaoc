@@ -57,7 +57,7 @@ class CategoryController extends PHOController
         $param['start'] = $start;
         $param['end'] = $end;
        
-        $this->set_template_share();
+        //$this->set_template_share();
         $this->ViewVAR($param);
 	}
 	public function newslistAction($ctg_no)
@@ -107,7 +107,7 @@ class CategoryController extends PHOController
             $cache->save($cachekey,$param);
         }
         //PhoLog::debug_var('---abc--',$param);
-        $this->set_template_share();
+       // $this->set_template_share();
         $this->ViewVAR($param);
 	}	
 	public function searchAction()
@@ -166,7 +166,7 @@ class CategoryController extends PHOController
         $param['start'] = $start;
         $param['end'] = $end;
        
-        $this->set_template_share();
+        //$this->set_template_share();
         $this->ViewVAR($param);
 	}
 }

@@ -1,7 +1,9 @@
 {{ partial('includes/search') }}
 <div class="row">
+   {% set banners= elements.get_banner()%}
+   {{ partial('includes/banner_left') }}
    <div class="container" id="content">            
-      <div class="col-md-8 col-sm-12 col-xs-12 margin_top">
+      <div class="col-md-8 col-sm-12 col-xs-12 margin_top no_padding_left">
          <div class="row margin_top" >
             <div class="pn_title">
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
@@ -12,7 +14,7 @@
                   <div class="row margin_top pn_background pn_border">
                      <div class="col-md-3 col-sm-3 col-xs-12 post_img">
                         <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">
-                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/176x118/')}}{{item['img_path']}}{%endif%}" class="img_newlist"></a>
+                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/154x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist"></a>
                      </div>
                      <div class="col-md-9 col-sm-9 col-xs-12">
                         <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}" class="news_title">{{item['news_name']}}</a>
@@ -47,4 +49,5 @@
       </div>
       {{ partial('includes/right') }}
    </div>
+   {{ partial('includes/banner_right') }}
 </div>

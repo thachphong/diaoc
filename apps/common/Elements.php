@@ -90,7 +90,7 @@ class Elements extends Component
             $url = new Url();
             $url->setBaseUri(BASE_URL_NAME);            
 	        $base_url = $url->get('');
-            foreach($list_menu as $item){
+            foreach($list_menu as $key=>$item){
                 if($item['child_flg'] > 0){
 	                $menu_data .='<li>';
                     $href = $base_url;
@@ -175,8 +175,13 @@ class Elements extends Component
                         $href .=$item['link'];
                     }else{
                         //$href ='#';
-                    }                
-                    $menu_data .='<li><a href="'.$href.'">'.$item['menu_name'].'</a></li>';
+                    }   
+                    if($key>0){
+						$menu_data .='<li><a href="'.$href.'">'.$item['menu_name'].'</a></li>';
+					}else{
+						$menu_data .='<li><a href="'.$href.'" style="padding-top: 6px;padding-bottom: 13px;"><i class="fa fa-home"></i></a></li>';
+					}             
+                    
                 }        
 	        }
 		    // Store it in the cache
@@ -241,7 +246,7 @@ class Elements extends Component
             $data = $ne->get_news_pupular(5);	    	
 	    	$html = '';
 	    	foreach($data as $key=>$item){
-				$html .= '<li> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.$item['news_no'].'_'.$item['news_id'].'">';
+				$html .= '<li> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'t/'.$item['news_no'].'_'.$item['news_id'].'">';
                 $html .=$item['news_name'].'</a></li>';
                 if ($key < count($data)-1){
                     $html .='<hr class="row_line" />';
@@ -272,7 +277,7 @@ class Elements extends Component
                     $html .= '<img src="'.BASE_URL_NAME.'template1/images/post1.png"><div>';
                 }
                 
-                $html .= '<a href="'.BASE_URL_NAME.$item['post_no'].'_'.$item['post_id'].'">'.$item['post_name'].'</a>';
+                $html .= '<a href="'.BASE_URL_NAME.'b/'.$item['post_no'].'_'.$item['post_id'].'">'.$item['post_name'].'</a>';
                 $html .= '<div style="text-align:right">';
                 $html .= '<span class="postprice_right"><strong>'.$item['price'].'</strong>'. $item['m_unit_name'].'</span>';
                 $html .= '</div></div></div>';               
@@ -302,7 +307,7 @@ class Elements extends Component
                     $html .= '<img class="duan_img" src="'.BASE_URL_NAME.'template1/images/post1.png"><div>';
                 }
                 
-                $html .= '<a href="'.BASE_URL_NAME.$item['news_no'].'_'.$item['news_id'].'">'.$item['news_name'].'</a>';
+                $html .= '<a href="'.BASE_URL_NAME.'t/'.$item['news_no'].'_'.$item['news_id'].'">'.$item['news_name'].'</a>';
                 $html .= '<div>';
                 $html .= '<span>'. $item['des'].'</span>';
                 $html .= '</div></div></div>';               

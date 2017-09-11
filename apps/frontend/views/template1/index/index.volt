@@ -1,14 +1,7 @@
 {{ partial('includes/search') }}
 {% set banners= elements.get_banner()%}
 <div class="row">
-   <div class="banner_left">
-   		<a href="{{url.get(banners[0].link_page)}}">
-   			<img src="{{url.get(banners[0].img_path)}}" style="margin-bottom: 5px"/>
-   		</a>
-   		<a href="{{url.get(banners[1].link_page)}}">
-   			<img src="{{url.get(banners[1].img_path)}}"/>
-   		</a>
-   </div>
+   {{ partial('includes/banner_left') }}
    <div class="container" id="content">
       <div class="col-md-8 col-sm-12 col-xs-12 margin_top no_padding_left">
          <div class="row margin_top" >
@@ -98,7 +91,7 @@
                <div class="newsboxrow pn_background pn_border">
                   <div class="colbox">
                   {%if phongthuy|length >0 %}                  
-                     <img src="{{url.get('crop/338x225/')}}{{phongthuy[0]['img_path']}}">
+                     <img src="{{url.get('crop/308x225/')}}{{phongthuy[0]['img_path']}}">
                      <a class="post_name" href=""><h4>{{phongthuy[0]['news_name']}}</h4></a>                  
                   {%endif%}
                   <hr/>
@@ -120,7 +113,7 @@
                <div class="newsboxrow pn_background pn_border">
                   <div class="colbox">
                   {%if tuvanluat|length >0 %}                  
-                     <img src="{{url.get('crop/338x225/')}}{{tuvanluat[0]['img_path']}}">
+                     <img src="{{url.get('crop/308x225/')}}{{tuvanluat[0]['img_path']}}">
                      <a class="post_name" href=""><h4>{{tuvanluat[0]['news_name']}}</h4></a>                  
                   {%endif%}
                   <hr/>
@@ -165,45 +158,8 @@
 	      $(this).next("span").text("CallbackDisplay: hidden "+ordinal+"!");
 	    }
 	  });
-	  $(window).scroll(function() {
-		    var height = $(window).scrollTop();
-		    
-		    $('.banner_left').removeAttr("style");
-		    $('.banner_right').removeAttr("style");
-		    if(height  < 380) {
-		        // do something
-		        $('.banner_left').css('top',(380-height)+'px');
-		        $('.banner_right').css('top',(380-height)+'px');
-		    }else{
-		    	$('.banner_left').css('top','0px');
-		    	$('.banner_right').css('top','0px');
-		    }
-		    var wheight = $(document).height();
-		    var screen_height = window.innerHeight;
-		    var bottom = wheight - screen_height - 248;
-		    //console.log('height:'+height);
-		    //console.log('bottom:'+bottom);
-		    //console.log('bottom2:'+(height-bottom));
-		    if(height > bottom ){
-		    	$('.banner_left').removeAttr("style");
-		    	$('.banner_left').css('bottom',(height-bottom)+'px');
-		    	$('.banner_right').removeAttr("style");
-		    	$('.banner_right').css('bottom',(height-bottom)+'px');
-		    }
-		    //console.log(window.innerHeight);
-		    
-		    //248 bottom
-		    
-		}); 	
 </script>
       {{ partial('includes/right') }}
    </div>
-   <div class="banner_right">
-   		<a href="{{url.get(banners[2].link_page)}}">
-   			<img src="{{url.get(banners[2].img_path)}}" style="margin-bottom: 5px"/>
-   		</a>
-   		<a href="{{url.get(banners[3].link_page)}}">
-   			<img src="{{url.get(banners[3].img_path)}}"/>
-   		</a>
-   </div>
+   {{ partial('includes/banner_right') }}
 </div>

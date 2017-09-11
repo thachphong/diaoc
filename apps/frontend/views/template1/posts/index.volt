@@ -1,3 +1,25 @@
+<style>
+#filedrag
+{	
+	font-weight: bold;
+	text-align: center;	
+	color: #555;
+	border: 2px dashed rgb(169, 169, 169);
+	border-radius: 7px;
+	cursor: default;
+	overflow: hidden;
+	padding-top: 10px;
+}
+
+#filedrag.hover
+{
+	color: #f00;
+	border-color: #f00;
+	border-style: solid;
+	box-shadow: inset 0 3px 4px #888;
+}
+
+</style>
 <div class="row">
 	<div class="container">
 		{{ partial('includes/user_left') }}
@@ -184,7 +206,7 @@
 						</div>
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Nội dung mô tả <span class="lab_red">(*)</span>:</label>
-							<div class="col-md-9 col-sm-9 col-xs-12">
+							<div class="col-md-10 col-sm-10 col-xs-12">
 								<textarea style="height:100px" name="content" id="post_content" required >{{content}}</textarea> 
 								<label class="lab_red lab_invisible" id="post_content_error">Bạn cần nhập nội dung mô tả!</label>
 							</div>												
@@ -192,18 +214,22 @@
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Cập nhật hình ảnh</label>							
 							<div class="col-md-10 col-sm-10 col-xs-12" id="img_box">
-								{%for img in img_list%}
-								<div class="div_img" id="div_img_{{img.post_img_id}}">
-									<img class="" src="{{url.get(img.img_path)}}">
-									<a href="javascript:void(0)" class="delete_img" id="delete_img_{{img.post_img_id}}">X</a>
-								</div>
-								{%endfor%}														
-								<div class="div_img" id="div_btn_img">
-									<a class="btn_upload" id="btn_upload"><i class="fa fa-cloud-upload"></i><br/>Upload Ảnh</a>
-									<input type="file" multiple="true" style="display: none" accept=".JPG,.PNG,.GIF" id="upload_file">
+								<div id="filedrag">
+									{%for img in img_list%}
+									<div class="div_img" id="div_img_{{img.post_img_id}}">
+										<img class="" src="{{url.get(img.img_path)}}">
+										<a href="javascript:void(0)" class="delete_img" id="delete_img_{{img.post_img_id}}">X</a>
+									</div>
+									{%endfor%}														
+									<div class="div_img" id="div_btn_img">
+										<a class="btn_upload" id="btn_upload"><i class="fa fa-cloud-upload"></i><br/>Upload Ảnh</a>
+										<input type="file" multiple="true" style="display: none" accept=".JPG,.PNG,.GIF" id="upload_file">
+										<input type="file" id="fileselect" style="display: none" accept=".JPG,.PNG,.GIF" name="fileselect[]" multiple="multiple" />
+										
+									</div>
 								</div>
 							</div>												
-						</div>
+						</div>						
 						<hr/>
 						<div>
 							<h3>Thông tin bản đồ</h3>
@@ -636,30 +662,9 @@
         	for(var i=0;i<file_data.length;i++){
         		form_data.append(i,file_data[i]);
         	}        	
-            form_data.append("folder_tmp",$('#folder_tmp').val());
-            var base_url= "{{url.get('')}}";
-            //console.log(form_data);	
-        	Pho_upload("{{url.get('posts/upload')}}" ,form_data,function(datas){
-				if(datas.status =="OK"){
-					//console.log(datas);					
-                    var cnt_add = $('.add_img').length;  			
-					for(var i=0;i<datas.link.length;i++){
-		        		//form_data.append(i,file_data[i]);
-		        		cnt_add++;
-		        		var html_tr= '<div class="div_img" id="div_img_add_'+cnt_add+'"><img class="add_img" src="'+datas.link[i]+'"><a href="javascript:void(0)" class="delete_img" id="delete_img_add_'+cnt_add+'">X</a><input type="hidden" name="img_add['+cnt_add+']" value="'+datas.link[i]+'"></div>';
-		        		$("#div_btn_img").before(html_tr);		        		
-		        	}
-		        	// if(get_avata_id()==""){
-		        	// 	$("#radio_add_1").prop('checked',true);	
-		        	// }
-					//var file_name = datas.link.replace(base_url,"");	
-					//$('#img_path').val(file_name);				
-				}else{
-					Pho_message_box_error("Lỗi",datas.msg);
-				}
-                
-            });
+            upload_file(form_data);
         });
+        
         var thanh_tien= function(){
         	var fdate = $('#view_start').val().split('/');
         	var tdate = $('#view_end').val().split('/');
@@ -700,7 +705,33 @@
 		});
 		setTimeout(thanh_tien(),1000);
 		
+		
 	});
+var upload_file = function(form_data){
+        	form_data.append("folder_tmp",$('#folder_tmp').val());
+            var base_url= "{{url.get('')}}";
+            //console.log(form_data);	
+        	Pho_upload("{{url.get('posts/upload')}}" ,form_data,function(datas){
+				if(datas.status =="OK"){
+					//console.log(datas);					
+                    var cnt_add = $('.add_img').length;  			
+					for(var i=0;i<datas.link.length;i++){
+		        		//form_data.append(i,file_data[i]);
+		        		cnt_add++;
+		        		var html_tr= '<div class="div_img" id="div_img_add_'+cnt_add+'"><img class="add_img" src="'+datas.link[i]+'"><a href="javascript:void(0)" class="delete_img" id="delete_img_add_'+cnt_add+'">X</a><input type="hidden" name="img_add['+cnt_add+']" value="'+datas.link[i]+'"></div>';
+		        		$("#div_btn_img").before(html_tr);		        		
+		        	}
+		        	// if(get_avata_id()==""){
+		        	// 	$("#radio_add_1").prop('checked',true);	
+		        	// }
+					//var file_name = datas.link.replace(base_url,"");	
+					//$('#img_path').val(file_name);				
+				}else{
+					Pho_message_box_error("Lỗi",datas.msg);
+				}
+                
+            });
+};
 function currency_format(n) {
     return n.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
 };
@@ -796,3 +827,93 @@ if(post_address.length ==0){ post_address = "152 Vũ Phạm Hàm , Phường Yê
 </script>
 <script async defer  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGWoTNwauIzO_pJEDymaSYTG031uJbbkk&callback=initMap">
     </script>
+<script>
+	(function() {
+
+	// getElementById
+	function $id(id) {
+		return document.getElementById(id);
+	}
+
+
+	// output information
+	/*function Output(msg) {
+		var m = $id("messages");
+		m.innerHTML = msg + m.innerHTML;
+	}*/
+
+
+	// file drag hover
+	function FileDragHover(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		e.target.className = (e.type == "dragover" ? "hover" : "");
+	}
+
+
+	// file selection
+	function FileSelectHandler(e) {
+
+		// cancel event and hover styling
+		FileDragHover(e);
+
+		// fetch FileList object
+		var files = e.target.files || e.dataTransfer.files;
+		var form_data=new FormData(this);
+		// process all File objects
+		for (var i = 0, f; f = files[i]; i++) {
+			//ParseFile(f);
+			form_data.append(i,f);
+		}	       	
+        upload_file(form_data);
+
+	}
+
+
+	// output file information
+	function ParseFile(file) {
+
+		Output(
+			"<p>File information: <strong>" + file.name +
+			"</strong> type: <strong>" + file.type +
+			"</strong> size: <strong>" + file.size +
+			"</strong> bytes</p>"
+		);
+
+	}
+
+
+	// initialize
+	function Init() {
+
+		var fileselect = $id("fileselect"),
+			filedrag = $id("filedrag"),
+			submitbutton = $id("submitbutton");
+
+		// file select
+		fileselect.addEventListener("change", FileSelectHandler, false);
+
+		// is XHR2 available?
+		var xhr = new XMLHttpRequest();
+		if (xhr.upload) {
+
+			// file drop
+			filedrag.addEventListener("dragover", FileDragHover, false);
+			filedrag.addEventListener("dragleave", FileDragHover, false);
+			filedrag.addEventListener("drop", FileSelectHandler, false);
+			filedrag.style.display = "block";
+
+			// remove submit button
+			//submitbutton.style.display = "none";
+		}
+
+	}
+
+	// call initialization file
+	if (window.File && window.FileList && window.FileReader) {
+		Init();
+	}
+
+
+})();
+</script>

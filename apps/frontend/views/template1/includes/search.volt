@@ -143,15 +143,57 @@ $(document).ready(function() {
         $(this).addClass('active');
         change_m_type_id($(this).attr('data'));
         $('#mtype').val($(this).attr('data'));
+        m_type_id = $(this).attr('data');
     });
     var category_list = Array();
     var sprices = Array();
-    {%for item in sprices%}
-        sprices.push(['{{item.s_price_id}}',"{{item.s_price_name}}",'{{item.m_type_id}}']);
-    {%endfor%}
-    {%for item in categorys%}
-        category_list.push(['{{item.ctg_id}}',"{{item.ctg_name}}",'{{item.parent_id}}']);
-    {%endfor%}
+    var m_type_id =1;
+    function get_basic(){
+        jsion_ajax("{{url.get('index/sbasic')}}" ,null,function(datas){               
+            district_list = datas.m_districts;  
+            provins_list    =  datas.m_provins;
+            category_list = datas.categorys;
+            sprices_list =   datas.sprices;
+            var option = '<option value="">Loại bất động sản</option>';
+            $.each(category_list,function(key,item){
+               //console.log(item);
+               if(m_type_id == item['parent_id']){                    
+                   option +='<option value="'+item['ctg_id']+'">'+item['ctg_name']+'</option>';                                     
+               }
+            });
+            $('#ctg_id').empty();
+            $('#ctg_id').append(option);
+            var option = '<option value="">--Chọn Tỉnh/Thành phố--</option>';
+            $.each(provins_list,function(key,item){                                
+               option +='<option value="'+item['m_provin_id']+'">'+item['m_provin_name']+'</option>';
+            });
+            $('#s_m_provin_id').empty();
+            $('#s_m_provin_id').append(option);
+            var op_price = '<option value="">Mức giá</option>';
+            $.each(sprices_list,function(key,item){            
+               if(m_type_id == item['m_type_id']){                    
+                   op_price +='<option value="'+item['s_price_id']+'">'+item['s_price_name']+'</option>';                                     
+               }
+            });
+            $('#price').empty();
+            $('#price').append(op_price);
+        });
+    }
+    function get_advance(){
+        jsion_ajax("{{url.get('index/sadvance')}}" ,null,function(datas){   
+            ward_list    =  datas.m_wards;
+           
+            var option = '<option value="">Hướng nhà</option>';
+            $.each(datas.directionals,function(key,item){                                
+               option +='<option value="'+item['m_directional_id']+'">'+item['m_directional_name']+'</option>';
+            });
+            $('#directional').empty();
+            $('#directional').append(option);
+            
+        });
+    }
+    setTimeout(get_basic(),1000);
+    setTimeout(get_advance(),1500);
     function change_m_type_id(val){
         var option = '<option value="">Loại bất động sản</option>';
         $.each(category_list,function(key,item){

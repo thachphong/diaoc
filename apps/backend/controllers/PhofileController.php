@@ -27,7 +27,11 @@ class PhofileController extends PHOController
 		// if(is_dir($folder_name)==false){
 		// 	@mkdir($folder_name, 0777, true);
 		// }
+		
 		$file_name ='tmp/'.$folder_tmp.'/'.uniqid('',true).'.'.$file_lb->GetExtensionName($name);
+		PhoLog::debug_var('file---','from:'.$file_tmp);
+		PhoLog::debug_var('file---','to:'.PHO_PUBLIC_PATH.$file_name);
+		PhoLog::debug_var('file---',$param);
 		$file_lb->CopyFile($file_tmp,PHO_PUBLIC_PATH.$file_name);
 		$file_lb->DeleteFile($file_tmp);
 		$result['link'] = BASE_URL_NAME.$file_name;

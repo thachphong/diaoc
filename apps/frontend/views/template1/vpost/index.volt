@@ -1,7 +1,7 @@
 {{ partial('includes/search') }}
 <div class="row">
    <div class="container" id="content">            
-      <div class="col-md-8 col-sm-12 col-xs-12 margin_top">
+      <div class="col-md-8 col-sm-12 col-xs-12 margin_top no_padding_left">
          <div class="row margin_top pn_background pn_border post_pn" >
             <div class="post_head">
                <h1>{{post_name}}</h1> 

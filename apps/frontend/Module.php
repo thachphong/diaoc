@@ -92,6 +92,7 @@ class Module
             return $view;
 
         });
+        
 		/*$di->set('db', function () {
 			return new Database(array(
 				"host" => "localhost",

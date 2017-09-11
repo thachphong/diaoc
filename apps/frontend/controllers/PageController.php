@@ -15,14 +15,14 @@ class PageController extends PHOController
 		));
 		$model = new Page();
 		$rows['page'] = $model->get_page_byno($page_no);	
-		PhoLog::debug_var('---d--',$page_no);
-		PhoLog::debug_var('---d--',$rows);
+		//PhoLog::debug_var('---d--',$page_no);
+		//PhoLog::debug_var('---d--',$rows);
 		if($rows == false){
 			$rows['page_no']='';
 			$rows['page_name']='Trang không tồn tại';
 			$rows['content']= 'Trang này không tồn tại';					  
 		}	
-		$this->set_template_share();
+		//$this->set_template_share();
 		$this->ViewVAR($rows);
 	}
 	public function route404Action(){

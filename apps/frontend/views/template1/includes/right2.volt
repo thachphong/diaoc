@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-12 col-xs-12 margin_top">
+<div class="col-md-4 col-sm-12 col-xs-12 margin_top no_padding_right">
    <div class="row margin_top">            
             <div class="searchright pn_background pn_border"> 
             <form action="{{url.get('tim')}}" method="GET">

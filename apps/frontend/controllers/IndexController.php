@@ -33,7 +33,7 @@ class IndexController extends PHOController
 			$param['phongthuy'] = $ne->get_news_rows(68,4); // phong thuy
 			$param['tuvanluat'] = $ne->get_news_rows(69,4); // tu van luat
 			$sl = new Slide();
-			$param['slides'] = $sl->get_slides_list(0);
+			$param['slides'] = $sl->get_slides_list(0);						
 			//$frontendCache->save( $param);
 			$cache2 = $this->createCache( ['lifetime' => 900 ]); // 15 phut
 			$cacheKey2 = 'seachtopparam1.cache';

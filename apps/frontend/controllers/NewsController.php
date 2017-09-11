@@ -26,7 +26,7 @@ class NewsController extends PHOController
 		$traffic['news_id'] =$id;
 		$db->update_traffic($traffic);
         
-		$this->set_template_share();
+		//$this->set_template_share();
         //PhoLog::debug_var('---tét---',$result);
         $this->ViewVAR($result);
 		

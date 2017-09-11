@@ -1,5 +1,7 @@
 {{ stylesheet_link('froala/css/froala_style.css')}}
 <div class="row">
+	{% set banners= elements.get_banner()%}
+   {{ partial('includes/banner_left') }}
    <div class="container">
    
       <div class="col-md-8 col-sm-12 col-xs-12">
@@ -18,6 +20,8 @@
             </div>
          </div>
       </div>
-      {{ partial('includes/right') }}
+      {{ partial('includes/right2') }}
    </div>
+   {% set banners= elements.get_banner()%}
+   {{ partial('includes/banner_right_2') }}
 </div>
