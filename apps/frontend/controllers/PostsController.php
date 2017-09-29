@@ -20,6 +20,7 @@ use Multiple\Models\Category;
 use Multiple\Library\FilePHP;
 use Multiple\PHOClass\PhoLog;
 use Multiple\Models\News;
+
 class PostsController extends PHOController
 {
 	public function initialize()
@@ -80,6 +81,7 @@ class PostsController extends PHOController
 			$result['post_contract_id']='';
 			$result['map_lat'] ='';
 			$result['map_lng'] = '';
+			$result['furniture'] = '';			
 		}else{
 			$db = new Posts();
 			$dbimg = new PostsImg();
@@ -128,17 +130,17 @@ class PostsController extends PHOController
 	        	$contract =  $param['contract'];
 	        	$edit_flg = false;
 				if(strlen($param['post_id'])==0){
-					PhoLog::debug_var('update----','insert');
+					//PhoLog::debug_var('update----','insert');
 					$id = $db->_insert($param);
-					PhoLog::debug_var('update----','1');
+					//PhoLog::debug_var('update----','1');
 					$param['post_id'] = $id;	
 					$paview['post_id'] = $id;	
 					$contract['post_id'] = $id;
 					$add_date = $db->add_date;
-					PhoLog::debug_var('update----','2');
+					//PhoLog::debug_var('update----','2');
 					$pview->_insert($paview);	
 					$pcon->_insert($contract);
-					PhoLog::debug_var('update----','3');
+					//PhoLog::debug_var('update----','3');
 					$result['msg'] = $id;
 				}else{
 					$edit_flg = true;
@@ -167,8 +169,8 @@ class PostsController extends PHOController
 				if(isset($param['img_add']) && count($param['img_add']) > 0){
 					$imglist = $this->move_file($add_date,$param['post_id'],$param['img_add']);			
 					$paimg['post_id'] = $param['post_id'];
-					PhoLog::debug_var('update----','inset img');
-					PhoLog::debug_var('update----',$imglist);
+					//PhoLog::debug_var('update----','inset img');
+					//PhoLog::debug_var('update----',$imglist);
 					foreach ($imglist as $key => $img) {
 						$pimg = new PostsImg();
 						$paimg['img_path'] = $img;
@@ -178,7 +180,7 @@ class PostsController extends PHOController
 						}				
 						$pimg->_insert($paimg);
 					}
-					PhoLog::debug_var('update----','inset img end');
+					//PhoLog::debug_var('update----','inset img end');
 				}
 				if($edit_flg){
 					$pimg = new PostsImg();
@@ -194,7 +196,7 @@ class PostsController extends PHOController
 		} catch (\Exception $e) {
 			PhoLog::debug_var('---Error---',$e);
 		}
-		PhoLog::debug_var('update----','end');
+		//PhoLog::debug_var('update----','end');
 		return $this->ViewJSON($result);
 	}
 	public function move_file($add_date,$post_id,$listfile){

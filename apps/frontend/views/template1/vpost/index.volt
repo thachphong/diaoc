@@ -82,6 +82,12 @@
                      <td>Số toilet</td>
                      <td>{{toilet_num}}</td>
                   </tr>
+                  {%if furniture != ''%}
+                  <tr>
+                     <td>Nội thất</td>
+                     <td style="width: 200px">{{furniture|nl2br}}</td>
+                  </tr>
+                  {%endif%}
                </table>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 col_right">

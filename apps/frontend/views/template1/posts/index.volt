@@ -18,13 +18,12 @@
 	border-style: solid;
 	box-shadow: inset 0 3px 4px #888;
 }
-
 </style>
 <div class="row">
 	<div class="container">
 		{{ partial('includes/user_left') }}
 		{% set define= elements.get_define()%}
-		<div class="col-md-9 col-sm-12 col-xs-12">
+		<div class="col-md-9 col-sm-12 col-xs-12 no_padding_right">
 			<div class="pn_posts">
 				<div class="pn_title">
 					<span class="bg_icon"><i class="fa post-pencil"></i></span>
@@ -52,7 +51,7 @@
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
-							<div class="col-md-2 col-sm-2 col-xs-12">							
+							<div class="col-md-3 col-sm-3 col-xs-12">							
 								<label class="control control-radio">
 							        BĐS Cho thuê
 							        <input type="radio" name="m_type_id" {%if m_type_id ==2%}checked="checked"{%endif%} value="2" class="m_type_id"/>
@@ -139,7 +138,7 @@
 									</select>
 								</label>
 							</div>
-							<label class="col-md-1 col-sm-1 col-xs-12 title_col">Diện tích</label>
+							<label class="col-md-1 col-sm-1 col-xs-12 title_col" style="padding-right: 0px">Diện tích</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="number" name="acreage" value="{{acreage}}">
 							</div>
@@ -193,6 +192,12 @@
 								<input type="number" name="toilet_num" value="{{toilet_num}}">
 							</div>						
 						</div>
+						<div class="row row-margin-bottom">
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Nội thất</label>
+							<div class="col-md-10 col-sm-10 col-xs-12">
+								<textarea style="height:100px" name="furniture" id="post_content">{{furniture}}</textarea> 		
+							</div>												
+						</div>
 						<hr/>
 						<div>
 							<h3>Mô tả chi tiết</h3>
@@ -207,7 +212,7 @@
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Nội dung mô tả <span class="lab_red">(*)</span>:</label>
 							<div class="col-md-10 col-sm-10 col-xs-12">
-								<textarea style="height:100px" name="content" id="post_content" required >{{content}}</textarea> 
+								<textarea style="height:130px" name="content" id="post_content" required >{{content}}</textarea> 
 								<label class="lab_red lab_invisible" id="post_content_error">Bạn cần nhập nội dung mô tả!</label>
 							</div>												
 						</div>
@@ -287,7 +292,7 @@
 						</div>
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Loại tin rao</label>
-							<div class="col-md-2 col-sm-2 col-xs-12">
+							<div class="col-md-2 col-sm-2 col-xs-12 no_padding_right">
 								<label class="control control-radio">
 							        Tin siêu vip
 							        <input type="radio" name="view[post_level]" {%if post_level ==3%}checked="checked"{%endif%} value="3" class="post_level"/>
@@ -308,7 +313,7 @@
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
-							<div class="col-md-2 col-sm-2 col-xs-12">
+							<div class="col-md-2 col-sm-2 col-xs-12 no_padding_right">
 								<label class="control control-radio">
 							        Tin thường
 							        <input type="radio" name="view[post_level]" value="0" {%if post_level ==0%}checked="checked"{%endif%} class="post_level"/>
@@ -666,11 +671,12 @@
         });
         
         var thanh_tien= function(){
+        	var oneDay = 24*60*60*1000;
         	var fdate = $('#view_start').val().split('/');
         	var tdate = $('#view_end').val().split('/');
         	var fromdate = new Date(fdate[2],fdate[1],fdate[0]);
         	var todate = new Date(tdate[2],tdate[1],tdate[0]);
-        	var total_date = todate.getDate()- fromdate.getDate();
+        	var total_date =Math.round(Math.abs((todate.getTime() - fromdate.getTime())/(oneDay)));;
         	$('#total_date').text(total_date + ' ngày');
         	var post_level = $('input[name="view[post_level]"]:checked').val();
         	var total_amt =0,vat=0,total=0,price=0;

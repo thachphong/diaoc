@@ -1,4 +1,4 @@
-<div class="col-md-3 col-sm-6 col-xs-12 padding_top_20">
+<div class="col-md-3 col-sm-6 col-xs-12 padding_top_20 no_padding_left">
 	<div class="row pn_background pn_border">
 		{% set login_info= elements.getuser()%}
 	    <img src="{{url.get('images/users/')}}{{login_info.avata}}" style="width:100%; padding:20px" />

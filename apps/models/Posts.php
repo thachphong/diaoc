@@ -39,7 +39,7 @@ class Posts extends DBModel
     public  $map_lng;
     public 	$total_view;
     public  $project_id;
-        
+    public  $furniture;
     public function initialize()
     {
         $this->setSource("posts");
@@ -77,6 +77,7 @@ class Posts extends DBModel
 				  p.m_directional_id,
 				  p.map_lat,
 				  p.map_lng,
+				  p.furniture,
 				 v.post_level,				
 				 DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,
 				 DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date,	
@@ -151,6 +152,8 @@ class Posts extends DBModel
 	    
 	    $this->map_lat = $param['map_lat'];
 	    $this->map_lng = $param['map_lng'];
+	    $this->furniture = $param['furniture'];
+	    
 	    $this->save();
 	    } catch (\Exception $e) {
 			PhoLog::debug_var('update----',$e);
@@ -184,6 +187,7 @@ class Posts extends DBModel
 					map_lng = :map_lng,
 					m_type_id =:m_type_id,
 					project_id =:project_id,
+					furniture =:furniture,
 					upd_date =now()
 
 				where post_id =:post_id
@@ -213,6 +217,7 @@ class Posts extends DBModel
                     ,'map_lat'
                     ,'map_lng'
                     ,'project_id'
+                    ,'furniture'
                     ));
 		if(strlen($pasql['unit_price'])==0){
 			$pasql['unit_price'] =NULL;
@@ -271,6 +276,7 @@ class Posts extends DBModel
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
 
 				where p.del_flg = 0
+				and p.status =1
 				$where
 				order by p.post_id DESC
 				limit $limit";
@@ -303,6 +309,7 @@ class Posts extends DBModel
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
 
 				where p.del_flg = 0
+				and p.status =1
 				$where			
 				order by p.post_id DESC				
 				limit $limit
@@ -327,6 +334,7 @@ class Posts extends DBModel
 		$sql="select count(p.post_id) cnt
 				from posts p				
 				where p.del_flg = 0
+				and p.status =1
 				$where
 				";
 		$res = $this->query_first($sql,$param);
@@ -355,6 +363,7 @@ class Posts extends DBModel
 				  p.facade_width,
 				  p.map_lat,
 				  p.map_lng,
+				  p.furniture,
 				  di.m_directional_name,
 				 v.post_level,				
 				 DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,
@@ -471,6 +480,7 @@ class Posts extends DBModel
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
 
 				where p.del_flg = 0
+				and p.status =1
 				$where			
 				order by p.post_id DESC				
 				limit $limit
@@ -566,6 +576,7 @@ class Posts extends DBModel
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
 
 				where p.del_flg = 0
+				and p.status =1
 				$where	
 				";
 		$res = $this->query_first($sql,$param);
