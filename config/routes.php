@@ -246,7 +246,12 @@ $router->removeExtraSlashes(true);
 				'action' => 1,
 				'params'=>2
 			));
-		
+			$router->add("/useradm/:action/:params", array(
+				'module' => 'backend',
+				'controller' => 'useradm',
+				'action' => 1,
+				'params'=>2
+			));
 
 			
 			/*$router->notFound(array(

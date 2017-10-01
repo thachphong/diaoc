@@ -3,11 +3,11 @@
             <div class="searchright pn_background pn_border"> 
             <form action="{{url.get('tim')}}" method="GET">
                <div class="row" style="margin-top:0px;padding-top:0px;">
-                  <div class="col-md-6 right_tab" >
+                  <div class="col-md-6 col-sm-6 col-xs-6 right_tab" >
                      <a href="javascript:void(0)" data="1" class="right_tab_item right_tab_active">BĐS BÁN</a>
                      
                   </div>
-                  <div class="col-md-6 right_tab" >                     
+                  <div class="col-md-6 col-sm-6 col-xs-6 right_tab" >                     
                      <a href="javascript:void(0)" data="2" class="right_tab_item">BĐS CHO THUÊ</a>
                   </div>
                </div>
@@ -100,11 +100,11 @@
                </div>
                <div class="right_search_btn">
                   <div class="row">
-                     <div class="col-md-6" style="padding-left:0px;padding-top:7px;padding-right:0px;">
+                     <div class="col-md-6 col-sm-6 col-xs-6" style="padding-left:0px;padding-top:7px;padding-right:0px;">
                         <i class="fa fa-asterisk"></i>
                         <a href="javascript:void(0)" class="show_search_advance">Tìm kiếm nâng cao</a>
                      </div>
-                     <div class="col-md-6" style="padding-right:0px;">
+                     <div class="col-md-6 col-sm-6 col-xs-6" style="padding-right:0px;">
                         <button class="btn_search"><span class="fa fa-search"></span><span style="margin-left:5px;">TÌM KIẾM</span></button>
                      </div>
                   </div>

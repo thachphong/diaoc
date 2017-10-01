@@ -292,28 +292,28 @@
 						</div>
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Loại tin rao</label>
-							<div class="col-md-2 col-sm-2 col-xs-12 no_padding_right">
+							<div class="col-md-2 col-sm-2 col-xs-6 no_padding_right">
 								<label class="control control-radio">
 							        Tin siêu vip
 							        <input type="radio" name="view[post_level]" {%if post_level ==3%}checked="checked"{%endif%} value="3" class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
-							<div class="col-md-2 col-sm-2 col-xs-12">
+							<div class="col-md-2 col-sm-2 col-xs-6">
 								<label class="control control-radio">
 							        Tin vip
 							        <input type="radio" name="view[post_level]" value="2" {%if post_level ==2%}checked="checked"{%endif%} class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
-							<div class="col-md-2 col-sm-2 col-xs-12">
+							<div class="col-md-2 col-sm-2 col-xs-6">
 								<label class="control control-radio">
 							        Tin hot
 							        <input type="radio" name="view[post_level]" value="1" {%if post_level ==1%}checked="checked"{%endif%} class="post_level"/>
 							        <div class="control_indicator"></div>
 							    </label>
 							</div>
-							<div class="col-md-2 col-sm-2 col-xs-12 no_padding_right">
+							<div class="col-md-2 col-sm-2 col-xs-6 no_padding_right">
 								<label class="control control-radio">
 							        Tin thường
 							        <input type="radio" name="view[post_level]" value="0" {%if post_level ==0%}checked="checked"{%endif%} class="post_level"/>

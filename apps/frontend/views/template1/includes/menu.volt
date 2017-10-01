@@ -1,11 +1,11 @@
 <div class="row">
          <div class="container" id="header">
             <div class="row" >
-               <div class="col-md-4 col-sm-4 col-xs-6">
+               <div class="col-md-4 col-sm-4 col-xs-12">
                   <img src="{{url.get('template1/images/logo.png')}}" />  
                </div>
                {% set login_info= elements.getuser()%}
-               <div class="col-md-8 col-sm-8 col-xs-6">
+               <div class="col-md-8 col-sm-8 col-xs-12">
                   <ul class="dang-tin-icon">
                      <li><span class="fa fa-pencil"></span><a href="{{url.get('dang-tin/0')}}">Đăng tin miễn phí</a></li>
                      {%if login_info is defined%}
@@ -26,6 +26,14 @@
             <div class="menu_top">
                <ul class="dropDownMenu">
                   {{ elements.getMenu() }}
+               </ul>
+            </div>
+            <button class="btn_menu_mobi">
+            <span data-toggle="collapse" data-target="#nav-menu" class="glyphicon glyphicon-menu-hamburger menu_mobi"></span>
+            </button>
+            <div id="nav-menu" class="collapse">
+               <ul class="vertical_bar">
+               		{{ elements.getMenu_mobi() }}
                </ul>
             </div>
          </div>

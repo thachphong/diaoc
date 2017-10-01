@@ -1,5 +1,6 @@
-{{ partial('includes/search') }}
 <div class="row">
+	{% set banners= elements.get_banner()%}
+   {{ partial('includes/banner_left') }}
    <div class="container" id="content">            
       <div class="col-md-8 col-sm-12 col-xs-12 margin_top no_padding_left">
          <div class="row margin_top pn_background pn_border post_pn" >
@@ -162,8 +163,10 @@
          </div>
             
       </div>
-      {{ partial('includes/right') }}
+      {{ partial('includes/right2') }}
    </div>
+   {% set banners= elements.get_banner()%}
+   {{ partial('includes/banner_right_2') }}
 </div>
 {{ stylesheet_link('template1/css/jquery.bxslider.css') }}
 {{ javascript_include('template1/js/jquery.bxslider.min.js') }}

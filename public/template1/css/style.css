@@ -951,6 +951,40 @@ a.link_color:hover{
 	text-decoration: none;
 	color: var(--color_hover);
 }
+.btn_menu_mobi {
+    display: none;
+    background: 0 0;
+    border: none
+}
+.menu_mobi {
+    color: #fff;
+    font-size: 25px;
+    border: 1px solid;
+    padding: 5px 5px 2px;
+    border-radius: 4px;
+    display: none;
+    width: 38px;
+    margin-top: 5px;
+    margin-bottom: 5px
+}
+ul.vertical_bar,ul.vertical_bar ul{
+	list-style: none;
+	font-family: 'Roboto Condensed';
+    font-size: 15px;
+}
+ul.vertical_bar li a {
+    color: #fff;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 43px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+ul.vertical_bar li a:hover {
+    background: var(--main_color_3);
+    color: #ffffff;
+}
 /*.main_img{
     width: 100%;
     padding: 5px;

@@ -9,7 +9,8 @@
 			<div class="row margin_top pn_background pn_border post_pn" >
             <div class="post_head">
                <div class="row">
-						<table class="table table-bordered" style="font-size: 12px;">
+               	<div class="table-responsive"> 
+						<table class="table table-bordered " style="font-size: 12px;">
 							<tr>								
 								<th>Mã tin</th>
 								<th>Tiêu đề</th>
@@ -31,6 +32,7 @@
 							</tr>
 							{%endfor%}							
 						</table>
+						</div>
 					</div>
             </div>
             <!--<hr class="line" />-->

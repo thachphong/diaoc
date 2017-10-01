@@ -178,10 +178,119 @@ class Elements extends Component
                     }   
                     if($key>0){
 						$menu_data .='<li><a href="'.$href.'">'.$item['menu_name'].'</a></li>';
-					}else{
+					}else{											
 						$menu_data .='<li><a href="'.$href.'" style="padding-top: 6px;padding-bottom: 13px;"><i class="fa fa-home"></i></a></li>';
 					}             
                     
+                }        
+	        }
+		    // Store it in the cache
+		    $this->dataCache->save($cacheKey, $menu_data);
+		    
+		}
+		echo $menu_data;
+
+    }
+    public function getMenu_mobi()
+    {
+    	$cacheKey = 'menu_mobi.cache';
+		$menu_data  = $this->dataCache->get($cacheKey);
+		if ($menu_data === null) {
+			$menu_data ='';
+            $db = new Menu();
+		    $list_menu = $db->get_menus();
+            $url = new Url();
+            $url->setBaseUri(BASE_URL_NAME);            
+	        $base_url = $url->get('');
+            foreach($list_menu as $key=>$item){
+                if($item['child_flg'] > 0){
+	                $menu_data .='<li>';
+                    $href = $base_url;
+                    
+                    if(strlen($item['link'])>0){                        
+                        if($item['page_flg']==1){
+                            $href .= 'p/';
+                        }else if($item['page_flg']==2){
+                            $href .= 'c/';
+                        }else if($item['page_flg']==3){
+                            $href .= 'dm/';
+                        }
+                         $href .=$item['link'];
+                    }else{
+                        $href ='#';
+                    }
+                    $menu_data .='<a href="'.$href.'">'.$item['menu_name'].'</a><ul>';
+                            
+                    foreach($item['child'] as $sub1){                              
+                        if($sub1['child_flg'] > 0){                               
+                            $menu_data .='<li>';
+                            $href = $base_url;
+                            
+                            if(strlen($sub1['link'])>0) {                       
+                                if($sub1['page_flg']==1){
+                                    $href .= 'p/';
+                                }else if($sub1['page_flg']==2){
+                                    $href .= 'c/';
+                                }else if ($sub1['page_flg']==3){
+                                    $href .= 'dm/';
+                                }
+                                 $href .=$sub1['link'];
+                            }else{
+                               // $href ='#';
+                            }
+                            $menu_data .='<a href="'.$href.'">'.$sub1['menu_name'].'</a><ul>';
+                            foreach($sub1['child'] as $sub2){                            
+                                $href = $base_url;                    
+                                if(strlen($sub2['link'])>0) {                       
+                                    if( $sub2['page_flg']==1){
+                                        $href .= 'p/';
+                                    }else if( $sub2['page_flg']==2){
+                                        $href .= 'c/';
+                                    }else if ($sub2['page_flg']==3){
+                                        $href .= 'dm/';
+                                    }
+                                     $href .=$sub2['link'];
+                                }else{
+                                    //$href ='#';
+                                }                
+                                $menu_data .='<li><a href="'.$href.'">'.$sub2['menu_name'].'</a></li>';
+                            }                   
+                            $menu_data .='</ul></li>';
+                        }else{                      
+                            $href = $base_url;                    
+                            if(strlen($sub1['link'])>0) {                       
+                                if( $sub1['page_flg']==1){
+                                    $href .= 'p/';
+                                }else if( $sub1['page_flg']==2){
+                                    $href .= 'c/';
+                                }else if ($sub1['page_flg']==3){
+                                    $href .= 'dm/';
+                                }
+                                 $href .=$sub1['link'];
+                            }else{
+                                //$href ='#';
+                            }                
+                            $menu_data .='<li><a href="'.$href.'">'.$sub1['menu_name'].'</a></li>';
+                        }              
+                    }               
+                    $menu_data .='</ul></li>';
+                }else{
+                    $href = $base_url;                    
+                    if(strlen($item['link'])>0){                        
+                        if( $item['page_flg']==1){
+                            $href .= 'p/';
+                        }else if( $item['page_flg']==2){
+                            $href .= 'c/';
+                        }else if ($item['page_flg']==3){
+                            $href .= 'dm/';
+                        }
+                        $href .=$item['link'];
+                    }else{
+                        //$href ='#';
+                    } 
+                   
+					$menu_data .='<li><a href="'.$href.'">'.$item['menu_name'].'</a></li>';
+					 
                 }        
 	        }
 		    // Store it in the cache
