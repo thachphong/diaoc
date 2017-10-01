@@ -70,6 +70,9 @@
 		position: relative;
 		float: right;
 	}
+	.desc_news{
+		display: none;
+	}
 }
 @media (max-width: 320px){
 	.search_tab .tab_title{
@@ -84,5 +87,8 @@
 	
 	.post_head h1{
 		font-size: 20px;
+	}
+	.pn_title h1, .pn_title h3{
+		font-size: 16px;
 	}
 }
