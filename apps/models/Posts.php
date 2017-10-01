@@ -63,9 +63,9 @@ class Posts extends DBModel
 				  p.m_provin_id,
 				  p.m_district_id,
 				  p.m_ward_id,
-				  p.price,
+				  (trim(p.price)+0) price,
 				  p.unit_price,
-				  p.acreage,
+				  (trim(p.acreage)+0) acreage,
 				  p.address,
 				  p.content,  
 				  p.del_flg,
@@ -264,7 +264,9 @@ class Posts extends DBModel
 		if($post_type !=''){
 			$where =" and v.post_level = $post_type";
 		}
-		$sql ="select p.post_id,p.post_name,p.post_no,p.price,p.acreage,pro.m_provin_name,dis.m_district_name,
+		$sql ="select p.post_id,p.post_name,p.post_no,
+		(trim(p.price)+0) price,
+		(trim(p.acreage)+0) acreage,pro.m_provin_name,dis.m_district_name,
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
@@ -297,7 +299,10 @@ class Posts extends DBModel
 					)	";
 			$param['ctg_no'] = $ctg_no;
 		}
-		$sql="select p.post_id,p.post_name,p.post_no,p.price,p.acreage,pro.m_provin_name,dis.m_district_name,
+		$sql="select p.post_id,p.post_name,p.post_no,
+				(trim(p.price) +0) price,
+				(trim(p.acreage) +0) acreage,
+				pro.m_provin_name,dis.m_district_name,
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
@@ -350,9 +355,9 @@ class Posts extends DBModel
 				  mp.m_provin_name,
 				  md.m_district_name,
 				  mw.m_ward_name,
-				  p.price,
+				  (trim(p.price)+0) price,
 				  mu.m_unit_name,
-				  p.acreage,
+				  (trim(p.acreage)+0) acreage,
 				  p.address,
 				  p.content,  
 				  p.del_flg,
@@ -468,7 +473,10 @@ class Posts extends DBModel
 			}						
 		}
 		
-		$sql="select p.post_id,p.post_name,p.post_no,p.price,p.acreage,pro.m_provin_name,dis.m_district_name,
+		$sql="select p.post_id,p.post_name,p.post_no,
+				(trim(p.price)+0) price,
+				(trim(p.acreage)+0) acreage,
+				pro.m_provin_name,dis.m_district_name,
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
