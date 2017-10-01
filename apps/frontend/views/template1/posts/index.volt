@@ -217,7 +217,13 @@
 							</div>												
 						</div>
 						<div class="row row-margin-bottom">
-							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Cập nhật hình ảnh</label>							
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Link youtube:</label>
+							<div class="col-md-10 col-sm-10 col-xs-12">
+								<input type="text" name="youtube_url" value="{{youtube_url}}"  >
+							</div>												
+						</div>
+						<div class="row row-margin-bottom">
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Cập nhật hình ảnh:</label>							
 							<div class="col-md-10 col-sm-10 col-xs-12" id="img_box">
 								<div id="filedrag">
 									{%for img in img_list%}

@@ -40,6 +40,8 @@ class Posts extends DBModel
     public 	$total_view;
     public  $project_id;
     public  $furniture;
+    public  $youtube_url;
+    public  $youtube_key;
     public function initialize()
     {
         $this->setSource("posts");
@@ -78,6 +80,7 @@ class Posts extends DBModel
 				  p.map_lat,
 				  p.map_lng,
 				  p.furniture,
+				  p.youtube_url,
 				 v.post_level,				
 				 DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,
 				 DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date,	
@@ -153,7 +156,10 @@ class Posts extends DBModel
 	    $this->map_lat = $param['map_lat'];
 	    $this->map_lng = $param['map_lng'];
 	    $this->furniture = $param['furniture'];
-	    
+	    $this->youtube_url = $param['youtube_url'];
+	    if(strlen($param['youtube_url'])>0){
+			$this->youtube_key    = $this->extract_youtube_key($param['youtube_url']);
+		}	   
 	    $this->save();
 	    } catch (\Exception $e) {
 			PhoLog::debug_var('update----',$e);
@@ -188,6 +194,8 @@ class Posts extends DBModel
 					m_type_id =:m_type_id,
 					project_id =:project_id,
 					furniture =:furniture,
+					youtube_url =:youtube_url,
+					youtube_key =:youtube_key,
 					upd_date =now()
 
 				where post_id =:post_id
@@ -218,6 +226,7 @@ class Posts extends DBModel
                     ,'map_lng'
                     ,'project_id'
                     ,'furniture'
+                    ,'youtube_url'
                     ));
 		if(strlen($pasql['unit_price'])==0){
 			$pasql['unit_price'] =NULL;
@@ -255,6 +264,7 @@ class Posts extends DBModel
 		if(strlen($pasql['project_id'])==0){
 			$pasql['project_id']=NULL;
 		}
+		$pasql['youtube_key'] = $this->extract_youtube_key($param['youtube_url']);
 		
 		$this->pho_execute($sql, $pasql);  
         return TRUE;
@@ -369,6 +379,7 @@ class Posts extends DBModel
 				  p.map_lat,
 				  p.map_lng,
 				  p.furniture,
+				  p.youtube_key,
 				  di.m_directional_name,
 				 v.post_level,				
 				 DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,
@@ -731,5 +742,10 @@ class Posts extends DBModel
 	public function update_traffic($param){
 		$sql="select update_traffic_post(:post_id,:section_id,:time,:ip)";
 		return $this->pho_execute($sql,$param);
+	}
+	public function extract_youtube_key($url_link){
+		if(strlen($url_link)==0) return '';
+		$position=strpos( $url_link, 'watch?v=',1) + 8;
+	    return substr($url_link ,$position,11);
 	}
 }

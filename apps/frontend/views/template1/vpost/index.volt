@@ -21,8 +21,14 @@
             </div>
             <hr class="line" />
             <div class="post_tab">
-               <a href="javascript:void(0)" data-tab="#tab_detail_1" class="tab_item active"><i class="fa fa-picture-o"></i>Hình ảnh(1)</a>
-               <a href="javascript:void(0)" data-tab="#tab_detail_2" class="tab_item"><i class="fa fa-map-marker3"></i>Bản đồ</a>
+               {%if imglist|length >0%}
+               <a href="javascript:void(0)" data-tab="#tab_detail_1" class="tab_item active"><i class="fa fa-picture-o"></i>Hình ảnh</a>
+               {%endif%}
+               {%if youtube_key != ''%}
+               <a href="javascript:void(0)" data-tab="#tab_detail_3" class="tab_item {%if imglist|length ==0%} active{%endif%}"><i class="fa fa-play-circle-o"></i>Video</a>
+               
+               {%endif%}
+               <a href="javascript:void(0)" data-tab="#tab_detail_2" class="tab_item {%if imglist|length ==0 and youtube_key == ''%} active{%endif%}"><i class="fa fa-map-marker3"></i>Bản đồ</a>
             </div>
             <!-- <ul class="nav nav-tabs" id="comment_tab">
                  <li class="active"><a data-toggle="tab" href="#tab_detail_1">Facebook</a></li>
@@ -30,6 +36,7 @@
                </ul> -->
                <!-- <div class="tab-content"> -->
                   <!-- <div id="tab_detail_1" class="tab-pane fade in "> -->
+            
               <div class="tab_item_detail" id="tab_detail_1">
                <div>
                   <ul class="bxslider" >
@@ -46,6 +53,14 @@
                   </ul>                 
                </div>
             </div>
+            
+            {%if youtube_key != ''%}
+            <div class="tab_item_detail" id="tab_detail_3" {%if imglist|length !=0 %} style="display:none"{%endif%}>
+               <div style="width:100%">
+               	  <iframe width="100%" height="60%" src="//www.youtube.com/embed/{{youtube_key}}?wmode=opaque" frameborder="0" allowfullscreen=""></iframe>
+               </div>
+            </div>
+            {%endif%}
          <!--    <div id="tab_detail_2" class="tab-pane fade in active"> -->
             <div class="tab_item_detail" id="tab_detail_2" style="display:block">
                <div id="maps_mapcanvas" style="width:100%">
@@ -227,11 +242,19 @@ if(post_address.length ==0){ post_address = "152 Vũ Phạm Hàm , Phường Yê
           animation: google.maps.Animation.DROP
       });
     var infowindow = new google.maps.InfoWindow;
-    var div_addr ='<div style="overflow: auto;width: 100%;">'+post_address+'</div>'
+    var div_addr ='<div style="overflow: auto;width:100%;">'+post_address+'</div>'
     infowindow.setContent(div_addr);
         infowindow.open(map, markers[0]);  
 
-      setTimeout(function(){$('#tab_detail_2').hide();},1000);
+      setTimeout(function(){
+      		{%if imglist|length !=0 or youtube_key != ''%} 
+      			$('#tab_detail_2').hide();
+      		{%elseif imglist|length ==0 %}
+      			$('#tab_detail_1').hide();
+      		{%endif%}
+      		
+      		},1000
+      	);
        
       }
 

@@ -125,6 +125,12 @@
     margin-right: 11px;
     color: #868080;
 }
+.fa-play-circle-o:before {
+    content: "\f01d";
+    font-size: 18px;
+    margin-right: 11px;
+    color: #868080;
+}
 .fa-usd:before {
     content: "\f155";
     font-size: 15px;

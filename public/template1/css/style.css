@@ -853,7 +853,7 @@ a.link_color:hover{
     color: var(--main_color);
     font-weight: bold;   
 }
-.post_tab .active .fa-picture-o:before,.post_tab .active .fa-map-marker3:before {
+.post_tab .active .fa-picture-o:before,.post_tab .active .fa-map-marker3:before,.post_tab .active .fa-play-circle-o::before {
     color: var(--main_color);
 }
 .tab_item_detail{
