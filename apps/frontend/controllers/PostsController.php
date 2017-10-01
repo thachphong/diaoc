@@ -248,7 +248,11 @@ class PostsController extends PHOController
 	}
 	public function check_validate_update(&$param){
 		$param['post_no'] = $this->convert_url($param['post_name']);
-		$param['address_ascii'] = $this->convert_ascii($param['address']);		
+		$param['address_ascii'] = $this->convert_ascii($param['address']);	
+		$code = $this->session->get('captcha_code');
+		if($param['capcha_code'] != $code){
+			return 'Mã an toàn không đúng, vui lòng nhập lại!';
+		}	
 		return "";
 	}
 	

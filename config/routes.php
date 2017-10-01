@@ -54,6 +54,12 @@ $router->removeExtraSlashes(true);
 				'action' => 'crop',
 				'params'=>1
 			));
+			$router->add("/image/:action/:params", array(
+				'module' => 'frontend',
+				'controller' => 'image',
+				'action' => 1,
+				'params'=>2
+			));
 			$router->add("/dang-ky", array(
 				'module' => 'frontend',
 				'controller' => 'users',

@@ -5,6 +5,7 @@ namespace Multiple\Frontend\Controllers;
 use Multiple\PHOClass\PHOController;
 use Phalcon\Image\Adapter\GD;
 use Multiple\PHOClass\PhoLog;
+use Multiple\Library\Captcha;
 class ImageController extends PHOController
 {
 
@@ -27,5 +28,19 @@ class ImageController extends PHOController
 		$this->view->disable();
         $this->response->setContent($img->render('jpg'));
         return $this->response;
+	}
+	public function capchaAction(){
+		try{
+			$this->view->disable();
+			$captcha = new Captcha();
+			$code ="";
+			$this->response->setContent( $captcha->get_and_show_image($code));
+			//PhoLog::debug_var('---img---',$code);
+			$this->session->set('captcha_code', $code);	
+			return $this->response;
+		}catch (\Exception $e) {
+			PhoLog::debug_var('---Error---',$e);
+		}
+
 	}
 }

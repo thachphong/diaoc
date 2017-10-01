@@ -366,6 +366,17 @@
 							</div>
 							
 						</div>
+						<div class="row row-margin-bottom">
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Mã an toàn  <span class="lab_red">(*)</span>:</label>
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<input type="text" name="capcha_code" class="" id="capcha_code" required value="">
+								<label class="lab_red lab_invisible" id="capcha_code_error">Bạn cần nhập mã an toàn</label>
+							</div>							
+							<div class="col-md-3 col-sm-3 col-xs-12">
+								<img src="{{url.get('image/capcha')}}" style="border:1px solid var(--color_pn_header)" id="img-captcha">
+								<a style="margin-left: 5px" href="javascript:void(0)" onclick="$('#img-captcha').attr('src', '{{url.get('image/capcha')}}?rand=' + Math.random())"><i class="fa fa-refresh"></i></a>
+							</div>					
+						</div>
 						</form>
 						<div class="row row-margin-bottom" style="margin-top:20px">
 							<div class="col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
