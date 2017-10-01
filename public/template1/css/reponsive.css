@@ -53,4 +53,36 @@
    	  height: auto;
    	  background-image: none;
    }
+   .newsboxrow .boxleft img,.colbox img,.img_newlist{
+		width: 100%;
+	}
+	.post_title{
+		height: auto;
+	}
+	.col-xs-9{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.col_right{
+		margin-top:10px;
+	}
+	.post_date{
+		position: relative;
+		float: right;
+	}
+}
+@media (max-width: 320px){
+	.search_tab .tab_title{
+		font-size: 12px !important;
+		line-height: 36px;
+	}
+	
+	.post_title{
+		height: auto;
+		font-size: 12px;
+	}
+	
+	.post_head h1{
+		font-size: 20px;
+	}
 }
