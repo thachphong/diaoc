@@ -55,7 +55,8 @@
                           <th>Họ và tên</th>
                           <th>Email</th>
                           <th>Điện thoại</th>
-                          <th>Sửa</th>                          
+                          <th>Loại user</th>                        
+                          <th>Phân quyền</th>                          
                         </tr>
                       </thead>
                       <tbody id="fbody">
@@ -65,8 +66,16 @@
                           <td>{{item['user_name']}}</td>
                           <td>{{item['email']}}</td>
                           <td>{{item['mobile']}}</td>
+                          <td>{{item['level_name']}}</td>
                           <!--<td><button class="btn btn-info btn-xs btn_editpass" id="pass_<%$item.user_id%>">Đổi mật khẩu</button></td>-->
-                          <td><button class="btn btn-warning btn-xs btn_edit" id="edit_<%$item.user_id%>">Sửa</button></td>
+                          <td><!--<button class="btn btn-warning btn-xs btn_edit" id="edit_{{item['user_id']}}">Sửa</button>-->
+                          {%if item['level']==0%}
+                          	  <a class="btn btn-info btn-xs btn_edit" href="{{url.get('useradm/toadmin/')}}{{item['user_id']}}">Nâng cấp thành admin</a>
+                          {%else%}
+                          	  <a class="btn btn-warning btn-xs btn_edit" href="{{url.get('useradm/tonormal/')}}{{item['user_id']}}">Hạ xuống thường</a>
+                          {%endif%}
+                          	
+                          </td>
                         </tr>
                       {%endfor%}                        
                       </tbody>
@@ -95,5 +104,13 @@ $(document).ready(function() {
 	    });	       
 	    jo.show();
 	});
+	$(document).off('click','.btn_edit'); 
+        $(document).on('click','.btn_edit',function(event){
+        	var id = $(this).attr('id');
+	        	id = id.replace("edit_","");			
+            	Pho_html_ajax('GET',"<%$smarty.const.ACW_BASE_URL%>user/edit/"+ id ,null,function(html){
+            	Pho_modal(html,"Sửa thông tin tài khoản",600);
+            });
+        });
 });
 </script>

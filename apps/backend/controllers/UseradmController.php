@@ -90,4 +90,14 @@ class UserAdmController extends PHOController
 		$this->set_template_share();
 		return $this->ViewVAR($result);
 	}
+	public function toadminAction($id){
+		$db = new Users();
+		$db->updatelevel($id,1);
+		return $this->response->redirect('useradm/list');
+	}
+	public function tonormalAction($id){
+		$db = new Users();
+		$db->updatelevel($id,0);
+		return $this->response->redirect('useradm/list');
+	}
 }

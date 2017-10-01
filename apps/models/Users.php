@@ -140,7 +140,9 @@ class Users extends DBModel
 	}
 	public function get_user_rows($param)
 	{
-		$sql = "SELECT	* FROM	user ";
+		$sql = "SELECT	user_id,user_name,user_no,email,mobile,level,
+				(case when level=1 then 'Admin' else 'Thường' end) level_name
+				 FROM	user ";
 		
 		if (isset($param['s_user_name'])) {
 			$sql_param = array(
@@ -157,5 +159,11 @@ class Users extends DBModel
 		";
 		//var_dump($sql);die;
 		return $this->pho_query($sql, $sql_param);
+	}
+	public function updatelevel($user_id,$level){		
+		$sql ="update user set 
+						level = :level	
+				where user_id =:user_id ";		
+		return $this->pho_execute($sql,array('level'=>$level,'user_id'=>$user_id));
 	}
 }
