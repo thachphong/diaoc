@@ -388,7 +388,12 @@ class Elements extends Component
                 
                 $html .= '<a href="'.BASE_URL_NAME.'b/'.$item['post_no'].'_'.$item['post_id'].'">'.$item['post_name'].'</a>';
                 $html .= '<div style="text-align:right">';
-                $html .= '<span class="postprice_right"><strong>'.$item['price'].'</strong>'. $item['m_unit_name'].'</span>';
+                if(strlen($item['price'])>0){
+					$html .= '<span class="postprice_right"><strong>'.$item['price'].'</strong>'. $item['m_unit_name'].'</span>';
+				}else{
+					$html .= '<span class="postprice_right"><strong>Thỏa thuận</strong></span>';
+				}
+                
                 $html .= '</div></div></div>';               
             }
             // Store it in the cache
@@ -445,19 +450,23 @@ class Elements extends Component
 		return $cdata;
 	}
 	public function get_banner(){
-    	$options = ['lifetime' => 86400 ]; // thoi gian tinh bang giay ,1 ngay
-        $frontendCache = new FrontData($options);   
-        $cache = new BackFile( $frontendCache,  ['cacheDir' => PHO_CACHE_DIR ]);
+		try{
+	    	$options = ['lifetime' => 86400 ]; // thoi gian tinh bang giay ,1 ngay
+	        $frontendCache = new FrontData($options);   
+	        $cache = new BackFile( $frontendCache,  ['cacheDir' => PHO_CACHE_DIR ]);
 
-        $cacheKey = 'banner.cache';
-        $cdata  = $cache->get($cacheKey);
-        if($cdata === NULL){
-			$model = new Slide();
-			$cdata = $model->get_slides_list(1); //1 la banner		
-			
-			$cache->save($cacheKey, $cdata);
-		}		
-		return $cdata;
+	        $cacheKey = 'banner.cache';
+	        $cdata  = $cache->get($cacheKey);
+	        if($cdata === NULL){
+				$model = new Slide();
+				$cdata = $model->get_slides_list(1); //1 la banner		
+				
+				$cache->save($cacheKey, $cdata);
+			}		
+			return $cdata;
+		}catch (\Exception $e) {
+			PhoLog::debug_var('---Error---',$e);
+		}
 	}
     
     

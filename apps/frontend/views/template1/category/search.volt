@@ -16,8 +16,8 @@
                      </div>
                      <div class="col-md-9 col-sm-9 col-xs-12">
                         <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}" class="post_title">{{item['post_name']}}</a>
-                        <div class="icon_post"><label><i class="fa fa-usd"></i>Giá<span>: </span></label><strong>{{item['price']}} {{item['m_unit_name']}}</strong></div>
-                        <div class="icon_post"><label><i class="fa fa-university"></i>Diện tích<span>: </span></label>{{item['acreage']}} m2</div>
+                        <div class="icon_post"><label><i class="fa fa-usd"></i>Giá<span>: </span></label><strong>{%if item['price'] is defined%}{{item['price']}} {{item['m_unit_name']}}{%else%}Thỏa thuận{%endif%}</strong></div>
+                        <div class="icon_post"><label><i class="fa fa-university"></i>Diện tích<span>: </span></label>{%if item['acreage'] is defined%}{{item['acreage']}} m2{%else%}Không xác định{%endif%}</div>
                         <div class="icon_post"><label><i class="fa fa-map-marker"></i>Vị trí<span>: </span></label>
                         {{item['m_district_name']}} - {{item['m_provin_name']}}</div>
                         <span class="post_date">{{item['start_date']}}</span>

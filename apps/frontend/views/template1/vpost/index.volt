@@ -191,7 +191,7 @@ $(document).ready(function() {
    var map_api_key ='AIzaSyAbkqq1po0p6Z1rnpQSSlO4x32JrdnedY0';
    $('.bxslider').bxSlider({
         pagerCustom: '#bx-pager'
-        ,auto:true
+        ,auto:false
    });
    
    $(document).off('click','.tab_item');

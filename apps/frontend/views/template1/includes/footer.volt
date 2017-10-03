@@ -26,7 +26,7 @@
                <p><strong style="color:#589b04;">Email:</strong> datxanhmienbac@gmail.com</p>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-12" id="footer_col_2">
-                <div><img src="{{url.get('template1/images/dang_ky_bct.png')}}"> </div>
+                <!--<div><img src="{{url.get('template1/images/dang_ky_bct.png')}}"> </div>-->
                 <ul class="mxh">
                     <li><a href="{{define['facebook_page']}}" target="_blank"><i class="fa fa-facebook-square"></i></a>
                     <li><a href="{{define['tweet_page']}}" target="_blank"><i class="fa fa-twitter-square"></i></a>

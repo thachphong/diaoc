@@ -65,7 +65,7 @@ class IndexController extends PHOController
 			//$param['viplist'] = $db->get_list_new(3);
 			//$param['xemnhieu'] = $ne->get_news_pupular(5);
 			$this->set_template_share();
-			PhoLog::debug_var('test',__LINE__);
+			//PhoLog::debug_var('test',$param);
 			$this->ViewVAR($param);	
 		}catch (\Exception $e) {
 			PhoLog::debug_var('---Error---',$e);

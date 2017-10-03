@@ -505,7 +505,8 @@ class Posts extends DBModel
 				limit $limit
 				OFFSET $start_row
 				";
-		return $this->pho_query($sql,$param);
+		
+		return $this->pho_query($sql,$search);
 	}
 	public function search_posts_count($param){
 		$limit = PAGE_LIMIT_RECORD;
@@ -598,7 +599,7 @@ class Posts extends DBModel
 				and p.status =1
 				$where	
 				";
-		$res = $this->query_first($sql,$param);
+		$res = $this->query_first($sql,$search);
 		return $res['cnt'];
 	}
 	public function get_list_byuser($user_id){

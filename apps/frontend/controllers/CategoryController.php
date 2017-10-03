@@ -112,7 +112,7 @@ class CategoryController extends PHOController
 	}	
 	public function searchAction()
 	{
-        $param = $this->get_Gparam('ctgid',
+        /*$param = $this->get_Gparam('ctgid',
                   'type',
                   'provin' ,
                   'district',
@@ -124,7 +124,8 @@ class CategoryController extends PHOController
                   'directional',
                   'addr',
                   'page'
-                  );
+                  );*/
+        $param = $_GET;
         $page = 1;
       	if(isset($param['page']) && strlen($param['page']) > 0){
             $page=$param['page'];

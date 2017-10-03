@@ -1,10 +1,14 @@
 <div class="banner_right">
+	{%if banners[2] is defined %}
    		<a href="{{url.get(banners[2].link_page)}}">
    			<img src="{{url.get(banners[2].img_path)}}" style="margin-bottom: 5px"/>
    		</a>
+     {%endif%}
+     {%if banners[3]is defined %}
    		<a href="{{url.get(banners[3].link_page)}}">
    			<img src="{{url.get(banners[3].img_path)}}"/>
    		</a>
+   	{%endif%}
 </div>
 <script type="text/javascript">
 	$('.banner_left').css('top','338px');

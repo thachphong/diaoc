@@ -10,7 +10,7 @@ class Captcha
 	var $fonts          =   array();
 	var $font_size      =   15;
 	
-	var $char_set       =   "ABCDEFGHJKLMNPQRSTUVWXYZ12345689";
+	var $char_set       =   "abcdefghijklmnopqrstyz12345689";
 	var $char_length    =   5;
 	
 	var $char_color     =   "#880000,#008800,#000088,#888800,#880088,#008888,#000000";
