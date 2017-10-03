@@ -4,16 +4,17 @@
             <form action="{{url.get('tim')}}" method="GET">
                <div class="row" style="margin-top:0px;padding-top:0px;">
                   <div class="col-md-6 col-sm-6 col-xs-6 right_tab" >
-                     <a href="javascript:void(0)" data="1" class="right_tab_item right_tab_active">BĐS BÁN</a>
+                     <a href="javascript:void(0)" data="1" class="right_tab_item right_tab_active" id="tab_1">BĐS BÁN</a>
                      
                   </div>
                   <div class="col-md-6 col-sm-6 col-xs-6 right_tab" >                     
-                     <a href="javascript:void(0)" data="2" class="right_tab_item">BĐS CHO THUÊ</a>
+                     <a href="javascript:void(0)" data="2" class="right_tab_item" id="tab_2">BĐS CHO THUÊ</a>
                   </div>
+                  <input type="hidden" name="type" id="mtype" value="1">
                </div>
                <div class="right_search_basic">
                   <div class="row">
-                     <input type="" name="" placeholder="Nhập địa điểm">
+                     <input type="text" name="addr" id="addr" placeholder="Nhập địa điểm">
                   </div>
                   <div class="row">
                      <label class="select_icon">
@@ -96,7 +97,14 @@
                                <option value="5">5+</option>
                            </select>
                      </label>
-                  </div>                  
+                  </div>
+                  <div class="row">
+                    <label class="select_icon">  
+                        <select name="project" id="project">
+                            <option value="">Dự án</option>
+                        </select>
+                    </label>
+                </div>                  
                </div>
                <div class="right_search_btn">
                   <div class="row">
@@ -147,14 +155,16 @@
       </div>
 <script type="text/javascript">
 $(document).ready(function() {
+	var _param = get_param_search();	
     $(document).off('click','.right_tab_item');
     $(document).on('click','.right_tab_item',function(){
-         console.log('aaa');
+        // console.log('aaa');
         $('.right_tab_item').removeClass('right_tab_active');
         $(this).addClass('right_tab_active');
         change_m_type_id($(this).attr('data'));
         $('#mtype').val($(this).attr('data'));
     });
+    
     $(document).off('click','.show_search_advance');
     $(document).on('click','.show_search_advance',function(){
          if($(this).text()=='Tìm kiếm nâng cao'){
@@ -203,6 +213,7 @@ $(document).ready(function() {
             provins_list    =  datas.m_provins;
             category_list = datas.categorys;
             sprices_list =   datas.sprices;
+            project_list = datas.projects;
             var option = '<option value="">Loại bất động sản</option>';
             $.each(category_list,function(key,item){
                //console.log(item);
@@ -226,6 +237,12 @@ $(document).ready(function() {
             });
             $('#price').empty();
             $('#price').append(op_price);
+            var op_project = '<option value="">Dự án</option>';
+            $.each(project_list,function(key,item){
+               op_project +='<option value="'+item['news_id']+'">'+item['news_name']+'</option>';                        
+            });
+            $('#project').empty();
+            $('#project').append(op_project);
         });
     }
     function get_advance(){
@@ -238,20 +255,61 @@ $(document).ready(function() {
             });
             $('#directional').empty();
             $('#directional').append(option);
-            
+            set_param_search();
         });
     }
-    setTimeout(get_basic(),1000);
-    setTimeout(get_advance(),1500);
+    function set_param_search(){    	
+    	if(_param.type != undefined && _param.type==2 ){		
+			$('#tab_2').click();		
+		}
+		if(_param.addr != undefined && _param.addr.length > 0){
+			$('#addr').val(urldecode(_param.addr));
+		}
+		if(_param.ctgid != undefined && _param.ctgid.length > 0){
+			$('#ctg_id').val(_param.ctgid);
+		}
+		if(_param.provin != undefined && _param.provin.length > 0){
+			$('#s_m_provin_id').val(_param.provin);
+			change_district_list();
+		}
+		if(_param.acreage != undefined && _param.acreage.length > 0){
+			$('#acreage').val(_param.acreage);
+		}
+		if(_param.price != undefined && _param.price.length > 0){
+			$('#price').val(_param.price);
+		}
+		if(_param.directional != undefined && _param.directional.length > 0){
+			$('#directional').val(_param.directional);
+		}
+		if(_param.roomnum != undefined && _param.roomnum.length > 0){
+			$('#roomnum').val(_param.roomnum);
+		}
+		if(_param.project != undefined && _param.project.length > 0){
+			$('#project').val(_param.project);
+		}
+    };
+    setTimeout(get_basic(),500);
+    setTimeout(get_advance(),1000);
+    
     $(document).off('change','#s_m_provin_id');
     $(document).on('change','#s_m_provin_id',function(){
-        var val = $(this).val().trim();
+        change_district_list();
+    }); 
+    function change_district_list(){
+    	var val = $('#s_m_provin_id').val().trim();
         var option='<option value="">Quận/Huyện</option>';
         if(val !=''){
             var list=district_list;
             for(i=0;i<list.length;i++){
                 if(list[i]['m_provin_id'] == val){
-                    option +='<option value="'+list[i]['m_district_id']+'">'+list[i]['m_district_name']+'</option>'; 
+                	if(_param.district != undefined && _param.district ==list[i]['m_district_id'] ){
+                		option +='<option value="'+list[i]['m_district_id']+'" selected>'+list[i]['m_district_name']+'</option>'; 
+                		
+                	}else{
+                		option +='<option value="'+list[i]['m_district_id']+'">'+list[i]['m_district_name']+'</option>'; 
+                	}
+                    
+                    
                 }                        
             }
             $('#s_m_district_id').empty();
@@ -261,24 +319,36 @@ $(document).ready(function() {
         }else{
             $('#s_m_district_id').empty();
             $('#s_m_district_id').append(option);
-        }        
-        
-    });  
+        }
+        if(_param.district != undefined && _param.district.length > 0){
+        	_param.district='';
+			change_ward_list();
+		}
+    }; 
     $(document).off('change','#s_m_district_id');
     $(document).on('change','#s_m_district_id',function(){
-        var val = $(this).val().trim();
+        change_ward_list();
+    });
+    function change_ward_list(){
+    	var val = $('#s_m_district_id').val().trim();
         var option='<option value="">Phường/Xã</option>';
         if(val !=''){
             var list=ward_list;                    
             for(i=0;i<list.length;i++){
                 if(list[i]['m_district_id'] == val){
-                    option +='<option value="'+list[i]['m_ward_id']+'">'+list[i]['m_ward_name']+'</option>'; 
+                	if(_param.ward != undefined && _param.ward == list[i]['m_ward_id']){
+						option +='<option value="'+list[i]['m_ward_id']+'" selected>'+list[i]['m_ward_name']+'</option>'; 
+						_param.ward='';
+					}else{
+						option +='<option value="'+list[i]['m_ward_id']+'">'+list[i]['m_ward_name']+'</option>'; 
+					}
+                    
                 }                        
             }                  
         }
         $('#s_m_ward_id').empty();
         $('#s_m_ward_id').append(option);
-    });
+    };
 });
 function jsion_ajax(url,data,done_fun){
     $.ajax({
@@ -293,5 +363,25 @@ function jsion_ajax(url,data,done_fun){
         },      
         type: 'POST'
     });
+}
+function get_param_search(){
+	var url = location.href;
+	var result = {};
+	if(url.indexOf('?')>=0){
+		var str = url.split('?');
+		if(str[1].indexOf('&')>=0){
+			var param = str[1].split('&');
+			$.each(param, function( index, value ) {
+			    var item = value.split('=');
+			    result[item[0]]=item[1];
+			});
+		}		
+	}
+	return result;
+}
+function urldecode(html) {
+    var txt = decodeURIComponent(html);
+    txt =  txt.replace( /\+/g, ' '); 
+    return txt;
 }
 </script>

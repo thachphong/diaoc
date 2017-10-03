@@ -121,7 +121,7 @@
                 </div>
                 <div class="col-md-2 col-sm-2 col-xs-12 no_padding">
                     <label class="select_icon">  
-                        <select name="project">
+                        <select name="project" id="project">
                             <option value="">Dự án</option>
                         </select>
                     </label>
@@ -153,7 +153,9 @@ $(document).ready(function() {
             district_list = datas.m_districts;  
             provins_list    =  datas.m_provins;
             category_list = datas.categorys;
-            sprices_list =   datas.sprices;
+            sprices =   datas.sprices;
+            project_list = datas.projects;
+            //console.log(datas);
             var option = '<option value="">Loại bất động sản</option>';
             $.each(category_list,function(key,item){
                //console.log(item);
@@ -170,13 +172,19 @@ $(document).ready(function() {
             $('#s_m_provin_id').empty();
             $('#s_m_provin_id').append(option);
             var op_price = '<option value="">Mức giá</option>';
-            $.each(sprices_list,function(key,item){            
+            $.each(sprices,function(key,item){            
                if(m_type_id == item['m_type_id']){                    
                    op_price +='<option value="'+item['s_price_id']+'">'+item['s_price_name']+'</option>';                                     
                }
             });
             $('#price').empty();
             $('#price').append(op_price);
+            var op_project = '<option value="">Dự án</option>';
+            $.each(project_list,function(key,item){
+               op_project +='<option value="'+item['news_id']+'">'+item['news_name']+'</option>';                        
+            });
+            $('#project').empty();
+            $('#project').append(op_project);
         });
     }
     function get_advance(){
@@ -192,22 +200,25 @@ $(document).ready(function() {
             
         });
     }
-    setTimeout(get_basic(),1000);
-    setTimeout(get_advance(),1500);
+    setTimeout(get_basic(),500);
+    setTimeout(get_advance(),1000);
     function change_m_type_id(val){
         var option = '<option value="">Loại bất động sản</option>';
+        //console.log(val);
         $.each(category_list,function(key,item){
             //console.log(item);
-            if(val == item[2]){                    
-                option +='<option value="'+item[0]+'">'+item[1]+'</option>';
+            if(val == item.parent_id){                    
+                option +='<option value="'+item.ctg_id+'">'+item.ctg_name+'</option>';
             }
         });
         $('#ctg_id').empty();
         $('#ctg_id').append(option);
         var op_price = '<option value="">Mức giá</option>';
-        $.each(sprices,function(key,item){            
-            if(val == item[2]){                    
-                op_price +='<option value="'+item[0]+'">'+item[1]+'</option>';                                     
+        //console.log(sprices);  
+        $.each(sprices,function(key,item){  
+        	//console.log(item);          
+            if(val == item.m_type_id){                    
+                op_price +='<option value="'+item.s_price_id+'">'+item.s_price_name+'</option>';                                     
             }
         });
         $('#price').empty();

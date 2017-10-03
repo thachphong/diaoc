@@ -43,7 +43,7 @@ class IndexController extends PHOController
 				PhoLog::debug_var('test',__LINE__);
 				$param['slides'] = $sl->get_slides_list(0);						
 				//$frontendCache->save( $param);
-				$cache2 = $this->createCache( ['lifetime' => 900 ]); // 15 phut
+				$cache2 = $this->createCache( ['lifetime' => 9000 ]); // 150 phut
 				$cacheKey2 = 'seachtopparam1.cache';
 				$search_pa = $cache2->get($cacheKey2);
 				if($search_pa === null){			
@@ -97,7 +97,9 @@ class IndexController extends PHOController
 			$data['m_districts'] = $db->get_rows();
 			$data['m_provins'] = Provincial::get_all();			
 			$data['categorys'] = Category::get_all();
-			$data['sprices'] = Sprice::find();				
+			$data['sprices'] = Sprice::find();	
+			$ndb = new News();
+			$data['projects'] = $ndb->get_project_all();			
 			$cache->save($ckey,$data);
 		}		
 		return $this->ViewJSON($data);

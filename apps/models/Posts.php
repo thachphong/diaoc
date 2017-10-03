@@ -432,15 +432,15 @@ class Posts extends DBModel
 		}
 		if(isset($param['roomnum']) && strlen($param['roomnum']) > 0){
 			$where .=" and p.room_num  > :room_num";	
-			$search['m_street_id'] =	$param['roomnum'];			
+			$search['room_num'] =	$param['roomnum'];			
 		}
 		if(isset($param['directional']) && strlen($param['directional']) > 0){
 			$where .=" and p.m_directional_id  = :m_directional_id";	
-			$search['m_street_id'] =	$param['directional'];			
+			$search['m_directional_id'] =	$param['directional'];			
 		}
 		if(isset($param['address_ascii']) && strlen($param['address_ascii']) > 0){
 			$where .=" and p.address_ascii  like :address_ascii";	
-			$search['address_ascii'] =	$param['address_ascii'];			
+			$search['address_ascii'] =	'%'.str_replace(' ','%',$param['address_ascii']).'%';			
 		}
 		
 		if(isset($param['acreage']) && $param['acreage']> 0){
@@ -505,7 +505,9 @@ class Posts extends DBModel
 				limit $limit
 				OFFSET $start_row
 				";
-		
+		PhoLog::debug_var('--search----',$param);
+		PhoLog::debug_var('--search----',$sql);
+		PhoLog::debug_var('--search----',$search);
 		return $this->pho_query($sql,$search);
 	}
 	public function search_posts_count($param){
@@ -535,15 +537,15 @@ class Posts extends DBModel
 		}
 		if(isset($param['roomnum']) && strlen($param['roomnum']) > 0){
 			$where .=" and p.room_num  > :room_num";	
-			$search['m_street_id'] =	$param['roomnum'];			
+			$search['room_num'] =	$param['roomnum'];			
 		}
 		if(isset($param['directional']) && strlen($param['directional']) > 0){
 			$where .=" and p.m_directional_id  = :m_directional_id";	
-			$search['m_street_id'] =	$param['directional'];			
+			$search['m_directional_id'] =	$param['directional'];			
 		}
 		if(isset($param['address_ascii']) && strlen($param['address_ascii']) > 0){
 			$where .=" and p.address_ascii  like :address_ascii";	
-			$search['address_ascii'] =	$param['address_ascii'];			
+			$search['address_ascii'] =	'%'.str_replace(' ','%',$param['address_ascii']).'%';						
 		}
 		
 		if(isset($param['acreage']) && $param['acreage']> 0){
@@ -599,6 +601,8 @@ class Posts extends DBModel
 				and p.status =1
 				$where	
 				";
+		PhoLog::debug_var('--search----',$sql);
+		PhoLog::debug_var('--search----',$search);
 		$res = $this->query_first($sql,$search);
 		return $res['cnt'];
 	}
