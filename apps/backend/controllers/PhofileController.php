@@ -5,6 +5,7 @@ namespace Multiple\Backend\Controllers;
 use Multiple\PHOClass\PHOController;
 use Multiple\PHOClass\PhoLog;
 use Multiple\Library\FilePHP;
+use Multiple\Library\Images;
 class PhofileController extends PHOController
 {
 
@@ -33,6 +34,8 @@ class PhofileController extends PHOController
 		PhoLog::debug_var('file---','to:'.PHO_PUBLIC_PATH.$file_name);
 		PhoLog::debug_var('file---',$param);
 		$file_lb->CopyFile($file_tmp,PHO_PUBLIC_PATH.$file_name);
+		$img = new Images();
+		$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,5);
 		$file_lb->DeleteFile($file_tmp);
 		$result['link'] = BASE_URL_NAME.$file_name;
 		return $this->ViewJSON($result);

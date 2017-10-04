@@ -20,7 +20,7 @@ use Multiple\Models\Category;
 use Multiple\Library\FilePHP;
 use Multiple\PHOClass\PhoLog;
 use Multiple\Models\News;
-
+use Multiple\Library\Images;
 class PostsController extends PHOController
 {
 	public function initialize()
@@ -282,6 +282,7 @@ class PostsController extends PHOController
 		if(is_dir($folder_name)==false){
 			 @mkdir($folder_name, 0777, true);
 		}
+		$img = new Images();
 		foreach($filelist as $item){
 			$name = $item['name'];
 			if($item['size'] > 4096000) // >4MB
@@ -295,6 +296,10 @@ class PostsController extends PHOController
 			
 			$file_name ='tmp/'.$folder_tmp.'/'.uniqid('',true).'.'.$file_lb->GetExtensionName($name);
 			$file_lb->CopyFile($file_tmp,PHO_PUBLIC_PATH.$file_name);
+			//PhoLog::debug_var('---logo--',PHO_PUBLIC_PATH.$file_name);
+			/PhoLog::debug_var('---logo--',PHO_LOGO_ADD);
+			$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,5);
+			//$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,9);
 			$file_lb->DeleteFile($file_tmp);
 			$result['link'][] = BASE_URL_NAME.$file_name;
 		}
