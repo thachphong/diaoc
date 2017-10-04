@@ -4,11 +4,11 @@ use Multiple\PHOClass\PhoLog;
 class Captcha 
 {
 	var $img_width      =   120;
-	var $img_height     =   30;	
+	var $img_height     =   34;	
         
 	var $font_path      =   PHO_PUBLIC_PATH.'template1/capchafonts'; // đường dẫn đên thư mục file text
 	var $fonts          =   array();
-	var $font_size      =   15;
+	var $font_size      =   16;
 	
 	var $char_set       =   "abcdefghijklmnopqrstyz12345689";
 	var $char_length    =   5;
@@ -40,7 +40,7 @@ class Captcha
 		
                 // Lấy danh sách fonts trong folder được định nghĩa trong biến font_path
 		$this->fonts = $this->collect_files( $this->font_path, "ttf");
-        PhoLog::debug_var('---font---',$this->fonts);        
+        //PhoLog::debug_var('---font---',$this->fonts);        
                 // Khởi tạo hình ảnh
 		$img = imagecreatetruecolor( $this->img_width, $this->img_height);
 		imagefilledrectangle($img, 0, 0, $this->img_width - 1, $this->img_height - 1, $this->gd_color( $this->bg_color ));
@@ -64,7 +64,7 @@ class Captcha
 		for ($i = 0; $i < $this->char_length ; $i++) 
                 {
 			$color = $this->gd_color( $this->char_colors[rand(0, count($this->char_colors) - 1)] );
-			$angle = rand(-30, 30);
+			$angle = rand(-20, 20);
 			$char = substr( $this->char_set, rand(0, strlen($this->char_set) - 1), 1);
 			
 			$sel_font = $this->fonts[rand(0, count($this->fonts) - 1)];	
