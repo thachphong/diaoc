@@ -42,6 +42,7 @@ class Posts extends DBModel
     public  $furniture;
     public  $youtube_url;
     public  $youtube_key;
+    public $huong_bancong;
     public function initialize()
     {
         $this->setSource("posts");
@@ -81,6 +82,7 @@ class Posts extends DBModel
 				  p.map_lng,
 				  p.furniture,
 				  p.youtube_url,
+				  p.huong_bancong,
 				 v.post_level,				
 				 DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,
 				 DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date,	
@@ -152,6 +154,9 @@ class Posts extends DBModel
 	    if(strlen($param['project_id'])>0){
 			$this->project_id    = $param['project_id'];
 		}
+		if(strlen($param['huong_bancong'])>0){
+			$this->huong_bancong    = $param['huong_bancong'];
+		}
 	    
 	    $this->map_lat = $param['map_lat'];
 	    $this->map_lng = $param['map_lng'];
@@ -196,6 +201,7 @@ class Posts extends DBModel
 					furniture =:furniture,
 					youtube_url =:youtube_url,
 					youtube_key =:youtube_key,
+					huong_bancong =:huong_bancong,
 					upd_date =now()
 
 				where post_id =:post_id
@@ -227,6 +233,7 @@ class Posts extends DBModel
                     ,'project_id'
                     ,'furniture'
                     ,'youtube_url'
+                    ,'huong_bancong'
                     ));
 		if(strlen($pasql['unit_price'])==0){
 			$pasql['unit_price'] =NULL;
@@ -263,6 +270,9 @@ class Posts extends DBModel
 		}
 		if(strlen($pasql['project_id'])==0){
 			$pasql['project_id']=NULL;
+		}
+		if(strlen($pasql['huong_bancong'])==0){
+			$pasql['huong_bancong']=NULL;
 		}
 		$pasql['youtube_key'] = $this->extract_youtube_key($param['youtube_url']);
 		
@@ -381,6 +391,7 @@ class Posts extends DBModel
 				  p.furniture,
 				  p.youtube_key,
 				  di.m_directional_name,
+				  bc.m_directional_name as huong_bancong,
 				 v.post_level,				
 				 DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,
 				 DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date,	
@@ -399,7 +410,8 @@ class Posts extends DBModel
 				INNER JOIN m_district md on md.m_district_id = p.m_district_id
 				LEFT JOIN m_ward mw on mw.m_ward_id = p.m_ward_id
 				LEFT JOIN m_unit mu on mu.m_unit_id = p.unit_price
-				LEFT JOIN m_directional di on di.m_directional_id = p.m_directional_id 			
+				LEFT JOIN m_directional di on di.m_directional_id = p.m_directional_id 
+				LEFT JOIN m_directional bc on bc.m_directional_id = p.huong_bancong 			
 				
 				where p.post_id = :post_id 
 				and p.del_flg = 0";

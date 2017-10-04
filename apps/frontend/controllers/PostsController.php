@@ -82,7 +82,8 @@ class PostsController extends PHOController
 			$result['map_lat'] ='';
 			$result['map_lng'] = '';
 			$result['furniture'] = '';
-			$result['youtube_url'] = '';				
+			$result['youtube_url'] = '';
+			$result['huong_bancong'] = '';				
 		}else{
 			$db = new Posts();
 			$dbimg = new PostsImg();
@@ -297,7 +298,7 @@ class PostsController extends PHOController
 			$file_name ='tmp/'.$folder_tmp.'/'.uniqid('',true).'.'.$file_lb->GetExtensionName($name);
 			$file_lb->CopyFile($file_tmp,PHO_PUBLIC_PATH.$file_name);
 			//PhoLog::debug_var('---logo--',PHO_PUBLIC_PATH.$file_name);
-			/PhoLog::debug_var('---logo--',PHO_LOGO_ADD);
+			//PhoLog::debug_var('---logo--',PHO_LOGO_ADD);
 			$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,5);
 			//$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,9);
 			$file_lb->DeleteFile($file_tmp);

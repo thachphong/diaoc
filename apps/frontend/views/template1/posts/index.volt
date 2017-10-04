@@ -60,6 +60,13 @@
 							</div>
 						</div>
 						<div class="row row-margin-bottom">
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Tiêu đề <span class="lab_red">(*)</span>:</label>
+							<div class="col-md-9 col-sm-9 col-xs-12">
+								<input type="text" name="post_name" required value="{{post_name}}" id="post_name">
+								<label class="lab_red lab_invisible" id="post_name_error">Bạn cần nhập tiêu đề !</label>
+							</div>												
+						</div>
+						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Loại nhà đất <span class="lab_red">(*)</span>:</label>
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
@@ -176,11 +183,10 @@
 							</div>						
 						</div>
 						<div class="row row-margin-bottom">
-							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Hướng BĐS</label>
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Hướng nhà</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">								
 								<label class="select_icon">
 									<select name="m_directional_id" id="m_directional_id">
-										<option value="">--Chọn hướng nhà--</option>
 										{%for item in directionals%}
 											<option value="{{item.m_directional_id}}" {%if m_directional_id == item.m_directional_id%}selected{%endif%}>{{item.m_directional_name}}</option>
 										{%endfor%}
@@ -193,6 +199,18 @@
 							</div>						
 						</div>
 						<div class="row row-margin-bottom">
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Hướng ban công</label>
+							<div class="col-md-3 col-sm-3 col-xs-12">								
+								<label class="select_icon">
+									<select name="huong_bancong" id="huong_bancong">
+										{%for item in directionals%}
+											<option value="{{item.m_directional_id}}" {%if huong_bancong == item.m_directional_id%}selected{%endif%}>{{item.m_directional_name}}</option>
+										{%endfor%}
+									</select>
+								</label>
+							</div>				
+						</div>
+						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Nội thất</label>
 							<div class="col-md-10 col-sm-10 col-xs-12">
 								<textarea style="height:100px" name="furniture" id="post_content">{{furniture}}</textarea> 		
@@ -202,13 +220,7 @@
 						<div>
 							<h3>Mô tả chi tiết</h3>
 						</div>
-						<div class="row row-margin-bottom">
-							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Tiêu đề <span class="lab_red">(*)</span>:</label>
-							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="text" name="post_name" required value="{{post_name}}" id="post_name">
-								<label class="lab_red lab_invisible" id="post_name_error">Bạn cần nhập tiêu đề !</label>
-							</div>												
-						</div>
+						
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Nội dung mô tả <span class="lab_red">(*)</span>:</label>
 							<div class="col-md-10 col-sm-10 col-xs-12">

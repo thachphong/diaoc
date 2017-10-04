@@ -91,6 +91,10 @@
                      <td>{{m_directional_name}}</td>
                   </tr>
                   <tr>
+                     <td>Hướng ban công</td>
+                     <td>{{huong_bancong}}</td>
+                  </tr>
+                  <tr>
                      <td>Số phòng</td>
                      <td>{{room_num}}</td>
                   </tr>
