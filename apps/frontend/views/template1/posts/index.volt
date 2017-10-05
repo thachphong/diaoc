@@ -110,7 +110,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
-									<select class="m_street_id" name="m_street_id">
+									<select class="m_street_id" name="m_street_id" id="m_street_id">
 										<option value="">--Chọn Đường/Phố--</option>
 									</select>
 								</label>
@@ -427,10 +427,7 @@
 		{%for item in districts%}
 			district_list.push(['{{item.m_district_id}}',"{{item.m_district_name}}",'{{item.m_provin_id}}']);
 		{%endfor%}
-
-		{%for item in streets%}
-			street_list.push(['{{item.m_street_id}}',"{{item.m_street_name}}",'{{item.m_ward_id}}']);
-		{%endfor%}
+		
 		{%for item in units%}
 			unit_list.push(['{{item.m_unit_id}}',"{{item.m_unit_name}}",'{{item.m_type_id}}']);
 		{%endfor%}
@@ -447,6 +444,26 @@
 	        jsion_ajax("{{url.get('posts/wards')}}" ,null,function(datas){               
 	            ward_list = datas.wards;  
 	            change_war_option('{{m_ward_id}}');
+	        });
+	    }
+	    function get_street(m_district_id){
+			loading_flg = false;
+	        jsion_ajax("{{url.get('index/street/')}}"+m_district_id ,null,function(datas){               
+	            street_list = datas.streets; 
+	            console.log(datas);
+	            var option = '<option value="">--Chọn Đường/Phố--</option>';
+				$.each(street_list,function(key,item){
+					//console.log(item);
+					//if(val == item['m_district_id']){
+						//if(m_ward_id == item['m_ward_id']){
+							//option +='<option value="'+item['m_ward_id']+'" selected>'+item['m_ward_name']+'</option>';
+						//}else{
+							option +='<option value="'+item['m_street_id']+'">'+item['m_street_name']+'</option>';
+						//}					
+					//}
+				});
+				$('#m_street_id').empty();
+				$('#m_street_id').append(option);
 	        });
 	    }
 	    setTimeout(get_basic(),10);
@@ -477,6 +494,8 @@
 		$(document).on('change','#m_district_id',function(){			
 			change_war_option('');
 			change_map();
+			dis_id = $(this).val();
+			get_street(dis_id);
 		});
 		var change_war_option = function(m_ward_id){
 			var val = $('#m_district_id').val();
@@ -497,7 +516,7 @@
 		//change_war_option('{{m_ward_id}}');
 		$(document).off('change','#m_ward_id');
 		$(document).on('change','#m_ward_id',function(){
-			var val = $(this).val();
+			/*var val = $(this).val();
 			var option = '<option value="">--Chọn Đường/Phố--</option>';
 			$.each(street_list,function(key,item){
 				//console.log(item);
@@ -506,7 +525,7 @@
 				}
 			});
 			$('#m_street_id').empty();
-			$('#m_street_id').append(option);
+			$('#m_street_id').append(option);*/
 			change_map();			
 		});
 		function change_map(){
@@ -781,7 +800,7 @@ function jsion_ajax(url,data,done_fun){
         error: function() {
             alert('Lỗi Ajax !!!');
         },      
-        type: 'POST'
+        type: 'GET'
     });
 }
 var map, ele, mapH, mapW, addEle, mapL, mapN, mapZ;

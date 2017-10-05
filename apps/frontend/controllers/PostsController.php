@@ -37,7 +37,7 @@ class PostsController extends PHOController
 			$result['provincials'] = Provincial::get_all();
 			$result['districts'] = District::find();
 			//$result['wards'] =array();//Ward::find();
-			$result['streets'] = Street::find();
+			//$result['streets'] = Street::find();
 			$result['directionals'] = Directional::find();
 			$result['units'] = Unit::find();
 			$ndb = new News();
@@ -299,7 +299,7 @@ class PostsController extends PHOController
 			$file_lb->CopyFile($file_tmp,PHO_PUBLIC_PATH.$file_name);
 			//PhoLog::debug_var('---logo--',PHO_PUBLIC_PATH.$file_name);
 			//PhoLog::debug_var('---logo--',PHO_LOGO_ADD);
-			$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,5);
+			//$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,5);
 			//$img->add_logo(PHO_PUBLIC_PATH.$file_name,PHO_LOGO_ADD,9);
 			$file_lb->DeleteFile($file_tmp);
 			$result['link'][] = BASE_URL_NAME.$file_name;

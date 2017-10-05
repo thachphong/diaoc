@@ -762,7 +762,7 @@ class Posts extends DBModel
 	}
 	public function extract_youtube_key($url_link){
 		if(strlen($url_link)==0) return '';
-		$position=strpos( $url_link, 'watch?v=',1) + 8;
+		$position=strpos( $url_link, 'v=',1) + 2;
 	    return substr($url_link ,$position,11);
 	}
 }

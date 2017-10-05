@@ -123,6 +123,15 @@ class IndexController extends PHOController
 		return $this->ViewJSON($data);
 	}
 	public function streetAction($m_district_id){
-		
+		$ckey ="street_".$m_district_id;
+		$cache = $this->createCache(['lifetime' => 86400 ]); // 1 ngay
+		$data = $cache->get($ckey);
+		if($data === null){			
+			$mw = new Street();	
+			$data['streets'] = $mw->get_list($m_district_id);
+			$cache->save($ckey,$data);
+		}
+		PhoLog::debug_var('--data--',$data);		
+		return $this->ViewJSON($data);
 	}
 }

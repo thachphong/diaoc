@@ -14,10 +14,11 @@ $router->removeExtraSlashes(true);
 				'controller' => 1,
 				'action' => 2,
 			));
-			$router->add('/index/:action', array(
+			$router->add('/index/:action/:params', array(
 				'module' => 'frontend',
 				'controller' => 'index',
 				'action' => 1,
+				'params'=>2
 			));
 			$router->add("/dang-tin", array(
 				'module' => 'frontend',
@@ -147,6 +148,17 @@ $router->removeExtraSlashes(true);
 				'module' => 'backend',
 				'controller' => 'index',
 				'action' => 'index',
+			));
+			$router->add("/street", array(
+				'module' => 'backend',
+				'controller' => 'street',
+				'action' => 'index',
+			));
+			$router->add("/street/:action/:params", array(
+				'module' => 'backend',
+				'controller' => 'street',
+				'action' => 1,
+				'params'=>2
 			));
 			$router->add("/slide", array(
 				'module' => 'backend',

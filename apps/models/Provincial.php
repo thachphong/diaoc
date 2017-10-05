@@ -14,6 +14,6 @@ class Provincial extends DBModel
     }
     public static function get_all(){
          //return Provincial::query()->order("m_provin_name")->execute();
-         return Provincial::find(['order'=>'m_provin_name']);   
+         return Provincial::find(['order'=>'sort']);   
     }
 }
