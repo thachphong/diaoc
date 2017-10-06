@@ -985,6 +985,14 @@ ul.vertical_bar li a:hover {
     background: var(--main_color_3);
     color: #ffffff;
 }
+ul.bxslider li{
+	display: flex;
+	height: 443px;
+}
+.bx-wrapper img{
+	margin: auto;
+}
+
 /*.main_img{
     width: 100%;
     padding: 5px;

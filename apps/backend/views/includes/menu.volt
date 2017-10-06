@@ -3,9 +3,13 @@
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                
               </div>
-
-              <ul class="nav navbar-nav navbar-right">
+			  <div class="col-md-4" style="margin-top: 10px;">
+			  	 <button class="btn btn-warning" id="delete_cache">Xóa cache</button>
+			  	 <label style="color: #0000ff; display: none;" id="msg_delete_cache">Xóa cache thành công</label>
+			  </div>
+              <ul class="nav navbar-nav navbar-right" style="width: 40%">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     <img src="{{url.get('templateadm/images/user.png')}}" alt="">{{login_info.user_name}}
@@ -23,74 +27,18 @@
                     <li><a href="{{url.get('loginadm/logout')}}"><i class="fa fa-sign-out pull-right"></i>Thoát</a></li>
                   </ul>
                 </li>
-
-                <li role="presentation" class="dropdown">
-                  <!--<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>-->
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
               </ul>
             </nav>
           </div>
-
-
+<script>
+$(document).ready(function() {    	
+		$(document).off('click','#delete_cache'); 
+        $(document).on('click','#delete_cache',function(event){
+        	Pho_html_ajax('POST',"{{url.get('admin/delcache')}}" ,{'silde_id':''},function(html){  
+            	Pho_message_box("Thông báo","Xóa cache thành công!");
+            });
+        	
+        });
+});
+</script>
        

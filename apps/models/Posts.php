@@ -613,8 +613,8 @@ class Posts extends DBModel
 				and p.status =1
 				$where	
 				";
-		PhoLog::debug_var('--search----',$sql);
-		PhoLog::debug_var('--search----',$search);
+		//PhoLog::debug_var('--search----',$sql);
+		//PhoLog::debug_var('--search----',$search);
 		$res = $this->query_first($sql,$search);
 		return $res['cnt'];
 	}

@@ -1,20 +1,16 @@
+<style>
+	.pager .active a{
+		 background-color: rgba(10, 75, 166, 0.86);
+    		color: #fff;
+	}
+	.pager .active a:hover{		 
+    	color: #000;
+	}
+</style>
 <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3>Quản lý đường phố <!--<small>Some examples to get you started</small>--></h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>                                 
-                  </div>
-                </div>
-              </div>
+              
             </div>
             
             <div class="clearfix"></div>
@@ -23,7 +19,7 @@
 			  <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Danh sách đường phố<!--<small>Users</small>--></h2>                    
+                    <h2>Danh sách đường phố</h2>                    
                     <ul class="nav navbar-right panel_toolbox">
                       <li><button type="button" class="btn btn-primary btn-sm" id="btn_new">Thêm mới</button></li>
                                           
@@ -32,7 +28,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form method="GET" action="{{url.get('product')}}">
+                    <form method="GET" action="{{url.get('street')}}">
                     <div class="row form-group">
                     	<label class="col-sm-2">Tỉnh/Thành Phố</label>
                     	<div class="col-sm-2">
@@ -58,7 +54,7 @@
                     <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                       <thead>
                         <tr>
-                         <!-- <th>STT</th>-->
+                          <th>Mã đường phố</th>
                           <th>Tỉnh/Thành Phố</th>
                           <th>Quận Huyện</th>
                           <th>Tên đường phố</th>
@@ -67,9 +63,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                      {%if list != null %}
+                      {%if list is defined %}
                       {% for item in list %}
-                      	<tr>                          
+                      	<tr>             
+                      	  <td>{{item['m_street_id']}}</td>             
                           <td>{{item['m_provin_name']}}</td>
                           <td>{{item['m_district_name']}}</td>
                           <td id="name_{{item['m_street_id']}}">{{item['m_street_name']}}</td>
@@ -84,7 +81,26 @@
                       {%endif%}                      
                       </tbody>
                     </table>
-					
+					{%if total_page > 1%}
+         <div class="row margin_top" >
+            <div class="col-md-12 col-sm-12 col-xs-12" style="display: flex;justify-content: center;">
+               <ul class="pager">
+                  {%if page > 1%}
+                     <li><a href="{{url.get('')}}{{ctg_no}}page=1">Trang đầu</a></li>
+                     <li><a href="{{url.get('')}}{{ctg_no}}page={{(page-1)}}">Trang trước</a></li>
+                  {%endif%}                 
+                  
+                  {%for i in  start..end%} 
+                    <li {%if page == i%}class="active"{%endif%}><a href="{%if page != i%}{{url.get('')}}{{ctg_no}}page={{i}}{%else%}#{%endif%}">{{i}}</a></li>
+                  {%endfor%}
+                  {%if page < total_page%}
+                     <li><a href="{{url.get('')}}{{ctg_no}}page={{page+1}}">Trang sau</a></li>
+                     <li><a href="{{url.get('')}}{{ctg_no}}page={{total_page}}">Trang cuối</a></li>
+                  {%endif%}       
+               </ul>
+            </div>
+         </div>
+         {%endif%}
 					
                   </div>
                 </div>
@@ -121,6 +137,7 @@
 			$('#m_district_id').empty();
 			$('#m_district_id').append(option);
 		};
+		change_district_option('{{m_district_id}}');
 		$(document).off('click','#btn_new'); 
         $(document).on('click','#btn_new',function(event){
         	Pho_html_ajax('POST',"{{url.get('street/new')}}" ,{'silde_id':''},function(html){

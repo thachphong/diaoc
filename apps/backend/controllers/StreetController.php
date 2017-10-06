@@ -10,21 +10,65 @@ use Multiple\Models\District;
 use Multiple\Library\FilePHP;
 class StreetController extends PHOController
 {
-
+	const PAGE_LIMIT_RECORD=50;
     public function initialize()
     {        
         $this->check_loginadmin();
     }
 	public function indexAction()
 	{
-		$street_db = new Street();
-		$data['m_provin_id'] = '';
-		$data['m_district_id'] = '';
-		$data['list'] = $street_db->get_all();
-		$data['provincials'] = Provincial::get_all();
-		$data['districts'] = District::find();
+		$param = $_GET;       
+        $page = 1;
+      	if(isset($param['page']) && strlen($param['page']) > 0){
+            $page=$param['page'];
+        }
+        
+        $street_db = new Street();
+        $start_row = 0;
+        if( $page > 1){
+            $start_row = ( $page-1)*self::PAGE_LIMIT_RECORD ;
+        }
+        PhoLog::debug_var('server',$_SERVER);
+		
+        $param['page'] = $page;       
+        //$param['ctg_no'] = str_replace('/','', $_SERVER['REQUEST_URI']);
+       // $param['ctg_no'] = str_replace('??','?', $param['ctg_no']);
+        //$exp = explode('page',$param['ctg_no'])  ;
+        //$param['ctg_no']=  $exp[0];    
+        $param['list']=$street_db->search($param,$start_row,self::PAGE_LIMIT_RECORD);
+        $param['total_post'] = $street_db->search_count($param);
+        $param['total_page']= round($param['total_post']/self::PAGE_LIMIT_RECORD);
+        
+        $start = $page - 2;
+        $end = $page + 2;
+        if($page < 3){
+            $start = 1;
+            $end = $start + 4;
+            if($end > $param['total_page']){
+               $end = $param['total_page'];
+            }
+        }
+        if($param['total_page']< $page + 2 ){
+            $end = $param['total_page'];
+            $start = $param['total_page'] - 4;
+            if($start < 1){
+               $start = 1;
+            }
+        }
+        $param['start'] = $start;
+        $param['end'] = $end;       		
+		if(isset($param['m_provin_id'])==FALSE){
+			$param['m_provin_id']='';
+		}
+		if(isset($param['m_district_id'])==FALSE){
+			$param['m_district_id']='';
+		}		
+		$param['ctg_no']= "street?m_provin_id=".$param['m_provin_id'].'&m_district_id='.$param['m_district_id'].'&';
+		//$param['list'] = $street_db->get_all();
+		$param['provincials'] = Provincial::get_all();
+		$param['districts'] = District::find();
 		$this->set_template_share();
-		$this->ViewVAR($data);
+		$this->ViewVAR($param);
 	}
 	public function newAction()
 	{

@@ -149,6 +149,11 @@ $router->removeExtraSlashes(true);
 				'controller' => 'index',
 				'action' => 'index',
 			));
+			$router->add("/admin/:action", array(
+				'module' => 'backend',
+				'controller' => 'index',
+				'action' => 1,
+			));
 			$router->add("/street", array(
 				'module' => 'backend',
 				'controller' => 'street',

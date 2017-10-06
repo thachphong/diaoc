@@ -126,6 +126,7 @@ class CategoryController extends PHOController
                   'page'
                   );*/
         $param = $_GET;
+        //PhoLog::debug_var('--testse---',$param);
         $page = 1;
       	if(isset($param['page']) && strlen($param['page']) > 0){
             $page=$param['page'];
@@ -139,7 +140,9 @@ class CategoryController extends PHOController
 
         $param['page'] = $page;
         $param['ctg_name'] ='Kết quả tìm';
-        $param['ctg_no'] = $_SERVER['QUERY_STRING'];
+        $param['ctg_no'] = str_replace('/','', $_SERVER['REQUEST_URI']);
+        $exp = explode('&page',$param['ctg_no'])  ;
+        $param['ctg_no']=  $exp[0]; 
         
         if(isset($param['addr']) && strlen($param['addr']) > 0){
             $param['address_ascii'] = $this->convert_ascii($param['addr']);

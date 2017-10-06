@@ -73,6 +73,9 @@
 	.desc_news{
 		display: none;
 	}
+	ul.bxslider li{		
+		height: 300px;
+	}
 }
 @media (max-width: 320px){
 	.search_tab .tab_title{
@@ -90,5 +93,8 @@
 	}
 	.pn_title h1, .pn_title h3{
 		font-size: 16px;
+	}
+	ul.bxslider li{		
+		height: 220px;
 	}
 }
