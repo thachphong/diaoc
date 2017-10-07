@@ -517,9 +517,9 @@ class Posts extends DBModel
 				limit $limit
 				OFFSET $start_row
 				";
-		PhoLog::debug_var('--search----',$param);
-		PhoLog::debug_var('--search----',$sql);
-		PhoLog::debug_var('--search----',$search);
+		//PhoLog::debug_var('--search----',$param);
+		//PhoLog::debug_var('--search----',$sql);
+		//PhoLog::debug_var('--search----',$search);
 		return $this->pho_query($sql,$search);
 	}
 	public function search_posts_count($param){
@@ -618,7 +618,7 @@ class Posts extends DBModel
 		$res = $this->query_first($sql,$search);
 		return $res['cnt'];
 	}
-	public function get_list_byuser($user_id){
+	public function get_list_byuser($param,$start_row){
 		$sql = "select p.post_id,p.post_name,p.post_no,p.price,p.acreage,pro.m_provin_name,dis.m_district_name,
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
@@ -630,13 +630,80 @@ class Posts extends DBModel
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
 				INNER JOIN posts_view v on v.post_id = p.post_id
 				LEFT JOIN posts_img im on im.post_id = p.post_id and im.avata_flg = 1
-				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
-
+				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price
 				where p.del_flg = 0
-				and p.add_user = :user_id
-				ORDER BY p.post_id DESC";
-		return $this->pho_query($sql,array('user_id'=>$user_id));
+				and p.add_user = :user_id";
+		$search['user_id'] = $param['user_id'];
+		if(isset($param['postno']) && strlen($param['postno'])>0 ){
+			$sql .=" and p.post_id = :postno";
+			$search['postno'] = $param['postno'];
+		}else{
+			if(isset($param['plevel']) && strlen($param['plevel'])>0 ){
+				$sql .=" and v.post_level = :post_level";
+				$search['post_level'] = $param['plevel'];
+			}
+			if(isset($param['status']) && strlen($param['status'])>0 ){
+				$sql .=" and p.status = :status";
+				$search['status'] = $param['status'];
+			}
+			
+			if(isset($param['fdate']) && strlen($param['fdate'])>0 && isset($param['tdate']) && strlen($param['tdate'])>0){
+				$sql .=" and v.start_date between STR_TO_DATE(:fdate,'%d/%m/%Y') and STR_TO_DATE(:tdate,'%d/%m/%Y')";
+				$search['fdate'] = $param['fdate'];
+				$search['tdate'] = $param['tdate'];
+			}elseif(isset($param['fdate']) && strlen($param['fdate'])>0){
+				$sql .=" and v.start_date >= STR_TO_DATE(:fdate,'%d/%m/%Y') ";
+				$search['fdate'] = $param['fdate'];
+			}elseif(isset($param['tdate']) && strlen($param['tdate'])>0){
+				$sql .=" and v.start_date <= STR_TO_DATE(:tdate,'%d/%m/%Y') ";
+				$search['tdate'] = $param['tdate'];
+			}
+		}
+		$limit = PAGE_SEARCH_LIMIT_RECORD;
+		$sql .=" ORDER BY p.post_id DESC
+				limit $limit
+				OFFSET $start_row";
+		//PhoLog::debug_var('--search1----',$sql);
+		//PhoLog::debug_var('--search1----',$search);
+		return $this->pho_query($sql, $search);
 	}	
+	public function get_byuser_count($param){
+		$sql = "select count(p.post_id) cnt
+				from posts p				
+				INNER JOIN posts_view v on v.post_id = p.post_id
+				where p.del_flg = 0
+				and p.add_user = :user_id";
+		$search['user_id'] = $param['user_id'];
+		if(isset($param['plevel']) && strlen($param['plevel'])>0 ){
+			$sql .=" and v.post_level = :post_level";
+			$search['post_level'] = $param['plevel'];
+		}
+		if(isset($param['status']) && strlen($param['status'])>0 ){
+			$sql .=" and p.status = :status";
+			$search['status'] = $param['status'];
+		}
+		if(isset($param['postno']) && strlen($param['postno'])>0 ){
+			$sql .=" and p.post_no = :postno";
+			$search['postno'] = $param['postno'];
+		}
+		if(isset($param['fdate']) && strlen($param['fdate'])>0 && isset($param['tdate']) && strlen($param['tdate'])>0){
+			$sql .=" and v.start_date between STR_TO_DATE(:fdate,'%d/%m/%Y') and STR_TO_DATE(:tdate,'%d/%m/%Y')";
+			$search['fdate'] = $param['fdate'];
+			$search['tdate'] = $param['tdate'];
+		}elseif(isset($param['fdate']) && strlen($param['fdate'])>0){
+			$sql .=" and v.start_date >= STR_TO_DATE(:fdate,'%d/%m/%Y') ";
+			$search['fdate'] = $param['fdate'];
+		}elseif(isset($param['tdate']) && strlen($param['tdate'])>0){
+			$sql .=" and v.start_date <= STR_TO_DATE(:tdate,'%d/%m/%Y') ";
+			$search['tdate'] = $param['tdate'];
+		}
+		$sql .=" ORDER BY p.post_id DESC";
+		$res =  $this->query_first($sql, $search);
+		if(isset($res['cnt'])){
+			return $res['cnt'];
+		}
+		return 0;
+	}
 	public function _delete($id){
 		$sql="update posts set del_flg = 1 where post_id = :post_id";
 		return $this->pho_execute($sql,array('post_id'=>$id));

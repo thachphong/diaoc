@@ -197,6 +197,16 @@
     font-size: 35px; 
     color: #015f95; 
 }
+.fa-skype:before {
+    content: "\f17e";
+    font-size: 35px; 
+    color: #015f95; 
+}
+.fa-envelope-square:before {
+    content: "\f199";
+    font-size: 35px; 
+    color: #015f95; 
+}
 .fa-sign-in:before {
     content: "\f090";
     color: #fff;

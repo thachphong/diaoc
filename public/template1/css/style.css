@@ -272,6 +272,7 @@ ul.dang-tin-icon li a{
 input,textarea{
     padding: 7px;
     width: 100%; 
+    line-height: 17px;
 }
 .no_padding input,.no_padding select{       
     color: #000;

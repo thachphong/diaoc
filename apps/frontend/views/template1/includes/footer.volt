@@ -32,6 +32,8 @@
                     <li><a href="{{define['tweet_page']}}" target="_blank"><i class="fa fa-twitter-square"></i></a>
                     <li><a href="{{define['youtu_page']}}" target="_blank"><i class="fa fa-youtube-square"></i></a>
                     <li><a href="{{define['google_page']}}" target="_blank"><i class="fa fa-google-plus-square"></i></a>
+                    <li><a href="{{define['skype']}}" target="_blank"><i class="fa fa-skype"></i></a>
+                    <li><a href="{{define['email']}}" target="_blank"><i class="fa fa-envelope-square"></i></a>
                 </ul>                
             </div>
          </div>
