@@ -128,6 +128,18 @@ $router->removeExtraSlashes(true);
 				'action' => 'search',  
 				'params' => 1            
 			));
+			$router->add("/nap-tien", array(
+				'module' => 'frontend',
+				'controller' => 'exchange',
+				'action' => 'index',  
+				'params' => 1            
+			));
+			$router->add("/exchange/:action/:params", array(
+				'module' => 'frontend',
+				'controller' => 'exchange',
+				'action' => 1,  
+				'params' => 2            
+			));
 			//backend
 			$router->add("/login", array(
 				'module' => 'backend',

@@ -8,10 +8,10 @@ class Captcha
         
 	var $font_path      =   PHO_PUBLIC_PATH.'template1/capchafonts'; // đường dẫn đên thư mục file text
 	var $fonts          =   array();
-	var $font_size      =   16;
+	var $font_size      =   18;
 	
 	var $char_set       =   "abcdefghijklmnopqrstyz12345689";
-	var $char_length    =   5;
+	var $char_length    =   4;
 	
 	var $char_color     =   "#880000,#008800,#000088,#888800,#880088,#008888,#000000";
 	var $char_colors    =   array();
@@ -64,7 +64,7 @@ class Captcha
 		for ($i = 0; $i < $this->char_length ; $i++) 
                 {
 			$color = $this->gd_color( $this->char_colors[rand(0, count($this->char_colors) - 1)] );
-			$angle = rand(-20, 20);
+			$angle = 0;//rand(-20, 20);
 			$char = substr( $this->char_set, rand(0, strlen($this->char_set) - 1), 1);
 			
 			$sel_font = $this->fonts[rand(0, count($this->fonts) - 1)];	

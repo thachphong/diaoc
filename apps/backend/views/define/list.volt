@@ -39,7 +39,7 @@
 						          <form id="form_define" action="" class="form-horizontal form-label-left" enctype="multipart/form-data">
                         {%for item in list%}     
 							           <div class="form-group">
-		                        <label class="control-label col-md-2 col-sm-2 col-xs-12" >{{item.define_name}}
+		                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >{{item.define_name}}
 		                        </label>
 		                        <div class="col-md-6 col-sm-4 col-xs-12">
 		                          <input type="text" required="required" name="define_val[{{item.define_id}}]" id="define_val" class="form-control col-md-7 col-xs-12" value="{{item.define_val}}" alt="{{item.define_name}}">           

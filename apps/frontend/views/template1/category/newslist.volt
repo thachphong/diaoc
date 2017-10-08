@@ -30,16 +30,16 @@
             <div class="col-md-12 col-sm-12 col-xs-12" style="display: flex;justify-content: center;">
                <ul class="page_number">
                   {%if page > 1%}
-                     <li><a href="{{url.get('c/')}}{{ctg_no}}?page=1">Trang đầu</a></li>
-                     <li><a href="{{url.get('c/')}}{{ctg_no}}?page={{(page-1)}}">Trang trước</a></li>
+                     <li><a href="{{url.get('')}}{{ctg_no}}?page=1">Trang đầu</a></li>
+                     <li><a href="{{url.get('')}}{{ctg_no}}?page={{(page-1)}}">Trang trước</a></li>
                   {%endif%}                 
                   
                   {%for i in  start..end%} 
-                    <li {%if page == i%}class="active"{%endif%}><a href="{{url.get('c/')}}{{ctg_no}}?page={{i}}">{{i}}</a></li>
+                    <li {%if page == i%}class="active"{%endif%}><a href="{{url.get('')}}{{ctg_no}}?page={{i}}">{{i}}</a></li>
                   {%endfor%}
                   {%if page < total_page%}
-                     <li><a href="{{url.get('c/')}}{{ctg_no}}?page={{page+1}}">Trang sau</a></li>
-                     <li><a href="{{url.get('c/')}}{{ctg_no}}?page={{total_page}}">Trang cuối</a></li>
+                     <li><a href="{{url.get('')}}{{ctg_no}}?page={{page+1}}">Trang sau</a></li>
+                     <li><a href="{{url.get('')}}{{ctg_no}}?page={{total_page}}">Trang cuối</a></li>
                   {%endif%}       
                </ul>
             </div>

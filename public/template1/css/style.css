@@ -396,6 +396,11 @@ input,textarea{
     margin: 0px;
     font-weight: normal;
 }
+.title_lb label{
+    padding: 7px;
+    margin: 0px;
+    font-weight: normal;
+}
 .row-margin-bottom{
     margin-bottom: 10px;
 }
@@ -760,6 +765,9 @@ a.link_color:hover{
 }
 .align_right{
     text-align: right;
+}
+.align_left{
+    text-align: left;
 }
 .padding_top_20{
     padding-top: 20px;

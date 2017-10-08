@@ -136,6 +136,12 @@
     font-size: 15px;
     margin-right: 11px;
 }
+.fa-usd-while:before {
+    content: "\f155";
+    font-size: 15px;
+    margin-right: 5px;
+    color: #fff;
+}
 .fa-university:before {
     content: "\f19c";
     font-size: 13px;

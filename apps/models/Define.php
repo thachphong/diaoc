@@ -78,4 +78,9 @@ class Define extends DBModel
 		$res = $this->pho_query($sql);		
 		return $res;		
 	}
+	public function get_list_bygroup_all($group_flg){
+		$sql ="select define_key,define_val from define where group_flg = :group_flg";
+		$res = $this->pho_query($sql,array('group_flg'=>$group_flg));		
+		return $res;		
+	}
 }

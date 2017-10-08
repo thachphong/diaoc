@@ -16,6 +16,7 @@
 	        <li><a href="{{url.get('thanh-vien/pass')}}"><i class="fa-angle-double-right"></i>Thay đổi mật khẩu</a></li>
 	        <li><a href="{{url.get('dang-tin/0')}}"><i class="fa-angle-double-right"></i>Đăng tin</a></li>
 	        <li><a href="{{url.get('tin-da-dang')}}"><i class="fa-angle-double-right"></i>Quản lý tin đã đăng</a></li>
+	        <li><a href="{{url.get('nap-tien')}}"><i class="fa-angle-double-right"></i>Nạp tiền</a></li>
 	    </ul>
 	    </div>
     </div>
