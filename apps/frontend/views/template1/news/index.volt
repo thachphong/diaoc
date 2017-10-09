@@ -25,7 +25,7 @@
             {%for key,item in relations%}
             <div class="col-md-6 col-sm-6 col-xs-12 {%if key%2==0 %}col_left{%else%}col_right{%endif%}" >
                <div class="relation_item pn_background pn_border">
-                  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}"><img  src="{{url.get('crop/120x79/')}}{{item['img_path']}}"></a>
+                  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}"><img  src="{{url.get('crop/120x79/')}}{{item['img_path']}}" alt="{{item['news_name']}}" title="{{item['news_name']}}"></a>
                   <a class="linkpost" href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">{{item['news_name']}}</a>
                </div>
             </div>

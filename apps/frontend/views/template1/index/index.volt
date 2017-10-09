@@ -15,11 +15,11 @@
                   <div class="row margin_top pn_background pn_border">
                      <div class="col-md-3 col-sm-3 col-xs-3 post_img">
                         <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}">
-                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/150x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist">
+                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/150x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist" alt="{{item['post_name']}}" title="{{item['post_name']}}">
                         </a>
                      </div>
                      <div class="col-md-9 col-sm-9 col-xs-9">
-                        <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}" class="post_title">{{item['post_name']}}</a>
+                        <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}" class="post_title {%if item['post_level']==3%}sieu_vip{%elseif item['post_level']==2%}vip{%elseif item['post_level']==1%}hot{%endif%}">{{item['post_name']}}</a>
                         <div class="icon_post"><label><i class="fa fa-usd"></i>Giá<span>: </span></label><strong>{%if item['price'] is defined%}{{item['price']}} {{item['m_unit_name']}}{%else%}Thỏa thuận{%endif%}</strong></div>
                         <div class="icon_post"><label><i class="fa fa-university"></i>Diện tích<span>: </span></label>{%if item['acreage'] is defined%}{{item['acreage']}} m2{%else%}Không xác định{%endif%}</div>
                         <div class="icon_post"><label><i class="fa fa-map-marker"></i>Vị trí<span>: </span></label>
@@ -42,8 +42,10 @@
             <div class="newsboxrow pn_background pn_border">
                {%if noingoaithat|length >0 %}
                <div class="col-md-6 col-sm-6 col-xs-12 boxleft">
-                  <img src="{{url.get('crop/354x236/')}}{{noingoaithat[0]['img_path']}}">
-                  <a href=""><h4>{{noingoaithat[0]['news_name']}}</h4></a>
+               	  <a href="{{url.get('t/')}}{{noingoaithat[0]['news_no']}}_{{noingoaithat[0]['news_id']}}">
+                  <img src="{{url.get('crop/354x236/')}}{{noingoaithat[0]['img_path']}}" alt="{{noingoaithat[0]['news_name']}}" title="{{noingoaithat[0]['news_name']}}">
+                  </a>
+                  <a href="{{url.get('t/')}}{{noingoaithat[0]['news_no']}}_{{noingoaithat[0]['news_id']}}"><h4>{{noingoaithat[0]['news_name']}}</h4></a>
                </div>
                {%endif%}
                <div class="col-md-6 col-sm-6 col-xs-12">
@@ -66,8 +68,10 @@
             <div class="newsboxrow pn_background pn_border">
                {%if kientruc|length >0 %}
                <div class="col-md-6 col-sm-6 col-xs-12 boxleft">
-                  <img src="{{url.get('crop/354x236/')}}{{kientruc[0]['img_path']}}">
-                  <a href=""><h4>{{kientruc[0]['news_name']}}</h4></a>
+               	  <a href="{{url.get('t/')}}{{kientruc[0]['news_no']}}_{{kientruc[0]['news_id']}}">
+                  <img src="{{url.get('crop/354x236/')}}{{kientruc[0]['img_path']}}" alt="{{kientruc[0]['news_name']}}" title="{{kientruc[0]['news_name']}}">
+                  </a>
+                  <a href="{{url.get('t/')}}{{kientruc[0]['news_no']}}_{{kientruc[0]['news_id']}}"><h4>{{kientruc[0]['news_name']}}</h4></a>
                </div>
                {%endif%}
                <div class="col-md-6 col-sm-6 col-xs-12">
@@ -90,9 +94,11 @@
                </div>
                <div class="newsboxrow pn_background pn_border">
                   <div class="colbox">
-                  {%if phongthuy|length >0 %}                  
-                     <img src="{{url.get('crop/308x225/')}}{{phongthuy[0]['img_path']}}">
-                     <a class="post_name" href=""><h4>{{phongthuy[0]['news_name']}}</h4></a>                  
+                  {%if phongthuy|length >0 %}   
+                  	<a href="{{url.get('t/')}}{{phongthuy[0]['news_no']}}_{{phongthuy[0]['news_id']}}">
+                     <img src="{{url.get('crop/308x225/')}}{{phongthuy[0]['img_path']}}" alt="{{phongthuy[0]['news_name']}}" title="{{phongthuy[0]['news_name']}}">
+                    </a>
+                     <a class="post_name" href="{{url.get('t/')}}{{phongthuy[0]['news_no']}}_{{phongthuy[0]['news_id']}}"><h4>{{phongthuy[0]['news_name']}}</h4></a>                  
                   {%endif%}
                   <hr/>
                   <ul class="boxright">
@@ -112,9 +118,11 @@
                </div>
                <div class="newsboxrow pn_background pn_border">
                   <div class="colbox">
-                  {%if tuvanluat|length >0 %}                  
-                     <img src="{{url.get('crop/308x225/')}}{{tuvanluat[0]['img_path']}}">
-                     <a class="post_name" href=""><h4>{{tuvanluat[0]['news_name']}}</h4></a>                  
+                  {%if tuvanluat|length >0 %}  
+                  	<a href="{{url.get('t/')}}{{tuvanluat[0]['news_no']}}_{{tuvanluat[0]['news_id']}}">
+                     <img src="{{url.get('crop/308x225/')}}{{tuvanluat[0]['img_path']}}" alt="{{tuvanluat[0]['news_name']}}" title="{{tuvanluat[0]['news_name']}}">
+                    </a>
+                     <a class="post_name" href="{{url.get('t/')}}{{tuvanluat[0]['news_no']}}_{{tuvanluat[0]['news_id']}}"><h4>{{tuvanluat[0]['news_name']}}</h4></a>                  
                   {%endif%}
                   <hr/>
                   <ul class="boxright">

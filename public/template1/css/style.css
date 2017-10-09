@@ -33,9 +33,9 @@ body {
 a{
     color: #000;
 }
-a:hover{
+/*a:hover{
     color: var(--color_hover);
-}
+}*/
 .container{
 	width: 1000px;
 	padding-left: 0px;
@@ -508,8 +508,9 @@ input,textarea{
     height: 48px;
 }
 a.post_title:hover{
-	color:var(--color_hover);
-	text-decoration: none;
+	/*color:var(--color_hover);
+	text-decoration: none;*/
+	color: var(--main_color_2);
 }
 .news_title{
     color: var(--main_color_2);
@@ -569,10 +570,10 @@ a.post_title:hover{
     font-weight: bold;
     color: var(--main_color_2);
 }
-.viplist a:hover{
+/*.viplist a:hover{
 	color: var(--color_hover);
 	text-decoration: none;
-}
+}*/
 .read_more{
     float: right;
     color: var(--main_color );  
@@ -580,7 +581,7 @@ a.post_title:hover{
     padding-top: 5px;
 }
 .read_more:hover{
-    text-decoration: none;
+    /*text-decoration: none;*/
 }
 .newsboxrow{
     display: block;
@@ -623,8 +624,8 @@ a.post_title:hover{
     display: block;
 }
 .newsboxrow .boxright a:hover,a.linkpost:hover,a.post_name:hover,.newsboxrow .boxleft a:hover{
-    text-decoration: none;
-    color: var(--color_hover );
+    /*text-decoration: none;
+    color: var(--color_hover );*/
 }
 .newsboxrow .boxright{
     padding:10px 0px 10px 0px;
@@ -1000,6 +1001,18 @@ ul.bxslider li{
 }
 .bx-wrapper img{
 	margin: auto;
+}
+a.sieu_vip{
+	color: red !important;
+    text-transform: uppercase;
+}
+a.vip{
+	color: red !important;
+    text-transform: lowercase;
+}
+a.hot{
+	color: #f36523 !important;
+    text-transform: lowercase;
 }
 
 /*.main_img{
