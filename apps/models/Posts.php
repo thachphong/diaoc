@@ -319,7 +319,7 @@ class Posts extends DBModel
 					)	";
 			$param['ctg_no'] = $ctg_no;
 		}
-		$sql="select p.post_id,p.post_name,p.post_no,
+		$sql="select p.post_id,p.post_name,p.post_no,v.post_level,
 				(trim(p.price) +0) price,
 				(trim(p.acreage) +0) acreage,
 				pro.m_provin_name,dis.m_district_name,
@@ -496,7 +496,7 @@ class Posts extends DBModel
 			}						
 		}
 		
-		$sql="select p.post_id,p.post_name,p.post_no,
+		$sql="select p.post_id,p.post_name,p.post_no,v.post_level,
 				(trim(p.price)+0) price,
 				(trim(p.acreage)+0) acreage,
 				pro.m_provin_name,dis.m_district_name,

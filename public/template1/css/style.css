@@ -506,6 +506,7 @@ input,textarea{
     font: bold 14px/22px tahoma;
     display: block;
     height: 48px;
+    text-transform: lowercase;
 }
 a.post_title:hover{
 	/*color:var(--color_hover);
@@ -569,6 +570,7 @@ a.post_title:hover{
     font-size: 13px;
     font-weight: bold;
     color: var(--main_color_2);
+    text-transform: lowercase;
 }
 /*.viplist a:hover{
 	color: var(--color_hover);
