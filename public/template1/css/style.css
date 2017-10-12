@@ -485,9 +485,12 @@ input,textarea{
 .margin_top{
     margin-top: 10px;
 }
+.margin_top_5{
+    margin-top: 5px;
+}
 .img_newlist{
     width: 154px;
-    max-height: 100px;
+    max-height: 83px;/*100px*/
 }
 .pn_background{
     background: #fff;/*rgba(89, 89, 89, 0.04);  */
@@ -520,12 +523,15 @@ a.post_title:hover{
     padding-bottom: 5px;
 }
 .icon_post label{
-    width: 83px;
+    width: 71px;
     padding-right: 3px;
     margin-bottom: 4px;
 }
 .icon_post label span{
     float: right;
+}
+.icon_dientich{
+	margin-left:10px;	
 }
 .post_date{
     position: absolute;
@@ -546,7 +552,7 @@ a.post_title:hover{
 .viplist .vipitem{
     display: block;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: 5px;
     position: relative;
 }
 .viplist img{
