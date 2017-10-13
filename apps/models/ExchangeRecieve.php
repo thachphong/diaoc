@@ -17,6 +17,7 @@ class ExchangeReceive extends DBModel
     public $status;
     public $trans_ref_no;
     public $website_id;
+    public $add_user;
     public function initialize()
     {
         $this->setSource("exchange_receive");
@@ -31,6 +32,7 @@ class ExchangeReceive extends DBModel
 		$this->website_id=$param['website_id'];
 		$this->status=$param['status'];
 		$this->trans_ref_no=$param['trans_ref_no'];
+		$this->add_user =$param['user_id'];
 		return $this->save();
 	}
 	public function get_name($status_id){

@@ -90,6 +90,7 @@ class ExchangeController extends PHOController
 			}else{
 				$user = $this->session->get('auth');
 				$db = new ExchangeReceive();
+				$param['user_id']= $user->user_id;
 				$upd_flg = $db->_insert($param);
 				if($param['status'] !=1){
 					$res['reason']= $db->get_name($param['status']);					
