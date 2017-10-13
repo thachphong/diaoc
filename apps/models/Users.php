@@ -25,7 +25,7 @@ class Users extends DBModel
     public $avata;
     public $facebook;
     public $skype;
-    //public $avata;
+    public $amount;
     public function initialize()
     {
         $this->setSource("user");

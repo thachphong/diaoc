@@ -124,4 +124,10 @@ class PHOController extends Controller
 		$ipaddress = $request->getClientAddress();	 
 	    return $ipaddress;
 	}
+	public static function currency_format($str){
+		if(strlen($str)> 0){
+			return number_format($str,0,".",",");
+		}
+		return "";
+	}
 }

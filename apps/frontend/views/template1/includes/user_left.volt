@@ -3,6 +3,9 @@
 		{% set login_info= elements.getuser()%}
 	    <img src="{{url.get('images/users/')}}{{login_info.avata}}" style="width:100%; padding:20px" />
 	    <h3 class="title_2" style="text-align:center">{{login_info.user_name}}</h3>
+	    <div style="padding: 10px;">
+	    <strong >Tài khoản : {{login_info.amount}} VNĐ</strong>
+	    </div>
 	</div>
 	<div class="huongdan">
 	    <div class="pn_title">

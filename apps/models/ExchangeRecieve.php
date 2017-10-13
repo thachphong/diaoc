@@ -31,8 +31,19 @@ class ExchangeReceive extends DBModel
 		$this->website_id=$param['website_id'];
 		$this->status=$param['status'];
 		$this->trans_ref_no=$param['trans_ref_no'];
-		$this->save();
+		return $this->save();
 	}
-	
+	public function get_name($status_id){
+		$sql="select desc from m_name where status = :status ";
+		$res = $this->query_first($sql,array('status'=>$status_id));
+		if(count($res)> 0){
+			return $res['desc'];
+		}
+		return "Nguyên nhân không xác định";
+	}
+	public function update_amount_user($user_id,$amount){
+		$sql ="update user set amount = amount+ :amount where user_id = :user_id";
+		return $this->pho_execute($sql,array('amount'=>$amount,'user_id'=>$user_id));
+	}
 	
 }

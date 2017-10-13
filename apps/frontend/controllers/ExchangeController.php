@@ -5,6 +5,7 @@ namespace Multiple\Frontend\Controllers;
 use Multiple\PHOClass\PHOController;
 use Multiple\Models\Exchange;
 use Multiple\Models\ExchangeReceive;
+use Multiple\Models\Users;
 use Multiple\Models\Define;
 use Multiple\PHOClass\PhoLog;
 use Multiple\Library\FilePHP;
@@ -64,26 +65,53 @@ class ExchangeController extends PHOController
 	}
 	public function recieveAction()
 	{
-		$param = $this->get_param('data','signature');
-			
-		$data = explode('|',$param['data']);
-		$param['amount']= $data[0];
-		$param['message']= $data[1];
-		$param['payment_type'] = $data[2];
-		$param['reference_number'] = $data[3];
-		$param['status'] = $data[4];
-		$param['trans_ref_no'] = $data[5];
-		$param['website_id'] = $data[6];
-		$cdata = $this->get_define();
-		$plaintext = $param['data'].'|'.$cdata['pay_securitycode'];
-		$mysign = strtoupper(hash('sha256', $plaintext));
-		PhoLog::debug_var('---recieve---',$param);
-		if($mysign != $param['signature']){
-			echo "kết quả ko hợp lệ !";
+		$param = $this->get_param(array('data','signature'));
+		$res['webtitle']="Thanh toán";
+		$res['status']='OK';
+		$res['msg']="Thanh toán thành công !";
+		$res['reason']='';
+		if(strlen($param['data'])>0){
+			$data = explode('|',$param['data']);
+			$param['amount']= $data[0];
+			$param['message']= $data[1];
+			$param['payment_type'] = $data[2];
+			$param['reference_number'] = $data[3];
+			$param['status'] = $data[4];
+			$param['trans_ref_no'] = $data[5];
+			$param['website_id'] = $data[6];
+			$cdata = $this->get_define();
+			$plaintext = $param['data'].'|'.$cdata['pay_securitycode'];
+			$mysign = strtoupper(hash('sha256', $plaintext));
+			PhoLog::debug_var('---recieve---',$param);
+			if($mysign != $param['signature']){
+				$res['reason']="Kết quả không hợp lệ.";
+				$res['msg']="Thanh toán không thành công.";
+				$res['status']='NOT';
+			}else{
+				$user = $this->session->get('auth');
+				$db = new ExchangeReceive();
+				$upd_flg = $db->_insert($param);
+				if($param['status'] !=1){
+					$res['reason']= $db->get_name($param['status']);					
+					$res['msg']="Thanh toán không thành công.";
+					$res['status']='NOT';
+				}else{
+					if($upd_flg){
+						$db->update_amount_user($user->user_id,$param['amount']);
+					}
+					$usdb = new Users();
+					$us_data = $usdb->get_info($user->user_id);
+					$this->session->set('auth', $us_data);
+					$res['reason']= "Tài khoản của bạn hiện tại là:".$this->currency_format($us_data->amount) . ' VNĐ';
+				}				
+				
+			}
 		}else{
-			$db = new ExchangeReceive();
-			$db->_insert($param);
-		}
+			$res['reason']="Kết quả không hợp lệ.";
+			$res['msg']="Thanh toán không thành công.";
+			$res['status']='NOT';			
+		}	
+		$this->ViewVAR($res);
 		
 	}
 	public function get_define(){
