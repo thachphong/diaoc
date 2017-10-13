@@ -489,7 +489,7 @@ input,textarea{
     margin-top: 5px;
 }
 .img_newlist{
-    width: 154px;
+    width: 140px;
     max-height: 83px;/*100px*/
 }
 .pn_background{
@@ -523,7 +523,7 @@ a.post_title:hover{
     padding-bottom: 5px;
 }
 .icon_post label{
-    width: 71px;
+    width: 54px;
     padding-right: 3px;
     margin-bottom: 4px;
 }
@@ -1022,7 +1022,9 @@ a.hot{
 	color: #f36523 !important;
     text-transform: lowercase;
 }
-
+.new_list .col-md-3,.new_list .col-sm-3{
+	width: 23%;
+}
 /*.main_img{
     width: 100%;
     padding: 5px;

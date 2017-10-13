@@ -290,17 +290,19 @@ class Posts extends DBModel
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
+				,rd.m_ward_name
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
 				INNER JOIN posts_view v on v.post_id = p.post_id
 				LEFT JOIN posts_img im on im.post_id = p.post_id and im.avata_flg = 1
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
-
+				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
+				and v.end_date >= NOW()
 				$where
-				order by p.post_id DESC
+				order by v.post_level DESC, v.start_date DESC
 				limit $limit";
 		return $this->pho_query($sql);
 	}
@@ -326,17 +328,19 @@ class Posts extends DBModel
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
+				,rd.m_ward_name
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
 				INNER JOIN posts_view v on v.post_id = p.post_id
 				LEFT JOIN posts_img im on im.post_id = p.post_id and im.avata_flg = 1
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
-
+				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
+				and v.end_date >= NOW()
 				$where			
-				order by p.post_id DESC				
+				order by v.post_level DESC, v.start_date DESC			
 				limit $limit
 				OFFSET $start_row
 				";
@@ -503,17 +507,18 @@ class Posts extends DBModel
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
+				,rd.m_ward_name
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
 				INNER JOIN posts_view v on v.post_id = p.post_id
 				LEFT JOIN posts_img im on im.post_id = p.post_id and im.avata_flg = 1
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
-
+				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
 				$where			
-				order by p.post_id DESC				
+				order by v.post_level DESC, v.start_date DESC			
 				limit $limit
 				OFFSET $start_row
 				";
