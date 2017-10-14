@@ -154,7 +154,12 @@ class News extends DBModel
                   n.img_path,
                   n.add_date
               from news n              
-              where n.ctg_id= :ctg_id 
+              where n.ctg_id in (select ctg_id from category 
+          where ctg_id = :ctg_id
+          union all
+          select ctg_id from category 
+          where parent_id = :ctg_id
+        ) 
               order by n.news_id desc
               limit $limit";
         return $this->pho_query($sql,array('ctg_id'=>$ctg_id));

@@ -35,8 +35,8 @@ class IndexController extends PHOController
 	 		PhoLog::debug_var('test',__LINE__);
 	 		if($param === null){
 	 			PhoLog::debug_var('test',__LINE__);
-	 			$param['kientruc'] = $ne->get_news_rows(67,6); // kiến trúc không gian
-				$param['noingoaithat'] = $ne->get_news_rows(66,6); // noi ngoai that
+	 			$param['kientruc'] = $ne->get_news_rows(72,8); // tin tuc
+				$param['noingoaithat'] = $ne->get_news_rows(66,8); // noi ngoai that
 				$param['phongthuy'] = $ne->get_news_rows(68,4); // phong thuy
 				$param['tuvanluat'] = $ne->get_news_rows(69,4); // tu van luat
 				$sl = new Slide();

@@ -84,6 +84,7 @@ class ExchangeController extends PHOController
 			$mysign = strtoupper(hash('sha256', $plaintext));
 			PhoLog::debug_var('---recieve---',$param);
 			PhoLog::debug_var('---recieve---',$cdata);
+			PhoLog::debug_var('---recieve---',$mysign);
 			if($mysign != $param['signature']){
 				$res['reason']="Kết quả không hợp lệ.";
 				$res['msg']="Thanh toán không thành công.";
