@@ -148,7 +148,7 @@
          	<div class="imgscroll">
 	         	<ul id="imgs" >
 				    {%for item in slides%}
-	         		<li><a href="{{item.link_page}}"><img src="{{url.get(item.img_path)}}" style="width: 200px;height:120px"></a></li>
+	         		<li><a href="{{item.link_page}}"><img src="{{url.get('crop/140x90/')}}{{item.img_path}}" style="width: 140px;height:90px"></a></li>
 	         		{%endfor%}
 	  			</ul>
   			</div>

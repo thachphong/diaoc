@@ -944,7 +944,7 @@ a.link_color:hover{
 .imgscroll ul{
 	display: block;
 	overflow: hidden;
-	height: 120px;
+	height: 90px;
 	width: 150%;
 	padding: 0px;
 }

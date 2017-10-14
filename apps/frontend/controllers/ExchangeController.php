@@ -86,10 +86,12 @@ class ExchangeController extends PHOController
 			PhoLog::debug_var('---recieve---',$cdata);
 			PhoLog::debug_var('---recieve---',$mysign);
 			if($mysign != $param['signature']){
+				PhoLog::debug_var('---recieve---','1');
 				$res['reason']="Kết quả không hợp lệ.";
 				$res['msg']="Thanh toán không thành công.";
 				$res['status']='NOT';
 			}else{
+				PhoLog::debug_var('---recieve---','2');
 				$user = $this->session->get('auth');
 				$db = new ExchangeReceive();
 				$param['user_id']= $user->user_id;
