@@ -505,4 +505,10 @@ class Elements extends Component
 	    $str = str_replace(array('"',':'), '', $str);
 	    return $str;
 	}
+	public static function currency_format($str){
+		if(strlen($str)> 0){
+			return number_format($str,0,".",",");
+		}
+		return "";
+	}
 }

@@ -65,57 +65,72 @@ class ExchangeController extends PHOController
 	}
 	public function recieveAction()
 	{
-		$param = $this->get_param(array('data','signature'));
-		$res['webtitle']="Thanh toán";
-		$res['status']='OK';
-		$res['msg']="Thanh toán thành công !";
-		$res['reason']='';
-		if(strlen($param['data'])>0){
-			$data = explode('|',$param['data']);
-			$param['amount']= $data[0];
-			$param['message']= $data[1];
-			$param['payment_type'] = $data[2];
-			$param['reference_number'] = $data[3];
-			$param['status'] = $data[4];
-			$param['trans_ref_no'] = $data[5];
-			$param['website_id'] = $data[6];
-			$cdata = $this->get_define();
-			$plaintext = $param['data'].'|'.$cdata['pay_securitycode'];
-			$mysign = strtoupper(hash('sha256', $plaintext));
-			PhoLog::debug_var('---recieve---',$param);
-			PhoLog::debug_var('---recieve---',$cdata);
-			PhoLog::debug_var('---recieve---',$mysign);
-			if($mysign != $param['signature']){
-				PhoLog::debug_var('---recieve---','1');
-				$res['reason']="Kết quả không hợp lệ.";
-				$res['msg']="Thanh toán không thành công.";
-				$res['status']='NOT';
-			}else{
-				PhoLog::debug_var('---recieve---','2');
-				$user = $this->session->get('auth');
-				$db = new ExchangeReceive();
-				$param['user_id']= $user->user_id;
-				$upd_flg = $db->_insert($param);
-				if($param['status'] !=1){
-					$res['reason']= $db->get_name($param['status']);					
+		try{
+			$param = $this->get_param(array('data','signature'));
+			
+			$res['webtitle']="Thanh toán";
+			$res['status']='OK';
+			$res['msg']="Thanh toán thành công !";
+			$res['reason']='';
+			if(strlen($param['data'])>0){
+				$data = explode('|',$param['data']);
+				$param['amount']= $data[0];
+				$param['message']= $data[1];
+				$param['payment_type'] = $data[2];
+				$param['reference_number'] = $data[3];
+				$param['status'] = $data[4];
+				$param['trans_ref_no'] = $data[5];
+				$param['website_id'] = $data[6];
+				$cdata = $this->get_define();
+				$plaintext = $param['data'].'|'.$cdata['pay_securitycode'];
+				$mysign = strtoupper(hash('sha256', $plaintext));
+				//PhoLog::debug_var('---recieve---',$param);
+				//PhoLog::debug_var('---recieve---',$cdata);
+				//PhoLog::debug_var('---recieve---',$mysign);
+				if($mysign != $param['signature']){
+					//PhoLog::debug_var('---recieve---','1');
+					$res['reason']="Kết quả không hợp lệ.";
 					$res['msg']="Thanh toán không thành công.";
 					$res['status']='NOT';
 				}else{
-					if($upd_flg){
-						$db->update_amount_user($user->user_id,$param['amount']);
-					}
-					$usdb = new Users();
-					$us_data = $usdb->get_info($user->user_id);
-					$this->session->set('auth', $us_data);
-					$res['reason']= "Tài khoản của bạn hiện tại là:".$this->currency_format($us_data->amount) . ' VNĐ';
-				}				
-				
-			}
-		}else{
-			$res['reason']="Kết quả không hợp lệ.";
+					//PhoLog::debug_var('---recieve---','2');
+					$user = $this->session->get('auth');
+					//PhoLog::debug_var('---recieve---','2.1');
+					$db = new ExchangeReceive();
+					//PhoLog::debug_var('---recieve---','2.2');
+					$param['user_id']= $user->user_id;
+					PhoLog::debug_var('---recieve---','2.3');
+					$upd_flg = $db->_insert($param);
+					PhoLog::debug_var('---recieve---','2.4');
+					if($param['status'] !='1'){
+						//PhoLog::debug_var('---recieve---','2.5');
+						$res['reason']= $db->get_name($param['status']);					
+						$res['msg']="Thanh toán không thành công.";
+						$res['status']='NOT';
+						//PhoLog::debug_var('---recieve---','3');
+					}else{
+						//PhoLog::debug_var('---recieve---','4');
+						if($upd_flg){
+							$db->update_amount_user($user->user_id,$param['amount']);
+						}
+						$usdb = new Users();
+						$us_data = $usdb->get_info($user->user_id);
+						$this->session->set('auth', $us_data);
+						$res['reason']= "Tài khoản của bạn hiện tại là:".$this->currency_format($us_data->amount) . ' VNĐ';
+					}				
+					
+				}
+			}else{
+				$res['reason']="Kết quả không hợp lệ.";
+				$res['msg']="Thanh toán không thành công.";
+				$res['status']='NOT';			
+			}				
+		}catch (\Exception $e) {
+			PhoLog::debug_var('---Error---',$e);
+			$res['reason']="Có lỗi xảy ra trong quá trình nhận kết quả thanh toán";
 			$res['msg']="Thanh toán không thành công.";
-			$res['status']='NOT';			
-		}	
+			$res['status']='NOT';
+		}
 		$this->ViewVAR($res);
 		
 	}
