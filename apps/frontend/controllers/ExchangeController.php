@@ -83,6 +83,7 @@ class ExchangeController extends PHOController
 			$plaintext = $param['data'].'|'.$cdata['pay_securitycode'];
 			$mysign = strtoupper(hash('sha256', $plaintext));
 			PhoLog::debug_var('---recieve---',$param);
+			PhoLog::debug_var('---recieve---',$cdata);
 			if($mysign != $param['signature']){
 				$res['reason']="Kết quả không hợp lệ.";
 				$res['msg']="Thanh toán không thành công.";

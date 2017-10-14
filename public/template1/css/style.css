@@ -1011,14 +1011,17 @@ ul.bxslider li{
 	margin: auto;
 }
 a.sieu_vip{
-	color: red !important;
+	/*color: red !important;*/
+	color: #e41b23 !important;
     text-transform: uppercase;
 }
 a.vip{
-	color: red !important;
+/*	color: red !important;*/
+	color: #e41b23 !important;
     text-transform: lowercase;
 }
 a.hot{
+	/*color: #f36523 !important;*/
 	color: #f36523 !important;
     text-transform: lowercase;
 }
