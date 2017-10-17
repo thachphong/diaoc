@@ -19,12 +19,12 @@ class ProjectController extends PHOController
 		
         $result['relations'] = $db->get_project_relation($result['project_id']);
         //update traffic
-        $time = time();
+        /*$time = time();
 		$traffic['time'] = $time;//-600;  //10phut		
 		$traffic['section_id'] = session_id();
 		$traffic['ip'] = $this->get_client_ip_server();
 		$traffic['news_id'] =$id;
-		$db->update_traffic($traffic);
+		$db->update_traffic($traffic);*/
         
         $this->ViewVAR($result);
 	}
