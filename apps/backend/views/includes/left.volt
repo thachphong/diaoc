@@ -51,7 +51,13 @@
                     <ul class="nav child_menu">
                       <li><a href="{{url.get('category/list/1/1')}}">Danh mục tin cấp 1</a></li>
                       <li><a href="{{url.get('category/list/2/1')}}">Danh mục tin cấp 2</a></li>
-                      <li><a href="{{url.get('news')}}">Tin tức</a></li>
+                      <li><a href="{{url.get('news')}}">Tin tức</a></li>                     
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-newspaper-o"></i> Dự án <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{{url.get('category/project')}}">Loại dự án</a></li>
+                      <li><a href="{{url.get('project')}}">Dự án</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-sliders"></i> Slide - Banner <span class="fa fa-chevron-down"></span></a>

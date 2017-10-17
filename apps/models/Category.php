@@ -18,7 +18,7 @@ class Category extends DBModel
     public $upd_user;
     public $ctg_level;
     public $sort;
-    public $news_flg;
+    public $news_flg;  //0 tin post, 1 tin tuc, 2 du án
     public $m_type_id;
     public function initialize()
     {

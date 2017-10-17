@@ -34,7 +34,20 @@ class CategoryController extends PHOController
 		$this->set_template_share();
 		$this->ViewVAR($param);
 	}
-	
+	public function projectAction()
+	{
+		$level_id = 2;
+		$news_flg = 2;		
+		$db = new Category();
+		$param['category']=$db->get_ctg_list($level_id,$news_flg);
+		$param['news_flg']=$news_flg;
+		$param['level_flg']=$level_id;
+		if($level_id > 1){
+			$param['parent_list1']= $db->get_ctg_list(1,$news_flg);
+		}		
+		$this->set_template_share();
+		$this->ViewVAR($param);
+	}
 	public function newAction()
 	{		
 		$param = $this->get_param(array('ctg_level','news_flg'));
@@ -56,6 +69,41 @@ class CategoryController extends PHOController
 		}
 				
 		return $this->ViewHtml('category/edit',$param);
+	}
+	public function newproAction()
+	{		
+		$param = $this->get_param(array('ctg_level','news_flg'));
+		$param['news_flg'] = 2;
+		$param['ctg_id'] = null;
+		$param['ctg_name'] = null;
+		$param['del_flg'] = 0;	
+		$param['sort'] = 1;	
+		$param['m_type_id'] = 0;
+		$mt = new MType();
+		$param['mtypelist'] = $mt->get_all();	
+		if(strlen($param['ctg_level'])==0){
+			$param['ctg_level'] = 1;
+		}
+		$level_id =$param['ctg_level'];
+		$param['parent_id_1']= 5;
+		$db = new Category();
+		if($level_id > 1){			
+			$param['parent_list1']= $db->get_ctg_list(1,$param['news_flg']);
+		}
+				
+		return $this->ViewHtml('category/editpro',$param);
+	}
+	public function editproAction($ctg_id)
+	{		
+		
+		$db = new Category();
+		$result = $db->get_ctg_info($ctg_id);
+		if($result['ctg_level'] > 1){			
+			$result['parent_list1']= $db->get_ctg_list(1,$result['news_flg'] );
+		}
+		$mt = new MType();
+		$result['mtypelist'] = $mt->get_all();	
+		return $this->ViewHtml('category/editpro',$result);
 	}
 	public function ctgnewsAction()
 	{

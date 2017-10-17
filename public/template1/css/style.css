@@ -98,6 +98,13 @@ ul.dang-tin-icon li a{
     font-family: 'Roboto Regular';
     font-size: 12px;
 }
+#menu_footer .menu_top ul li{
+	border-right:  1px solid rgb(49, 195, 32);
+}
+#menu_footer .menu_top ul li:last-child{
+	border-right:  none;
+}
+
 .menu_top ul li {
     background: var(--main_color );
     position: relative;
@@ -1027,6 +1034,29 @@ a.hot{
 }
 .new_list .col-md-3,.new_list .col-sm-3{
 	width: 23%;
+}
+.duan_img{
+    width: 100%;
+}
+.duan_title{
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 20px;    
+    width: 135px;
+}
+.duan_text{
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 20px; 
+}
+.duan_tongquan{
+    width: 100%;
+    font-family: 'Roboto Condensed';
+    color: var(--main_color_2);
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0px;
+    display: inline-block;
 }
 /*.main_img{
     width: 100%;

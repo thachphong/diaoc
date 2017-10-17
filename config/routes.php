@@ -98,6 +98,12 @@ $router->removeExtraSlashes(true);
 				'action' => 'index',  
 				'params' => 1            
 			));
+			$router->add("/da/:params", array(
+				'module' => 'frontend',
+				'controller' => 'project',
+				'action' => 'index',  
+				'params' => 1            
+			));
 			$router->add("/tin-moi", array(
 				'module' => 'frontend',
 				'controller' => 'category',
@@ -249,6 +255,17 @@ $router->removeExtraSlashes(true);
 			$router->add("/news/:action/:params", array(
 				'module' => 'backend',
 				'controller' => 'news',
+				'action' => 1,
+				'params'=>2
+			));
+			$router->add("/project", array(
+				'module' => 'backend',
+				'controller' => 'project',
+				'action' => 'index',
+			));
+			$router->add("/project/:action/:params", array(
+				'module' => 'backend',
+				'controller' => 'project',
 				'action' => 1,
 				'params'=>2
 			));

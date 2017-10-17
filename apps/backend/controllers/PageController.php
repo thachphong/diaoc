@@ -182,4 +182,19 @@ class PageController extends PHOController
 		}*/
 		return "";
 	}
+	public function deleteAction($page_id)
+	{		
+		$db = new Page();
+		$msg = "";//$db->check_before_delete($ctg_id);
+		$result['status']="OK";
+		if($msg== ""){
+			$db->page_id = $page_id;
+			$db->delete();
+		}else{
+			$result['status']="NOT";
+			$result['msg']= $msg;
+		}
+		
+		return $this->ViewJSON($result);
+	}
 }

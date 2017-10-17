@@ -10,7 +10,7 @@ use Phalcon\Cache\Backend\File as BackFile;
 use Phalcon\Cache\Frontend\Data as FrontData;
 use Multiple\PHOClass\PhoLog;
 use Multiple\Models\Slide;
-
+use Multiple\Models\Project;
 /**
  * Elements
  *
@@ -410,8 +410,8 @@ class Elements extends Component
         $cacheKey = 'duannoibac.cache';
         $html  = $cache->get($cacheKey);
         if ($html === null) {
-            $ne = new News();
-            $data = $ne->get_news_rows(5,8);    
+            $ne = new Project();
+            $data = $ne->get_project_rows(8);    
             $html = '';
             foreach($data as $key=>$item){
                 $html .= '<div class="vipitem pn_background pn_border">';
@@ -421,10 +421,11 @@ class Elements extends Component
                     $html .= '<img class="duan_img" src="'.BASE_URL_NAME.'template1/images/post1.png"><div>';
                 }
                 
-                $html .= '<a href="'.BASE_URL_NAME.'t/'.$item['news_no'].'_'.$item['news_id'].'">'.$item['news_name'].'</a>';
-                $html .= '<div>';
-                $html .= '<span>'. $item['des'].'</span>';
-                $html .= '</div></div></div>';               
+                $html .= '<a href="'.BASE_URL_NAME.'da/'.$item['project_no'].'_'.$item['project_id'].'">'.$item['project_name'].'</a>';
+                //$html .= '<div>';
+                //$html .= '<span>'. $item['des'].'</span>';
+                //$html .= '</div></div></div>';    
+                $html .= '</div></div>';              
             }
             // Store it in the cache
             $cache->save($cacheKey, $html);
