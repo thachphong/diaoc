@@ -352,7 +352,7 @@ class Elements extends Component
 
 		if ($html === null) {
             $ne = new News();
-            $data = $ne->get_news_pupular(12);	    	
+            $data = $ne->get_news_pupular(6);	    	
 	    	$html = '';
 	    	foreach($data as $key=>$item){
 				$html .= '<li class="news-item"> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'t/'.$item['news_no'].'_'.$item['news_id'].'">';
@@ -377,7 +377,7 @@ class Elements extends Component
         $html  = $cache->get($cacheKey);
         if ($html === null) {
             $db = new Posts();  
-            $data = $db->get_list_new(3,15);      //type sieu vip      
+            $data = $db->get_list_new(3);      //type sieu vip      
             $html = '';
             foreach($data as $key=>$item){
                 $html .= '<li class="vipitem pn_background pn_border">';
@@ -412,7 +412,7 @@ class Elements extends Component
         $html  = $cache->get($cacheKey);
         if ($html === null) {
             $ne = new Project();
-            $data = $ne->get_project_rows(8);    
+            $data = $ne->get_project_rows(12);    
             $html = '';
             foreach($data as $key=>$item){
                 $html .= '<div class="vipitem pn_background pn_border">';
