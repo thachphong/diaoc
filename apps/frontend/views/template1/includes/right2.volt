@@ -155,7 +155,7 @@
             </div>
          </div>
       </div>
-{{ javascript_include('template1/js/jquery.simplyscroll.js') }}
+<!--{{ javascript_include('template1/js/jquery.simplyscroll.js') }}-->
 <script type="text/javascript">
 $(document).ready(function() {
 	var _param = get_param_search();	
