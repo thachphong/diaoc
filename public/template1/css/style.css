@@ -556,6 +556,9 @@ a.post_title:hover{
 .post_img{
     padding:5px 5px 5px 5px;
 }
+.viplist{
+	padding-left:0px;
+}
 .viplist .vipitem{
     display: block;
     overflow: hidden;
@@ -1057,6 +1060,17 @@ a.hot{
     line-height: 24px;
     margin: 0px;
     display: inline-block;
+}
+.news-item{
+	border-bottom:1px solid rgba(151, 137, 137, 0.36);	
+	padding-bottom: 10PX;
+	padding-top: 10PX;
+}
+.news-item .fa-circle:before{
+	top: 15px;
+}
+#tinxemnhieu{
+	padding:0px;
 }
 /*.main_img{
     width: 100%;
