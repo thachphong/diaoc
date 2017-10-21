@@ -377,7 +377,7 @@ class Elements extends Component
         $html  = $cache->get($cacheKey);
         if ($html === null) {
             $db = new Posts();  
-            $data = $db->get_list_new(15);      //type sieu vip      
+            $data = $db->get_list_new(3,15);      //type sieu vip      
             $html = '';
             foreach($data as $key=>$item){
                 $html .= '<li class="vipitem pn_background pn_border">';
