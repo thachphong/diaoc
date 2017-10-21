@@ -9,7 +9,7 @@
          <div class="row">
          
          	<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0">
-         		<img class="duan_img" src="{{url.get('crop/314x179/')}}{{img_path}}" title="{{project_name}}" alt="{{project_name}}"/>
+         		<img class="duan_img" src="{{url.get('crop/303x173/')}}{{img_path}}" title="{{project_name}}" alt="{{project_name}}"/>
          	</div>
          	<div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0">
          		<div class="post_head">
@@ -46,13 +46,13 @@
          <div class="row margin_top" >
             <div class="pn_title">
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
-               <h1>Bài viết liên quan</h1>               
+               <h1>Dự án liên quan</h1>               
             </div>
             {%for key,item in relations%}
             <div class="col-md-6 col-sm-6 col-xs-12 {%if key%2==0 %}col_left{%else%}col_right{%endif%}" >
                <div class="relation_item pn_background pn_border">
-                  <a href="{{url.get('t/')}}{{item['project_no']}}_{{item['project_id']}}"><img  src="{{url.get('crop/120x79/')}}{{item['img_path']}}" alt="{{item['project_name']}}" title="{{item['project_name']}}"></a>
-                  <a class="linkpost" href="{{url.get('t/')}}{{item['project_no']}}_{{item['project_id']}}">{{item['project_name']}}</a>
+                  <a href="{{url.get('da/')}}{{item['project_no']}}_{{item['project_id']}}"><img  src="{{url.get('crop/120x79/')}}{{item['img_path']}}" alt="{{item['project_name']}}" title="{{item['project_name']}}"></a>
+                  <a class="linkpost" href="{{url.get('da/')}}{{item['project_no']}}_{{item['project_id']}}">{{item['project_name']}}</a>
                </div>
             </div>
             {%endfor%}
@@ -69,7 +69,7 @@
                </ul>
                <div class="tab-content">
                   <div id="tab1" class="tab-pane fade in active">
-                  <div class="fb-comments" data-href="{{url.get('t/')}}{{project_no}}_{{project_id}}" data-width="100%" data-numposts="20"></div>
+                  <div class="fb-comments" data-href="{{url.get('da/')}}{{project_no}}_{{project_id}}" data-width="100%" data-numposts="20"></div>
                                  <div id="fb-root"></div>
                                     <script>(function(d, s, id) {
                                       var js, fjs = d.getElementsByTagName(s)[0];

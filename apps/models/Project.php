@@ -59,7 +59,7 @@ class Project extends DBModel
 					  n.address,
 					  (trim(n.acreage)+0) acreage,
 					  n.address_ascii,					  
-					  (trim(N.percent)+0) percent,
+					  (trim(n.percent)+0) percent,
 					  n.m_provin_id,
 					  n.m_district_id,
 					  n.m_ward_id,
@@ -97,7 +97,7 @@ class Project extends DBModel
     $this->boss_name=  $param['boss_name'];
     $this->address=  $param['address'];    
     $this->address_ascii=  $param['address_ascii'];
-    $this->percent=  $param['percent'];
+   
     $this->m_provin_id=  $param['m_provin_id'];
     
     $this->map_lat=  $param['map_lat'];
@@ -145,7 +145,7 @@ class Project extends DBModel
 		  des=:des,
 		  scale=:scale,
 		  img_path=:img_path,
-		  upd_date=:upd_date,
+		  upd_date= now(),
 		  upd_user=:upd_user,
 		  del_flg=:del_flg 
           where project_id = :project_id
@@ -170,8 +170,7 @@ class Project extends DBModel
 		  'content',
 		  'des',
 		  'scale',
-		  'img_path',		 
-		  'upd_date',
+		  'img_path',	
 		  'upd_user',
 		  'del_flg'          
           ));

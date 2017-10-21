@@ -121,9 +121,9 @@
           var menu_name = $('#name_'+id).text();
           Pho_message_confirm("Thông báo","Bạn có chắc chắn muốn xóa tin: ["+menu_name+"] ?",function(){
             
-        Pho_json_ajax('GET',"{{url.get('news/delete/')}}" + id,null ,function(datas){
+        Pho_json_ajax('GET',"{{url.get('project/delete/')}}" + id,null ,function(datas){
           if(datas.status == "OK"){
-            Pho_direct("{{url.get('news')}}");
+            Pho_direct("{{url.get('project')}}");
           }else{
             Pho_message_box_error("Lỗi",datas.msg);
           }
@@ -136,7 +136,7 @@
         $(document).on('click','.btn_edit',function(event){
           var id = $(this).attr('id');
             id = id.replace("edit_","");  
-            location.href="{{url.get('news/edit/')}}"+id;
+            location.href="{{url.get('project/edit/')}}"+id;
         });
         
         

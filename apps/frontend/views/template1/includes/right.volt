@@ -4,8 +4,10 @@
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
                <h3>Tin đặc biệt</h3>
             </div>
-            <div class="viplist">               
+            <div style=" height: 400px;position: relative; overflow: hidden;">
+            <ul class="viplist" id="viplist" >               
                {{ elements.getTindacbiet() }}
+            </ul>
             </div>
          </div>
          <div class="row margin_top">
@@ -15,8 +17,8 @@
             </div>
             
             <div class="newsboxrow pn_background pn_border">
-               <div class="colbox ">
-                     <ul class="boxright">
+               <div class="colbox " style=" height: 314px; position: relative; overflow: hidden;">
+                     <ul class="boxright" id="tinxemnhieu">
                      {{ elements.getTinxemnhieu() }}
                      </ul>
                </div>
@@ -32,3 +34,27 @@
             </div>
          </div>
       </div>
+
+{{ javascript_include('template1/js/jquery.simplyscroll.js') }}
+<script type="text/javascript">
+   $(document).ready(function() {
+     // $('#tinxemnhieu').newstape();  
+      //$('.newstape').newstape();
+      $("#tinxemnhieu").simplyScroll({
+                    customClass: 'vert',
+                    orientation: 'vertical',
+                    auto: true,
+                    manualMode: 'end',
+                    frameRate:10 ,
+                    speed: 1
+                });
+      $("#viplist").simplyScroll({
+                    customClass: 'vert',
+                    orientation: 'vertical',
+                    auto: true,
+                    manualMode: 'end',
+                    frameRate:10 ,
+                    speed: 1
+                });
+   });
+</script>

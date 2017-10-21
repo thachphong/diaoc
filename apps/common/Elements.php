@@ -352,14 +352,15 @@ class Elements extends Component
 
 		if ($html === null) {
             $ne = new News();
-            $data = $ne->get_news_pupular(5);	    	
+            $data = $ne->get_news_pupular(12);	    	
 	    	$html = '';
 	    	foreach($data as $key=>$item){
-				$html .= '<li> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'t/'.$item['news_no'].'_'.$item['news_id'].'">';
-                $html .=$item['news_name'].'</a></li>';
-                if ($key < count($data)-1){
+				$html .= '<li class="news-item"> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'t/'.$item['news_no'].'_'.$item['news_id'].'">';
+                $html .=$item['news_name'].'</a>                         
+                        </li>';
+                /*if ($key < count($data)-1){
                     $html .='<hr class="row_line" />';
-                }  
+                }  */
 			}
 			// Store it in the cache
 		    $cache->save($cacheKey, $html);
@@ -376,10 +377,10 @@ class Elements extends Component
         $html  = $cache->get($cacheKey);
         if ($html === null) {
             $db = new Posts();  
-            $data = $db->get_list_new(3);      //type sieu vip      
+            $data = $db->get_list_new(15);      //type sieu vip      
             $html = '';
             foreach($data as $key=>$item){
-                $html .= '<div class="vipitem pn_background pn_border">';
+                $html .= '<li class="vipitem pn_background pn_border">';
                 if(strlen($item['img_path'])>0){
                     $html .= '<img src="'.BASE_URL_NAME.'crop/60x50/'.$item['img_path'].'"><div>';
                 }else{
@@ -394,7 +395,7 @@ class Elements extends Component
 					$html .= '<span class="postprice_right"><strong>Thỏa thuận</strong></span>';
 				}
                 
-                $html .= '</div></div></div>';               
+                $html .= '</div></div></li>';               
             }
             // Store it in the cache
             $cache->save($cacheKey, $html);

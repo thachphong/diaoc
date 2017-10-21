@@ -125,8 +125,10 @@
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
                <h3>Tin đặc biệt</h3>
             </div>
-            <div class="viplist">               
-               {{ elements.getTindacbiet() }}
+            <div style=" height: 400px;position: relative; overflow: hidden;">
+	            <ul class="viplist" id="viplist" >     
+	               {{ elements.getTindacbiet() }}
+	            </ul>
             </div>
          </div>
          <div class="row margin_top">
@@ -136,8 +138,8 @@
             </div>
             
             <div class="newsboxrow pn_background pn_border">
-               <div class="colbox ">
-                     <ul class="boxright">
+               <div class="colbox " height: 314px; position: relative; overflow: hidden;">
+                     <ul class="boxright" id="tinxemnhieu">
                      {{ elements.getTinxemnhieu() }}
                      </ul>
                </div>
@@ -153,6 +155,7 @@
             </div>
          </div>
       </div>
+{{ javascript_include('template1/js/jquery.simplyscroll.js') }}
 <script type="text/javascript">
 $(document).ready(function() {
 	var _param = get_param_search();	
@@ -349,6 +352,22 @@ $(document).ready(function() {
         $('#s_m_ward_id').empty();
         $('#s_m_ward_id').append(option);
     };
+    $("#tinxemnhieu").simplyScroll({
+                    customClass: 'vert',
+                    orientation: 'vertical',
+                    auto: true,
+                    manualMode: 'end',
+                    frameRate:10 ,
+                    speed: 1
+                });
+    $("#viplist").simplyScroll({
+                    customClass: 'vert',
+                    orientation: 'vertical',
+                    auto: true,
+                    manualMode: 'end',
+                    frameRate:10 ,
+                    speed: 1
+                });
 });
 function jsion_ajax(url,data,done_fun){
     $.ajax({
