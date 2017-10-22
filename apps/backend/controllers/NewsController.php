@@ -82,7 +82,8 @@ class NewsController extends PHOController
         	$listfile = $this->get_listfile($param['content']);
 			if(strlen($param['news_id'])==0){
 				$id = $db->_insert($param);
-				//PhoLog::debug_Var('---ssss--',$id);
+				$db = $db->get_news($id);
+				//PhoLog::debug_Var('---ssss--',$db->add_date);
 				$imglist = $this->move_file($db->add_date,$id,$listfile['tmp']);
 				//PhoLog::debug_Var('---img--',$imglist);
 				$db->content = $this->replace_image_path($imglist,$param['content']);

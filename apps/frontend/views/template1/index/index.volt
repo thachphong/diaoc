@@ -12,20 +12,24 @@
             <div class="newsboxrow pn_background pn_border">
                {%if kientruc|length >0 %}
                <div class="col-md-6 col-sm-6 col-xs-12 boxleft">
-               	  <a href="{{url.get('t/')}}{{kientruc[0]['news_no']}}_{{kientruc[0]['news_id']}}">
-                  <img src="{{url.get('crop/354x236/')}}{{kientruc[0]['img_path']}}" alt="{{kientruc[0]['news_name']}}" title="{{kientruc[0]['news_name']}}">
+               	{%for key,item in kientruc%}
+               	  <div id="li_{{key}}" class="news-list-thumb" {%if key !=0%}style="display:none"{%endif%}>
+               	  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">
+                  <img src="{{url.get('crop/354x236/')}}{{item['img_path']}}" alt="{{item['news_name']}}" title="{{item['news_name']}}">
                   </a>
-                  <a href="{{url.get('t/')}}{{kientruc[0]['news_no']}}_{{kientruc[0]['news_id']}}"><h4>{{kientruc[0]['news_name']}}</h4></a>
+                  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}"><h4>{{item['news_name']}}</h4></a>
+                  </div>
+                {%endfor%}
                </div>
                {%endif%}
-               <div class="col-md-6 col-sm-6 col-xs-12" style="height: 300;padding-top: 5px;display: block; overflow: none">
-                  <ul class="boxright" id="tintuc">
-                  {%for key,item in kientruc%}
-                     {%if key >0%}
-                        <li> <i class="fa fa-circle"></i><a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">{{item['news_name']}}</a></li>
-                     {%endif%}
-                  {%endfor%}
-                  </ul>
+               <div class="col-md-6 col-sm-6 col-xs-12" style="height: 299;margin-top: 5px;display: block; overflow: none" id="tintuc_new_list">
+               		<!--<div id="tintuc_new_list" style="height: 300;margin-top: 5px;display: block; overflow: none">-->
+	                  <ul class="boxright" id="tintuc">
+	                  {%for key,item in kientruc%}	                    
+	                        <li data_item="{{key}}" style="height: 45px; width: 100%"> <i class="fa fa-circle"></i><a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">{{item['news_name']}}</a></li>	                    
+	                  {%endfor%}
+	                 </ul>
+                  <!--</div>-->
                </div>
                
             </div>            
@@ -156,7 +160,7 @@
       </div>
       
       {{ javascript_include('template1/js/ImageScroll.js') }}
-      {{ javascript_include('template1/js/jquery.simplyscroll.js') }}
+      {{ javascript_include('template1/js/jcarousellite.js') }}
 <script type="text/javascript">
 $(document).ready(function() {
 	  $('#imgs').imageScroll({
@@ -170,16 +174,54 @@ $(document).ready(function() {
 	      $(this).next("span").text("CallbackDisplay: hidden "+ordinal+"!");
 	    }
 	  });
-	  $("#tintuc").simplyScroll({
+	  /*$("#tintuc").simplyScroll({
                     customClass: 'vert',
                     orientation: 'vertical',
                     auto: true,
                     manualMode: 'end',
                     frameRate:10 ,
                     speed: 1
-                });
+                });*/
+
+		var autocroll= function () {
+			var i = 0;
+			var len = 7;
+			var count = 8;
+			var first = true;
+			var o = $("#tintuc_new_list").jCarouselLite({
+					vertical: true,
+					hoverPause: false,
+					visible: len,
+					start: 1,
+					warp: "circle",
+					auto: 1,
+					speed: 1000,
+					beforeStart: function (a) {
+						if (!first)
+						$(a).parent().delay(1000);
+					},
+					afterEnd: function (a,b) {
+						if (first) {
+						first = false;
+						}	
+															
+						$(".news-list-thumb").css("display", "none");
+						var data_item = $(a).last().attr('data_item');
+						console.log(data_item);	
+						$("#li_" + (data_item)).css("display", "block");
+						//i++; if (i > count) i = 0;
+						$(a).parent().delay(6500);
+					}
+				});
+			};
+		autocroll();
+	
 });
 </script>
+<script type="text/javascript">
+
+</script>
+
       {{ partial('includes/right') }}
    </div>
    {{ partial('includes/banner_right') }}

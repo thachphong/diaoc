@@ -631,6 +631,11 @@ a.post_title:hover{
 }
 .newsboxrow .boxright li{
     position: relative;
+    display: block;   
+    border-bottom:1px solid rgba(151, 137, 137, 0.36);	
+    padding-bottom: 5px;
+    /*margin-bottom: 10px;*/
+    margin-top: 5px;
 }
 .newsboxrow .boxright a, a.linkpost{
     font-weight: normal;
@@ -640,6 +645,8 @@ a.post_title:hover{
     line-height: 20px;
     padding-left: 20px;
     display: block;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
 }
 .newsboxrow .boxright a:hover,a.linkpost:hover,a.post_name:hover,.newsboxrow .boxleft a:hover{
     /*text-decoration: none;
@@ -648,9 +655,6 @@ a.post_title:hover{
 .newsboxrow .boxright{
     padding:10px 0px 10px 0px;
     list-style: none;
-}
-.newsboxrow .boxright li{
-    padding-bottom: 10px;   
 }
 .col_left{
     padding-left: 0; 

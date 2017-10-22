@@ -29,13 +29,12 @@
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
                <h3>Dự án nổi bật</h3>
             </div>
-            <div class="viplist" style="display: block;height: 400px;overflow-y: auto;">
+            <div class="viplist" style="display: block;height: 400px;overflow-y: auto;margin-top: 5px">
             	{{ elements.getduannoibac() }}            
             </div>
          </div>
       </div>
 
-<!--{{ javascript_include('template1/js/jquery.simplyscroll.js') }}-->
 <script type="text/javascript">
    $(document).ready(function() {
      // $('#tinxemnhieu').newstape();  
