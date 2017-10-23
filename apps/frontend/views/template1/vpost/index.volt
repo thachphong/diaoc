@@ -67,6 +67,7 @@
                </div>
             </div>
            <!--  </div> -->
+           <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12 col_left">
                <h3 class="post_body_title">Đặc điểm bất động sản</h3>
                <table class="other_detail">
@@ -134,6 +135,25 @@
                      <td>{{email}}</td>
                   </tr>
                </table>
+            </div>
+            </div>
+            <hr class="line" />
+            <div class="row">
+            	<div><label style="float: left;padding-top: 16px;font-weight: normal;">Chia sẻ:</label></div>
+            	<ul class="mxh">
+            		<li><a href="https://www.facebook.com/sharer/sharer.php?u={{url.get('b/')}}{{post_no}}_{{post_id}}" target="_blank"><img src="{{url.get('template1/images/facebook.png')}}"/></a>
+            		</li>
+            		<li><a><img src="{{url.get('template1/images/twitter.png')}}"/></a>
+            		</li>
+            		<li><a><img src="{{url.get('template1/images/googleplus.png')}}"/></a>
+            		</li>
+            		<li><a><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
+            		</li>            		
+            		</li>
+            		<li><a><img src="{{url.get('template1/images/email.png')}}"/></a>
+            		</li>
+            	</ul>
+            	
             </div>
          </div> 
          <div class="row margin_top" >

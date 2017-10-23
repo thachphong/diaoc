@@ -10,7 +10,14 @@
   
 }
 @media (min-width: 768px) and (max-width: 991px) {
-
+	.btn_menu_mobi,
+    .menu_mobi {
+        display: block
+    }
+    .menu_top,
+    .nav_top {
+        display: none
+    }
 }
 @media (max-width: 639px) and (min-width: 360px){
   

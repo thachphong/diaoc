@@ -27,14 +27,31 @@
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12" id="footer_col_2">
                 <!--<div><img src="{{url.get('template1/images/dang_ky_bct.png')}}"> </div>-->
-                <ul class="mxh">
+                <!--<ul class="mxh">
                     <li><a href="{{define['facebook_page']}}" target="_blank"><i class="fa fa-facebook-square"></i></a>
                     <li><a href="{{define['tweet_page']}}" target="_blank"><i class="fa fa-twitter-square"></i></a>
                     <li><a href="{{define['youtu_page']}}" target="_blank"><i class="fa fa-youtube-square"></i></a>
                     <li><a href="{{define['google_page']}}" target="_blank"><i class="fa fa-google-plus-square"></i></a>
                     <li><a href="{{define['skype']}}" target="_blank"><i class="fa fa-skype"></i></a>
                     <li><a href="{{define['email']}}" target="_blank"><i class="fa fa-envelope-square"></i></a>
-                </ul>                
+                </ul>   -->
+                <ul class="mxh">
+            		<li><a href="{{define['facebook_page']}}" target="_blank"><img src="{{url.get('template1/images/facebook.png')}}"/></a>
+            		</li>
+            		<li><a href="{{define['tweet_page']}}" target="_blank"><img src="{{url.get('template1/images/twitter.png')}}"/></a>
+            		</li>
+            		<li><a href="{{define['google_page']}}" target="_blank"><img src="{{url.get('template1/images/googleplus.png')}}"/></a>
+            		</li>
+            		<li><a><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
+            		</li>
+            		<li><a href="{{define['youtu_page']}}" target="_blank"><img src="{{url.get('template1/images/youtube.png')}}"/></a>
+            		</li>
+            		<li><a href="{{define['skype']}}" target="_blank"><img src="{{url.get('template1/images/skype.jpg')}}"/></a>
+            		</li>
+            		<li><a href="{{define['email']}}" target="_blank"><img src="{{url.get('template1/images/email.png')}}"/></a>
+            		</li>
+            	</ul>
+            	             
             </div>
          </div>
       </div>
