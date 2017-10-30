@@ -5,6 +5,7 @@ namespace Multiple\Backend\Controllers;
 use Multiple\PHOClass\PHOController;
 use Multiple\Models\Posts;
 use Multiple\Models\Category;
+use Multiple\PHOClass\PhoLog;
 class ProductController extends PHOController
 {
 
@@ -31,7 +32,10 @@ class ProductController extends PHOController
 
 	        $param['page'] = $page;
 	        //$param['ctg_name'] ='Kết quả tìm';
-	        $param['ctg_no'] = $_SERVER['QUERY_STRING'];
+	        //PhoLog::debug_var('--url---',$_SERVER);
+	        $param['ctg_no'] = str_replace('/','', $_SERVER['REQUEST_URI']);
+        	$exp = explode('&page',$param['ctg_no'])  ;
+        	$param['ctg_no']=  $exp[0]; 
 	        
 	        //if(isset($param['addr']) && strlen($param['addr']) > 0){
 	        //    $param['address_ascii'] = $this->convert_ascii($param['addr']);
@@ -60,7 +64,7 @@ class ProductController extends PHOController
 	        $param['end'] = $end;
 			
 			
-					
+			$result = 	$param;	
 			$result['list']= $db->get_list_all($param);
 			$result['categorys']= $ctg->get_category_rows(0);
 			//$this->set_template_share();
