@@ -36,6 +36,7 @@ class VpostController extends PHOController
 			
 			$db = new Posts();
 			$result = $db->get_vpost($id);
+			$result['des']= substr($result['content'],0,150).'...';
 			//PhoLog::debug_var('view----',__LINE__);
 			$img = new PostsImg();
 			$result['imglist'] = $img->get_img_bypost($id);

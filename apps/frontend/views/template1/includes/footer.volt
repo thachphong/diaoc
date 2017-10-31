@@ -48,7 +48,7 @@
             		</li>
             		<li><a href="{{define['skype']}}" target="_blank"><img src="{{url.get('template1/images/skype.jpg')}}"/></a>
             		</li>
-            		<li><a href="{{define['email']}}" target="_blank"><img src="{{url.get('template1/images/email.png')}}"/></a>
+            		<li><a href="{{define['email']}}" target="_blank"><img class="email" src="{{url.get('template1/images/email.png')}}"/></a>
             		</li>
             	</ul>
             	             

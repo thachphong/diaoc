@@ -304,6 +304,7 @@ class Posts extends DBModel
 				$where
 				order by v.post_level DESC, v.start_date DESC
 				limit $limit";
+//		PhoLog::debug_var('vip',$sql);
 		return $this->pho_query($sql);
 	}
 	public function get_post_byctgno($ctg_no,$start_row=0){
@@ -795,16 +796,17 @@ class Posts extends DBModel
 			$sql .=" and p.status = :status";	
 			$pasql['status'] = $param['status'];		
 		}
-		$pasql['fdate'] ='00/00/0000';        
-        if (isset($param['fdate']) && empty($param['fdate'])==FALSE) {
-			$pasql['fdate'] = $param['fdate'];
-		}
-        if (isset($param['tdate']) && empty($param['tdate'])==FALSE) {
+		if (isset($param['fdate']) && empty($param['fdate'])==FALSE && isset($param['tdate']) && empty($param['tdate'])==FALSE) {
 			$pasql['tdate'] = $param['tdate'].' 23:59';
+			$pasql['fdate'] = $param['fdate'];
             $sql .= " and v.start_date between STR_TO_DATE(:fdate,'%d/%m/%Y') and STR_TO_DATE(:tdate,'%d/%m/%Y %H:%i')";
-		}else{
-            $sql .= " and v.start_date between STR_TO_DATE(:fdate,'%d/%m/%Y %H:%i') and SYSDATE()";
-        }
+		}elseif(isset($param['fdate']) && empty($param['fdate'])==FALSE){
+            $sql .= " and v.start_date >= STR_TO_DATE(:fdate,'%d/%m/%Y %H:%i')";
+            $pasql['fdate'] = $param['fdate'];
+        }elseif(isset($param['tdate']) && empty($param['tdate'])==FALSE){
+			$pasql['tdate'] = $param['tdate'].' 23:59';
+			$sql .= " and v.start_date <= STR_TO_DATE(:tdate,'%d/%m/%Y %H:%i')";
+		}
         if(strlen($param['ctgid']) > 0){
 			$sql .=" and p.ctg_id in (
 					select ctg_id from category 
@@ -820,7 +822,8 @@ class Posts extends DBModel
 			$sql .=" and p.post_id = :post_id";	
 			$pasql['post_id'] = $param['pid'];
 		}
-		
+		//PhoLog::debug_var('query-count---',$sql);
+		//PhoLog::debug_var('query-count---',$pasql);
 		$res = $this->query_first($sql,$pasql);
 		return $res['cnt'];
 	}

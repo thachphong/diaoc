@@ -216,4 +216,19 @@ class Category extends DBModel
         $data = Category::find(['del_flg = 0','order'=>'ctg_name']);        
         return $data;
     }
+    public function get_child($ctg_id){
+		$sql="select ctg_id
+					,ctg_no
+                    ,ctg_name                  
+                    ,del_flg                    
+                    ,sort 
+                    ,ctg_level
+                    ,news_flg
+                    ,m_type_id
+                from category
+                where parent_id = :ctg_id
+                and del_flg =0";
+        return $this->pho_query($sql,array('ctg_id'=>$ctg_id));
+		
+	}
 }

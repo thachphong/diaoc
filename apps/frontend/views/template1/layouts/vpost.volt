@@ -6,7 +6,7 @@
 	  {% set define= elements.get_define()%}
 	  <meta property="og:site_name" content="diaocviet.vn">
       <meta property="og:title" content="{{post_name}}">
-      <meta property="og:description" content="{{define['web_des']}}">  
+      <meta property="og:description" content="{{des}}">  
      <!-- <meta property="og:image" content="/images/logo.png"> -->
       <title>{{post_name}}</title>
       {{ partial('includes/header') }}        

@@ -7,7 +7,7 @@
 	  <meta property="og:site_name" content="diaocviet.vn">
       <meta property="og:title" content="{{project_name}}">
       <meta property="og:description" content="{{des}}">  
-     <!-- <meta property="og:image" content="/images/logo.png"> -->
+      <meta property="og:image" content="{{url.get('')}}{{img_path}}">
       <title>{{project_name}}</title>
       {{ partial('includes/header') }}        
    </head>

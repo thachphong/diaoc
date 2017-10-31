@@ -16,6 +16,23 @@
             <div class="fr-element fr-view">
                      {{content}}
             </div>
+            <hr class="line" />
+            <div class="row">
+            	<div><label class="chiase">Chia sẻ:</label></div>
+            	<ul class="mxh">
+            		<li><a href="https://www.facebook.com/sharer/sharer.php?u={{url.get('t/')}}{{news_no}}_{{news_id}}" target="_blank"><img src="{{url.get('template1/images/facebook.png')}}"/></a>
+            		</li>
+            		<li><a href="https://twitter.com/intent/tweet?text={{news_name}}&url={{url.get('t/')}}{{news_no}}_{{news_id}}" target="_blank"><img src="{{url.get('template1/images/twitter.png')}}"/></a>
+            		</li>
+            		<li><a href="https://plus.google.com/share?url={{url.get('t/')}}{{news_no}}_{{news_id}}" target="_blank"><img src="{{url.get('template1/images/googleplus.png')}}"/></a>
+            		</li>
+            		<li><a href="http://pinterest.com/pin/create/button/?url={{url.get('t/')}}{{news_no}}_{{news_id}}&description={{news_name}}&media={{url.get('')}}{{img_path}}" target="_blank"><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
+            		</li>
+            		<li><a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to&su={{news_name}}&body={{url.get('t/')}}{{news_no}}_{{news_id}}&ui=2&tf=1" target="_blank"><img src="{{url.get('template1/images/email.png')}}" class="email"/></a>
+            		</li>
+            	</ul>
+            	
+            </div>
          </div>
          <div class="row margin_top" >
             <div class="pn_title">

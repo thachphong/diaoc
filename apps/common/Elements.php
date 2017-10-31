@@ -5,6 +5,7 @@ use Multiple\Models\Message;
 use Multiple\Models\Menu;
 use Multiple\Models\News;
 use Multiple\Models\Posts;
+use Multiple\Models\Category;
 use Multiple\Models\Define;
 use Phalcon\Cache\Backend\File as BackFile;
 use Phalcon\Cache\Frontend\Data as FrontData;
@@ -433,6 +434,27 @@ class Elements extends Component
         }
         echo $html;
     }
+    public function getdanhmuc($ctg_id)
+    {    	
+        $options = ['lifetime' => 86400 ]; // thoi gian tinh bang giay  = 1ngay    
+        $frontendCache = new FrontData($options);   
+        $cache = new BackFile( $frontendCache,  ['cacheDir' => PHO_CACHE_DIR ]);
+    	$cacheKey = 'danhmuc_'.$ctg_id.'.cache';
+		$html  = $cache->get($cacheKey);
+
+		if ($html === null) {
+            $ne = new Category();
+            $data = $ne->get_child($ctg_id);	    	
+	    	$html = '';
+	    	foreach($data as $key=>$item){
+				$html .= '<li class="news-item"> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'c/'.$item['ctg_no'].'">';
+                $html .=$item['ctg_name'].'</a></li>';
+			}
+			// Store it in the cache
+		    $cache->save($cacheKey, $html);
+		}
+		echo $html;
+    }    
     public function get_define(){
     	$options = ['lifetime' => 24000 ]; // thoi gian tinh bang giay ,400 phut
         $frontendCache = new FrontData($options);   

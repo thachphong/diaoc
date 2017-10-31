@@ -33,6 +33,34 @@
             	{{ elements.getduannoibac() }}            
             </div>
          </div>
+         <div class="row margin_top">
+            <div class="pn_title">
+               <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
+               <h3>Mua bán nhà đất</h3>
+            </div>
+            
+            <div class="newsboxrow pn_background pn_border">
+               <div class="colbox " ><!--style=" height: 314px; position: relative; overflow: hidden;"-->
+                     <ul class="boxright">
+                     {{ elements.getdanhmuc(1) }}
+                     </ul>
+               </div>
+            </div>  
+         </div>
+         <div class="row margin_top">
+            <div class="pn_title">
+               <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
+               <h3>Cho thuê nhà đất</h3>
+            </div>
+            
+            <div class="newsboxrow pn_background pn_border">
+               <div class="colbox " ><!--style=" height: 314px; position: relative; overflow: hidden;"-->
+                     <ul class="boxright">
+                     {{ elements.getdanhmuc(2) }}
+                     </ul>
+               </div>
+            </div>  
+         </div>
       </div>
 
 <script type="text/javascript">

@@ -108,6 +108,7 @@ class ProjectController extends PHOController
         	$listfile = $this->get_listfile($param['content']);
 			if(strlen($param['project_id'])==0){
 				$id = $db->_insert($param);
+				$db = $db->get_project($id);
 				//PhoLog::debug_Var('---ssss--',$id);
 				$imglist = $this->move_file($db->add_date,$id,$listfile['tmp']);
 				//PhoLog::debug_Var('---img--',$imglist);

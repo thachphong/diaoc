@@ -143,14 +143,13 @@
             	<ul class="mxh">
             		<li><a href="https://www.facebook.com/sharer/sharer.php?u={{url.get('b/')}}{{post_no}}_{{post_id}}" target="_blank"><img src="{{url.get('template1/images/facebook.png')}}"/></a>
             		</li>
-            		<li><a><img src="{{url.get('template1/images/twitter.png')}}"/></a>
+            		<li><a href="https://twitter.com/intent/tweet?text={{post_name}}&url={{url.get('b/')}}{{post_no}}_{{post_id}}" target="_blank"><img src="{{url.get('template1/images/twitter.png')}}"/></a>
             		</li>
-            		<li><a><img src="{{url.get('template1/images/googleplus.png')}}"/></a>
+            		<li><a href="https://plus.google.com/share?url={{url.get('b/')}}{{post_no}}_{{post_id}}" target="_blank"><img src="{{url.get('template1/images/googleplus.png')}}"/></a>
             		</li>
-            		<li><a><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
-            		</li>            		
+            		<li><a href="http://pinterest.com/pin/create/button/?url={{url.get('b/')}}{{post_no}}_{{post_id}}&description={{post_name}}&media={{url.get('')}}{{imglist[0].img_path}}" target="_blank"><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
             		</li>
-            		<li><a><img src="{{url.get('template1/images/email.png')}}"/></a>
+	            		<li><a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to&su={{post_name}}&body={{url.get('b/')}}{{post_no}}_{{post_id}}&ui=2&tf=1" target="_blank"><img class="email" src="{{url.get('template1/images/email.png')}}" /></a>
             		</li>
             	</ul>
             	

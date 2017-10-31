@@ -32,7 +32,7 @@ class ProductController extends PHOController
 
 	        $param['page'] = $page;
 	        //$param['ctg_name'] ='Kết quả tìm';
-	        //PhoLog::debug_var('--url---',$_SERVER);
+	        //PhoLog::debug_var('--url---',$_GET);
 	        $param['ctg_no'] = str_replace('/','', $_SERVER['REQUEST_URI']);
         	$exp = explode('&page',$param['ctg_no'])  ;
         	$param['ctg_no']=  $exp[0]; 
@@ -40,7 +40,7 @@ class ProductController extends PHOController
 	        //if(isset($param['addr']) && strlen($param['addr']) > 0){
 	        //    $param['address_ascii'] = $this->convert_ascii($param['addr']);
 	        //}   
-	        $param['post']=$db->get_list_all($param,$start_row);
+	        //$param['post']=$db->get_list_all($param,$start_row);
 	        $param['total_post'] = $db->get_list_all_count($param);
 	        $param['total_page']= round($param['total_post']/$param['limit']);
 	        
@@ -65,13 +65,14 @@ class ProductController extends PHOController
 			
 			
 			$result = 	$param;	
-			$result['list']= $db->get_list_all($param);
+			$result['list']= $db->get_list_all($param,$start_row);
 			$result['categorys']= $ctg->get_category_rows(0);
 			//$this->set_template_share();
 		} catch (\Exception $e) {
 			PhoLog::debug_var('---Error---','------------------------------');
 			PhoLog::debug_var('---Error---',$e);
 		}
+		//PhoLog::debug_var('---result---',$result);
 		$this->ViewVAR($result);
 	}
 	public function apprAction($id){
