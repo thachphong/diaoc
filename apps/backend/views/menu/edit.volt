@@ -52,6 +52,7 @@
                              <option value="2" {%if page_flg == 2%}selected="selected"{%endif%}>Danh mục sản phẩm</option>
                              <option value="1" {%if page_flg == 1%}selected="selected"{%endif%}>Trang</option>
                              <option value="3" {%if page_flg == 3%}selected="selected"{%endif%}>Tin tức</option>
+                             <option value="4" {%if page_flg == 4%}selected="selected"{%endif%}>Dự án</option>
                           </select>                          
                         </div>
                       </div>
@@ -94,6 +95,7 @@
   var ctg_list =JSON.parse( "{{ctg_list}}");
   var page_list =JSON.parse( "{{page_list}}");
   var news_list =JSON.parse( "{{news_list}}");
+  var project_list =JSON.parse( "{{project_list}}");
   var link_val ="{{link}}";
   var list_level2= '{%if parent_list2 is defined%}{{parent_list2}}{%endif%}';
   if(list_level2.length > 0){
@@ -169,7 +171,7 @@
                 str_opt += '<option value="'+value.page_no+'">'+value.page_name + "</option>";
               }         
           
-        });
+        	});
           }else if(val == 3){
             $.each( news_list, function( key, value ) {             
               if(v_link_val.length > 0 && value.ctg_no == v_link_val){
@@ -179,7 +181,17 @@
                 str_opt += '<option value="'+value.ctg_no+'">'+value.ctg_name + "</option>";
               }         
           
-        });
+        	});
+          }else if(val == 4){
+            $.each( project_list, function( key, value ) {             
+              if(v_link_val.length > 0 && value.ctg_no == v_link_val){
+                //console.log(v_link_val);
+                str_opt += '<option value="'+value.ctg_no+'" selected="selected">'+value.ctg_name + "</option>";
+              }else{
+                str_opt += '<option value="'+value.ctg_no+'">'+value.ctg_name + "</option>";
+              }         
+          
+        	});
           }
           $("#menu_link").append(str_opt);
           

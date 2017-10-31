@@ -51,7 +51,8 @@ class MenuController extends PHOController
 		$param['link'] = null;
 		$param['ctg_list'] = addslashes(json_encode($ctg->get_category_rows(0)));
 		$param['news_list'] = addslashes(json_encode($ctg->get_category_rows(1)));
-		$param['page_list'] = addslashes(json_encode($pg->get_page_list()));		
+		$param['page_list'] = addslashes(json_encode($pg->get_page_list()));
+		$param['project_list'] = addslashes(json_encode($ctg->get_category_rows(2)));		
 		if(strlen($param['menu_level'])==0){
 			$param['menu_level'] = 1;
 		}
@@ -114,7 +115,7 @@ class MenuController extends PHOController
 		$result['ctg_list'] = addslashes(json_encode($ctg->get_category_rows(0)));
 		$result['news_list'] = addslashes(json_encode($ctg->get_category_rows(1)));
 		$result['page_list'] = addslashes(json_encode($pg->get_page_list()));
-	
+		$result['project_list'] = addslashes(json_encode($ctg->get_category_rows(2)));
 		if($result['menu_level'] > 1){			
 			$result['parent_list1']= $db->get_menu_list(1);
 			//$param['parent_id_1']= NULL;
