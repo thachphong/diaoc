@@ -98,6 +98,7 @@ $router->removeExtraSlashes(true);
 				'action' => 'index',  
 				'params' => 1            
 			));
+			
 			$router->add("/da/:params", array(
 				'module' => 'frontend',
 				'controller' => 'project',
@@ -114,6 +115,12 @@ $router->removeExtraSlashes(true);
 				'module' => 'frontend',
 				'controller' => 'category',
 				'action' => 'newslist',  
+				'params' => 1            
+			));
+			$router->add("/la/:params", array(
+				'module' => 'frontend',
+				'controller' => 'category',
+				'action' => 'prolist',  
 				'params' => 1            
 			));
 			$router->add("/t/:params", array(

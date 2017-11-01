@@ -103,6 +103,8 @@ class Elements extends Component
                             $href .= 'c/';
                         }else if($item['page_flg']==3){
                             $href .= 'dm/';
+                        }else if($item['page_flg']==4){
+                            $href .= 'la/';
                         }
                          $href .=$item['link'];
                     }else{
@@ -122,6 +124,8 @@ class Elements extends Component
                                     $href .= 'c/';
                                 }else if ($sub1['page_flg']==3){
                                     $href .= 'dm/';
+                                }else if ($sub1['page_flg']==4){
+                                    $href .= 'la/';
                                 }
                                  $href .=$sub1['link'];
                             }else{
@@ -137,7 +141,9 @@ class Elements extends Component
                                         $href .= 'c/';
                                     }else if ($sub2['page_flg']==3){
                                         $href .= 'dm/';
-                                    }
+                                    }else if ($sub2['page_flg']==4){
+                                    	$href .= 'la/';
+                                	}
                                      $href .=$sub2['link'];
                                 }else{
                                     //$href ='#';
@@ -154,6 +160,8 @@ class Elements extends Component
                                     $href .= 'c/';
                                 }else if ($sub1['page_flg']==3){
                                     $href .= 'dm/';
+                                }else if ($sub1['page_flg']==4){
+                                    $href .= 'la/';
                                 }
                                  $href .=$sub1['link'];
                             }else{
@@ -172,6 +180,8 @@ class Elements extends Component
                             $href .= 'c/';
                         }else if ($item['page_flg']==3){
                             $href .= 'dm/';
+                        }else if ($item['page_flg']==4){
+                            $href .= 'la/';
                         }
                         $href .=$item['link'];
                     }else{
@@ -215,6 +225,8 @@ class Elements extends Component
                             $href .= 'c/';
                         }else if($item['page_flg']==3){
                             $href .= 'dm/';
+                        }else if ($item['page_flg']==4){
+                            $href .= 'la/';
                         }
                          $href .=$item['link'];
                     }else{
@@ -234,7 +246,9 @@ class Elements extends Component
                                     $href .= 'c/';
                                 }else if ($sub1['page_flg']==3){
                                     $href .= 'dm/';
-                                }
+                                }else if ($sub1['page_flg']==4){
+		                            $href .= 'la/';
+		                        }
                                  $href .=$sub1['link'];
                             }else{
                                // $href ='#';
@@ -249,6 +263,8 @@ class Elements extends Component
                                         $href .= 'c/';
                                     }else if ($sub2['page_flg']==3){
                                         $href .= 'dm/';
+                                    }else if ($sub2['page_flg']==4){
+                                        $href .= 'la/';
                                     }
                                      $href .=$sub2['link'];
                                 }else{
@@ -266,6 +282,8 @@ class Elements extends Component
                                     $href .= 'c/';
                                 }else if ($sub1['page_flg']==3){
                                     $href .= 'dm/';
+                                }else if ($sub1['page_flg']==4){
+                                    $href .= 'la/';
                                 }
                                  $href .=$sub1['link'];
                             }else{
@@ -284,6 +302,8 @@ class Elements extends Component
                             $href .= 'c/';
                         }else if ($item['page_flg']==3){
                             $href .= 'dm/';
+                        }else if ($item['page_flg']==4){
+                            $href .= 'la/';
                         }
                         $href .=$item['link'];
                     }else{

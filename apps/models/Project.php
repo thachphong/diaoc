@@ -247,4 +247,34 @@ class Project extends DBModel
   	  $sql="select news_id,news_name,news_no from news where ctg_id = 5 and del_flg =0";
   	  return $this->pho_query($sql);
   }
+  public function get_project_byctgno($ctg_no,$start_row = 0){
+    $limit =PAGE_NEWS_LIMIT_RECORD;
+    $sql="select project_id, project_no,project_name,des,img_path 
+				from project  where del_flg =0
+        and ctg_id in (select ctg_id from category 
+          where ctg_no = :ctg_no
+          union all
+          select ctg_id from category 
+          where parent_id =(select ctg_id from category where ctg_no = :ctg_no)
+        )
+        order by project_id desc
+        limit $limit
+        OFFSET $start_row
+        ";
+    return $this->pho_query($sql,array('ctg_no'=>$ctg_no));
+  }
+  public function get_project_byctgno_count($ctg_no){
+   // $limit =PAGE_NEWS_LIMIT_RECORD;
+    $sql="select count(project_id) cnt
+				from project  where del_flg =0
+	        and ctg_id in (select ctg_id from category 
+	          where ctg_no = :ctg_no
+	          union all
+	          select ctg_id from category 
+	          where parent_id =(select ctg_id from category where ctg_no = :ctg_no)
+	        )  
+        ";
+    $res = $this->query_first($sql,array('ctg_no'=>$ctg_no));
+    return $res['cnt'];
+  }
 }
