@@ -91,7 +91,7 @@ ul.dang-tin-icon li a{
     font-family: 'Roboto Condensed';
     font-size: 15px;
 }
-.menu_top .active{
+.menu_top .active,.menu_top li:hover ul li a.active{
     background: var(--main_color_3);
 }
 #menu_footer .menu_top ul {
@@ -1094,6 +1094,9 @@ a.hot{
 }
 #tinxemnhieu{
 	padding:0px;
+}
+.opt_height{
+	line-height: 20px;
 }
 /*.main_img{
     width: 100%;

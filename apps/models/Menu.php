@@ -130,6 +130,9 @@ class Menu extends DBModel
         }else if(isset($param['parent_id_1']) && strlen($param['parent_id_1'])>0){
             $param['parent_id'] = $param['parent_id_1'];
         }
+        if(strlen($param['page_flg'])==0){
+        	$param['page_flg'] = 0;
+    	}
         $sql = "update menu
                     set menu_name = :menu_name  
                     ,page_flg = :page_flg   

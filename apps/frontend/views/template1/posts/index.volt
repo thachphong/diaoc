@@ -81,7 +81,7 @@
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Vị trí <span class="lab_red">(*)</span>:</label>
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
-									<select id="m_provin_id" name="m_provin_id" required>
+									<select id="m_provin_id" name="m_provin_id" required class="opt_height">
 										<option value="">--Chọn Tỉnh/Thành phố--</option>
 										{%for item in provincials%}
 											<option value="{{item.m_provin_id}}" {%if m_provin_id == item.m_provin_id%}selected{%endif%}>{{item.m_provin_name}}</option>
@@ -93,7 +93,7 @@
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
 									<select id="m_district_id" name="m_district_id" required>
-										<option value="">--Chọn Quận/HUyện--</option>
+										<option value="">--Chọn Quận/Huyện--</option>
 									</select>
 								</label>
 								<label class="lab_red lab_invisible" id="m_district_id_error">Bạn cần chọn quận/huyện !</label>
@@ -110,7 +110,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
-									<select class="m_street_id" name="m_street_id" id="m_street_id">
+									<select class="m_street_id" name="m_street_id" id="m_street_id" class="opt_height">
 										<option value="">--Chọn Đường/Phố--</option>
 									</select>
 								</label>
@@ -474,7 +474,7 @@
 		});
 		var change_district_option= function(district_id){
 			var val = $('#m_provin_id').val();
-			var option = '<option value="">--Chọn Quận/HUyện--</option>';
+			var option = '<option value="">--Chọn Quận/Huyện--</option>';
 			$.each(district_list,function(key,item){
 				//console.log(item);
 				if(val == item[2]){
