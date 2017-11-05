@@ -523,6 +523,9 @@ a.post_title:hover{
 	text-decoration: none;*/
 	color: var(--main_color_2);
 }
+a.post_title:visited,.viplist a:visited{
+	color: #888 !important;
+}
 .news_title{
     color: var(--main_color_2);
     font: bold 14px/22px tahoma;
