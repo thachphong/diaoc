@@ -399,7 +399,7 @@ class Elements extends Component
         $html  = $cache->get($cacheKey);
         if ($html === null) {
             $db = new Posts();  
-            $data = $db->get_list_new(3,8);      //type sieu vip      //8row
+            $data = $db->get_list_new(3,10);      //type sieu vip      //8row
             $html = '';
             foreach($data as $key=>$item){
                 $html .= '<li class="vipitem pn_background pn_border">';
@@ -486,11 +486,13 @@ class Elements extends Component
 
 		if ($html === null) {
             $ne = new Provincial();
-            $data = $ne->get_post_count(6);	   //6 row 	
+            $data = $ne->get_post_count(100);	   //6 row 	
 	    	$html = '';
 	    	foreach($data as $key=>$item){
-				$html .= '<li class="news-item"> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'tim?provin='.$item['m_provin_id'].'">';
-                $html .=$item['m_provin_name'].'('.$item['cnt'].')</a></li>';
+				//$html .= '<li class="news-item"> <i class="fa fa-circle"></i><a href="'.BASE_URL_NAME.'tim?provin='.$item['m_provin_id'].'">';
+				//$html .=$item['m_provin_name'].'('.$item['cnt'].')</a></li>';
+				$html .= '<div class="col-md-2 col-ms-4 col-xs-6"><a href="'.BASE_URL_NAME.'tim?provin='.$item['m_provin_id'].'">';
+                $html .=$item['m_provin_name'].'('.$item['cnt'].')</a></div>';
 			}
 			// Store it in the cache
 		    $cache->save($cacheKey, $html);
