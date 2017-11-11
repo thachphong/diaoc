@@ -48,6 +48,6 @@
          {%endif%}
             
       </div>
-      {{ partial('includes/right2') }}
+      {{ partial('includes/right_search') }}
    </div>
 </div>

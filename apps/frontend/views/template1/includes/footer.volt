@@ -88,4 +88,4 @@ jQuery('.fchat').toggle('slow');
   });
   });
   </script>
-{{ javascript_include('template1/js/menu_active.js') }}
+{{ javascript_include('template1/js/menu_active.js?ver=1.0.5') }}

@@ -92,7 +92,7 @@
 							</div>
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
-									<select id="m_district_id" name="m_district_id" required>
+									<select id="m_district_id" name="m_district_id" required class="opt_height">
 										<option value="">--Chọn Quận/Huyện--</option>
 									</select>
 								</label>
@@ -103,7 +103,7 @@
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col"></label>
 							<div class="col-md-4 col-sm-4 col-xs-12">
 								<label class="select_icon">
-									<select name="m_ward_id" id="m_ward_id">
+									<select name="m_ward_id" id="m_ward_id" class="opt_height">
 										<option value="">--Chọn Phường/Xã--</option>
 									</select>
 								</label>
@@ -177,7 +177,7 @@
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="number" name="floor_num" value="{{floor_num}}">
 							</div>	
-							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Số phòng</label>
+							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Số phòng ngủ</label>
 							<div class="col-md-3 col-sm-3 col-xs-12">
 								<input type="number" name="room_num" value="{{room_num}}">
 							</div>						

@@ -827,6 +827,37 @@ class Posts extends DBModel
 		$res = $this->query_first($sql,$pasql);
 		return $res['cnt'];
 	}
+	public function get_bydistrict($param){	
+		$pa_s = array();
+		if(isset($param['district']) && strlen($param['district'])>0){
+			$sql="select d.m_district_name title,c.ctg_name,t.m_type_id, p.m_ward_name dst_name,p.m_ward_id dst_id,count(t.post_id) cnt 
+						from posts t
+			inner join m_ward p on p.m_ward_id = t.m_ward_id
+			inner join m_district d on d.m_district_id = p.m_district_id
+			left JOIN category c on c.ctg_id = t.ctg_id
+			where t.status = 1
+			and p.m_district_id = :district
+			and t.m_type_id = :type
+			group by p.m_ward_name,p.m_ward_id
+			ORDER BY cnt desc";
+			$pa_s['district'] = $param['district'];
+		}else{
+			$sql="select d.m_provin_name title,c.ctg_name,t.m_type_id,p.m_district_name dst_name,p.m_district_id dst_id,count(t.post_id) cnt 
+			from posts t
+			inner join m_district p on p.m_district_id = t.m_district_id
+			inner join m_provincial d on d.m_provin_id = p.m_provin_id
+			left JOIN category c on c.ctg_id = t.ctg_id
+			where t.status = 1
+			and p.m_provin_id = :provin
+			and t.m_type_id = :type
+			group by p.m_district_name,p.m_district_id
+			ORDER BY cnt desc ";
+			$pa_s['provin'] = $param['provin'];
+		}	
+		$pa_s['type'] = $param['type'];
+		PhoLog::debug_var('---abc--',$sql);
+		return $this->pho_query($sql,$pa_s);	
+	}
 	public function update_status($post_id,$status){
 		$sql="update posts set status =:status where post_id = :post_id";
 		return $this->pho_execute($sql,array('status'=>$status,'post_id'=>$post_id));

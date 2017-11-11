@@ -157,7 +157,7 @@ class CategoryController extends PHOController
             $param['end'] = $end;
             $cache->save($cachekey,$param);
         }
-        PhoLog::debug_var('---abc--',$param);
+        //PhoLog::debug_var('---abc--',$param);
        // $this->set_template_share();
         $this->ViewVAR($param);
 	}		
@@ -220,7 +220,11 @@ class CategoryController extends PHOController
         }
         $param['start'] = $start;
         $param['end'] = $end;
-       
+        $param['dstlist'] = array();
+        if(isset($param['provin']) && strlen($param['provin']) > 0){
+            $param['dstlist'] = $db->get_bydistrict($param);
+        }
+        //PhoLog::debug_var('---abc--',$param['dstlist']);
         //$this->set_template_share();
         $this->ViewVAR($param);
 	}

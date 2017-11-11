@@ -224,7 +224,7 @@ $(document).ready(function() {
 
       {{ partial('includes/right') }}
    </div>
-   <div class="row" style="margin-top:20px">
+   <div class="row" style="margin-top:10px">
     	<div class="container">  
     		<div class="row">
 	    		<div class="pn_title">

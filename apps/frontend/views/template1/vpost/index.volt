@@ -96,7 +96,7 @@
                      <td>{{huong_bancong}}</td>
                   </tr>
                   <tr>
-                     <td>Số phòng</td>
+                     <td>Số phòng ngủ</td>
                      <td>{{room_num}}</td>
                   </tr>
                   <tr>
