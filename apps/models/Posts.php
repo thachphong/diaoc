@@ -395,6 +395,8 @@ class Posts extends DBModel
 				  p.map_lng,
 				  p.furniture,
 				  p.youtube_key,
+				  p.m_district_id,
+				  p.m_provin_id,				 
 				  di.m_directional_name,
 				  bc.m_directional_name as huong_bancong,
 				 v.post_level,				
@@ -524,8 +526,8 @@ class Posts extends DBModel
 				OFFSET $start_row
 				";
 		//PhoLog::debug_var('--search----',$param);
-		//PhoLog::debug_var('--search----',$sql);
-		//PhoLog::debug_var('--search----',$search);
+		PhoLog::debug_var('--search----',$sql);
+		PhoLog::debug_var('--search----',$search);
 		return $this->pho_query($sql,$search);
 	}
 	public function search_posts_count($param){
@@ -829,33 +831,53 @@ class Posts extends DBModel
 	}
 	public function get_bydistrict($param){	
 		$pa_s = array();
+		$where_join = "c.ctg_id = t.m_type_id";
+		$ctgid ="'ctgid=";
+		if(isset($param['ctgid']) && strlen($param['ctgid'])>0)
+		{
+			$where_join = "c.ctg_id = t.ctg_id and c.ctg_id= :ctgid";		
+			$pa_s['ctgid'] = $param['ctgid'];	
+			$ctgid .=$param['ctgid'];
+		}
+		$ctgid .="'";
 		if(isset($param['district']) && strlen($param['district'])>0){
-			$sql="select d.m_district_name title,c.ctg_name,t.m_type_id, p.m_ward_name dst_name,p.m_ward_id dst_id,count(t.post_id) cnt 
+			$sql="select d.m_district_name title,c.ctg_name,t.m_type_id, p.m_ward_name dst_name,CONCAT($ctgid,'&district=',p.m_district_id,'&ward=', p.m_ward_id) dst_id,count(t.post_id) cnt 
 						from posts t
 			inner join m_ward p on p.m_ward_id = t.m_ward_id
 			inner join m_district d on d.m_district_id = p.m_district_id
-			left JOIN category c on c.ctg_id = t.ctg_id
+			inner JOIN category c on $where_join
 			where t.status = 1
 			and p.m_district_id = :district
 			and t.m_type_id = :type
-			group by p.m_ward_name,p.m_ward_id
+			group by p.m_ward_name,p.m_ward_id,c.ctg_name
 			ORDER BY cnt desc";
 			$pa_s['district'] = $param['district'];
-		}else{
-			$sql="select d.m_provin_name title,c.ctg_name,t.m_type_id,p.m_district_name dst_name,p.m_district_id dst_id,count(t.post_id) cnt 
+		}else if(isset($param['provin']) && strlen($param['provin'])>0){
+			$sql="select d.m_provin_name title,c.ctg_name,t.m_type_id,p.m_district_name dst_name,CONCAT($ctgid,'&district=', p.m_district_id) dst_id,count(t.post_id) cnt 
 			from posts t
 			inner join m_district p on p.m_district_id = t.m_district_id
 			inner join m_provincial d on d.m_provin_id = p.m_provin_id
-			left JOIN category c on c.ctg_id = t.ctg_id
-			where t.status = 1
-			and p.m_provin_id = :provin
+			inner JOIN category c on $where_join
+			where t.status = 1			
 			and t.m_type_id = :type
-			group by p.m_district_name,p.m_district_id
-			ORDER BY cnt desc ";
-			$pa_s['provin'] = $param['provin'];
+			and p.m_provin_id = :provin
+			group by p.m_district_name,p.m_district_id,c.ctg_name
+			ORDER BY cnt desc  ";	
+			$pa_s['provin'] = $param['provin'];	
+		}else{
+			$sql="select '' title,c.ctg_name,t.m_type_id,d.m_provin_name dst_name,CONCAT($ctgid,'&provin=', d.m_provin_id) dst_id,count(t.post_id) cnt 
+			from posts t
+			
+			inner join m_provincial d on d.m_provin_id = t.m_provin_id
+			inner JOIN category c on $where_join
+			where t.status = 1			
+			and t.m_type_id = :type
+			group by d.m_provin_name ,d.m_provin_id,c.ctg_name
+			ORDER BY d.sort  ";	
 		}	
 		$pa_s['type'] = $param['type'];
 		PhoLog::debug_var('---abc--',$sql);
+		PhoLog::debug_var('---abc--',$pa_s);
 		return $this->pho_query($sql,$pa_s);	
 	}
 	public function update_status($post_id,$status){
@@ -870,5 +892,31 @@ class Posts extends DBModel
 		if(strlen($url_link)==0) return '';
 		$position=strpos( $url_link, 'v=',1) + 2;
 	    return substr($url_link ,$position,11);
+	}
+	public function get_post_relation($param,$limit=10){
+		$sql="select p.post_id,p.post_name,p.post_no,v.post_level,
+		(trim(p.price)+0) price,
+		(trim(p.acreage)+0) acreage,pro.m_provin_name,dis.m_district_name,
+				NULLIF(un.m_unit_name,'') m_unit_name,
+				NULLIF(im.img_path,'') img_path,
+				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
+				,rd.m_ward_name
+				from posts p
+				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
+				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
+				INNER JOIN posts_view v on v.post_id = p.post_id
+				LEFT JOIN posts_img im on im.post_id = p.post_id and im.avata_flg = 1
+				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price 
+				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
+				where p.del_flg = 0
+				and p.status =1
+				and v.end_date >= NOW()
+				and p.m_provin_id = :m_provin_id
+				and p.m_type_id = :m_type_id
+				and p.m_district_id = :m_district_id	
+				and p.post_id <> :post_id	
+				order by v.post_level DESC, v.start_date DESC
+				limit $limit";
+		return $this->pho_query($sql,$param);
 	}
 }

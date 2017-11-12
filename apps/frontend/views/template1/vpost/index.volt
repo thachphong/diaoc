@@ -147,7 +147,7 @@
             		</li>
             		<li><a href="https://plus.google.com/share?url={{url.get('b/')}}{{post_no}}_{{post_id}}" target="_blank"><img src="{{url.get('template1/images/googleplus.png')}}"/></a>
             		</li>
-            		<li><a href="http://pinterest.com/pin/create/button/?url={{url.get('b/')}}{{post_no}}_{{post_id}}&description={{post_name}}&media={{url.get('')}}{{imglist[0].img_path}}" target="_blank"><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
+            		<li><a href="http://pinterest.com/pin/create/button/?url={{url.get('b/')}}{{post_no}}_{{post_id}}&description={{post_name}}" target="_blank"><img src="{{url.get('template1/images/pinterest.png')}}"/></a>
             		</li>
 	            		<li><a href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to&su={{post_name}}&body={{url.get('b/')}}{{post_no}}_{{post_id}}&ui=2&tf=1" target="_blank"><img class="email" src="{{url.get('template1/images/email.png')}}" /></a>
             		</li>
@@ -155,6 +155,37 @@
             	
             </div>
          </div> 
+         <div class="row margin_top" >
+            <div class="pn_title">
+               <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>
+               <h1>Xêm thêm bất động sản khác</h1>               
+            </div>
+            <div class="new_list">
+               {%for item in relations%}
+                  <div class="row margin_top_5 pn_background pn_border">
+                     <div class="col-md-3 col-sm-3 col-xs-3 post_img">
+                        <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}">
+                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/140x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist" alt="{{item['post_name']}}" title="{{item['post_name']}}">
+                        </a>
+                     </div>
+                     <div class="col-md-9 col-sm-9 col-xs-9">
+                        <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}" class="post_title {%if item['post_level']==3%}sieu_vip{%elseif item['post_level']==2%}vip{%elseif item['post_level']==1%}hot{%endif%}">{%if item['post_level']==3%}<i class="fa fa-star"></i>{%endif%}{{item['post_name']}}</a>
+                        <div class="icon_post"><label><!--<i class="fa fa-usd"></i>-->Giá<span>: </span></label><strong>{%if item['price'] is defined%}{{item['price']}} {{item['m_unit_name']}}{%else%}Thỏa thuận{%endif%}</strong>
+                        <strong class="icon_dientich"><!--<i class="fa fa-university"></i>-->Diện tích<span>: </span></strong>{%if item['acreage'] is defined%}{{item['acreage']}} m2{%else%}Không xác định{%endif%}
+                        </div>
+                        <div class="icon_post"></div>
+                        <div class="icon_post"><label><!--<i class="fa fa-map-marker"></i>-->Địa chỉ<span>: </span></label>{%if item['m_ward_name'] is defined%}{{item['m_ward_name']}} - {%endif%}
+                        {{item['m_district_name']}} - {{item['m_provin_name']}}</div>
+                        <span class="post_date">{{item['start_date']}}</span>
+                     </div>
+                  </div>
+               {%endfor%}
+            </div>
+         	<div class="row margin_top pn_background pn_border" style="text-align:right;padding: 0px 5px 5px 0px;">
+               <a class="read_more" href="{{url.get('tim?')}}type={{m_type_id}}&provin={{m_provin_id}}&district={{m_district_id}}">>> Xem thêm các tin khác cùng khu vực này</a>
+               
+            </div> 
+         </div>
          <div class="row margin_top" >
             <div class="pn_title">
                <span class="bg_icon" style="padding: 6px 4px 4px 2px;"><i class="fa fa-list"></i></span>

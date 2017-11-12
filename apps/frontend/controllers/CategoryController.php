@@ -34,6 +34,12 @@ class CategoryController extends PHOController
             $info = $ctg->get_ctg_byno($ctg_no);
             $param['ctg_name'] = $info->ctg_name;
             $param['ctg_no'] ='c/'. $ctg_no;
+            if($info->ctg_id =='1' || $info->ctg_id=='2'){
+				$param['type'] = $info->ctg_id;
+			}else{
+				$param['ctgid'] = $info->ctg_id;
+				$param['type'] = $info->parent_id;
+			}
         }        
         $param['post']=$db->get_post_byctgno($ctg_no,$start_row);
         $param['total_post'] = $db->get_post_byctgno_count($ctg_no);
@@ -57,7 +63,12 @@ class CategoryController extends PHOController
         }
         $param['start'] = $start;
         $param['end'] = $end;
-       
+        $param['dstlist'] = array();
+        PhoLog::debug_var('---abc--',$param);
+        if((isset($param['ctgid']) && strlen($param['ctgid']) > 0)|| (isset($param['type']) && strlen($param['type']) > 0)){
+            $param['dstlist'] = $db->get_bydistrict($param);
+            $param['district']='';
+        }
         //$this->set_template_share();
         $this->ViewVAR($param);
 	}
@@ -221,9 +232,9 @@ class CategoryController extends PHOController
         $param['start'] = $start;
         $param['end'] = $end;
         $param['dstlist'] = array();
-        if(isset($param['provin']) && strlen($param['provin']) > 0){
+        //if(isset($param['provin']) && strlen($param['provin']) > 0){
             $param['dstlist'] = $db->get_bydistrict($param);
-        }
+        //}
         //PhoLog::debug_var('---abc--',$param['dstlist']);
         //$this->set_template_share();
         $this->ViewVAR($param);
