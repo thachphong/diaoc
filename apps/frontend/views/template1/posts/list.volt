@@ -58,17 +58,25 @@
 								<th>Trạng thái</th>
 								<th>Ngày đăng</th>
 								<th>Ngày hết hạn</th>
-								<th>Sửa</th>
+								<th>Sửa</th>							
 								<th>Xóa</th>
 							</tr>
 							{%for item in list%}
 							<tr>
 								<td>{{item['post_id']}}</td>
 								<td>{{item['post_name']}}</td>
-								<td>{{item['status']}}</td>
+								{%if item['end_flg'] =='1'%}
+									<td>Hết hạn</td>
+								{%else%}
+									<td>{{item['status']}}</td>
+								{%endif%}
 								<td>{{item['start_date']}}</td>
 								<td>{{item['end_date']}}</td>
-								<td><a href="{{url.get('dang-tin/')}}{{item['post_id']}}" class="btn_blue">Sửa</a></td>
+								{%if item['end_flg'] =='1'%}
+									<td style="width: 68px;"><a href="{{url.get('posts/increase/')}}{{item['post_id']}}" class="btn_blue">Gia hạn</a></td>
+								{%else%}
+									<td><a href="{{url.get('dang-tin/')}}{{item['post_id']}}" class="btn_blue">Sửa</a></td>
+								{%endif%}
 								<td><a href="{{url.get('posts/delete/')}}{{item['post_id']}}" class="btn_red_small">Xóa</a></td>
 							</tr>
 							{%endfor%}							

@@ -50,8 +50,22 @@ class VpostController extends PHOController
 			$traffic['post_id'] =$id;
 			//PhoLog::debug_var('view----',__LINE__);
 			$db->update_traffic($traffic);
-			//PhoLog::debug_var('view----',__LINE__);
+			
 			//$this->set_template_share();
+			$rel['m_type_id'] = $result['m_type_id'];
+			$rel['m_provin_id'] = $result['m_provin_id'];
+			$rel['m_district_id'] = $result['m_district_id'];
+			$rel['post_id'] = $result['post_id'];
+			PhoLog::debug_var('view----',$rel);
+			$result['relations']= $db->get_post_relation($rel);
+			
+			$result['type'] = $result['m_type_id'];
+			$param['type'] = $result['m_type_id'];
+			$param['ctgid'] = $result['ctg_id'];
+			$param['provin'] = $result['m_provin_id'];
+			$param['district'] = $result['m_district_id'];					      
+	        $result['dstlist'] = $db->get_bydistrict($param);
+	        
 			$this->ViewVAR($result);	
 		} catch (\Exception $e) {
 			PhoLog::debug_var('---Error---',$e);

@@ -256,8 +256,7 @@ class PostsController extends PHOController
 			return 'Mã an toàn không đúng, vui lòng nhập lại!';
 		}	
 		return "";
-	}
-	
+	}	
 	public function successAction($post_id){
 		$db = new Posts();
 		$po = $db->get_info($post_id);
@@ -382,5 +381,69 @@ class PostsController extends PHOController
 		$db->_delete($id);
 		$this->_redirect('tin-da-dang');
 	}
-	
+	public function increaseAction($id){		
+		if(strlen($id) > 0){			
+			$db = new Posts();
+			$dbimg = new PostsImg();
+			$result = $db->get_post_row($id);
+			
+		}
+		$result['start_date'] = date('d/m/Y');
+		$result['end_date'] = date('d/m/Y',strtotime('+ 14 day'));
+		$this->set_template_share();
+		$this->ViewVAR($result);	
+	}
+	public function updincrAction(){
+		try{
+			$param = $_POST;
+			//PhoLog::debug_var('test----',$param);
+			//PhoLog::debug_var('--giahan----',$param);
+			$result = array('status' => 'OK');
+			$result['status'] = 'OK';	
+			$result['msg'] = 'Cập nhật thành công!';		
+			$db = new Posts();
+			$pview = new PostsView();
+			$msg = $this->check_captcha($param['capcha_code']);
+			$add_date = "";
+			if($msg == ""){				
+				$login_info =  $this->session->get('auth');
+	        	$param['user_id'] = $login_info->user_id;
+	       // 	$listfile = $this->get_listfile($param['content']);	       		
+	        	$paview   =  $param['view'];
+	        	$paview['user_id'] = $param['user_id'];
+	        					
+				$paview['post_id'] = $param['post_id'];
+				$paview['post_view_id'] = $param['post_view_id'];
+				//PhoLog::debug_var('--giahan----',$paview);
+				$pview->hide($param['post_id']);
+				$pview->_insert($paview);
+				$result['msg'] = $param['post_id'];
+				
+			}else{
+				$result['status'] = 'ER';	
+				$result['msg'] = $msg;
+			}
+		} catch (\Exception $e) {
+			PhoLog::debug_var('---Error---',$e);
+		}
+		//PhoLog::debug_var('update----','end');
+		return $this->ViewJSON($result);
+	}
+	public function succincrAction($post_id){
+		$db = new Posts();
+		$po = $db->get_info($post_id);
+		//$po['post_date_num'] =\DateTime::createFromFormat('d/m/Y', '09/08/2017')->format("m/d/Y"); //date_create('09/08/2017','d/m/Y');
+		$result['post'] = $po;
+		$this->set_template_share();
+		$this->ViewVAR($result);	
+	}
+	public function check_captcha($capcha_code){
+		$code = $this->session->get('captcha_code');
+		//PhoLog::debug_var('--giahan----','code:'.$code);
+		//PhoLog::debug_var('--giahan----','capcha_code:'.$param['capcha_code']);
+		if($capcha_code != $code){
+			return 'Mã an toàn không đúng, vui lòng nhập lại!';
+		}
+		return "";
+	}
 }

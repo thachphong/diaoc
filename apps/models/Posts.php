@@ -52,10 +52,13 @@ class Posts extends DBModel
 	 	return Posts::findFirst(array("post_id = :post_id:  ",'bind' => array('post_id' => $id) ));
 	}
 	public function get_info($id){
-		$sql="select p.post_id,p.post_name,p.post_no, v.post_level,DATEDIFF(v.end_date, v.start_date) post_date_num 
+		$sql="select p.post_id,p.post_name,p.post_no, v.post_level,v.total_day post_date_num ,post_view_id
 				from posts p
 				INNER JOIN posts_view v on v.post_id = p.post_id
-				where p.post_id = :post_id";
+				where p.post_id = :post_id
+				and v.hide_flg = 0
+				ORDER BY post_view_id DESC
+				limit 1";
 		return $this->query_first($sql,array('post_id'=>$id));
 	}
 	public function get_post_row($id){
@@ -96,7 +99,8 @@ class Posts extends DBModel
 				from posts p
 				INNER JOIN posts_view v on v.post_id = p.post_id
 				INNER JOIN posts_contract c on c.post_id = p.post_id
-				where p.post_id = :post_id";
+				where p.post_id = :post_id
+				and v.hide_flg = 0";
 		return $this->query_first($sql,array('post_id'=>$id));
 	}	
 	public function _insert($param){
@@ -300,6 +304,7 @@ class Posts extends DBModel
 				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
+				and v.hide_flg = 0
 				and v.end_date >= NOW()
 				$where
 				order by v.post_level DESC, v.start_date DESC
@@ -339,6 +344,7 @@ class Posts extends DBModel
 				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
+				and v.hide_flg = 0
 				and v.end_date >= NOW()
 				$where			
 				order by v.post_level DESC, v.start_date DESC			
@@ -362,9 +368,12 @@ class Posts extends DBModel
 			$param['ctg_no'] = $ctg_no;
 		}	
 		$sql="select count(p.post_id) cnt
-				from posts p				
+				from posts p
+				INNER JOIN posts_view v on v.post_id = p.post_id				
 				where p.del_flg = 0
 				and p.status =1
+				and v.hide_flg = 0
+				and v.end_date >= NOW()
 				$where
 				";
 		$res = $this->query_first($sql,$param);
@@ -421,6 +430,7 @@ class Posts extends DBModel
 				LEFT JOIN m_directional bc on bc.m_directional_id = p.huong_bancong 			
 				
 				where p.post_id = :post_id 
+				and v.hide_flg = 0
 				and p.del_flg = 0";
 		return $this->query_first($sql,array('post_id'=>$post_id));
 	}
@@ -520,6 +530,7 @@ class Posts extends DBModel
 				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
+				and v.hide_flg = 0
 				$where			
 				order by v.post_level DESC, v.start_date DESC			
 				limit $limit
@@ -619,6 +630,7 @@ class Posts extends DBModel
 
 				where p.del_flg = 0
 				and p.status =1
+				and v.hide_flg = 0
 				$where	
 				";
 		//PhoLog::debug_var('--search----',$sql);
@@ -632,7 +644,7 @@ class Posts extends DBModel
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date,
 				DATE_FORMAT(v.end_date ,'%d/%m/%Y')  end_date,p.add_user,
-				(case p.`status` when 0 THEN 'Chờ duyệt' when 1 THEN 'đã duyệt' when 2 THEN 'Không duyệt' when 3 THEN 'Đã xóa' end) status
+				(case p.`status` when 0 THEN 'Chờ duyệt' when 1 THEN 'đã duyệt' when 2 THEN 'Không duyệt' when 3 THEN 'Đã xóa' end) status,(case when v.end_date < now() then '1' else '0' end ) as end_flg
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
@@ -640,6 +652,7 @@ class Posts extends DBModel
 				LEFT JOIN posts_img im on im.post_id = p.post_id and im.avata_flg = 1
 				LEFT JOIN m_unit un on un.m_unit_id = p.unit_price
 				where p.del_flg = 0
+				and v.hide_flg = 0
 				and p.add_user = :user_id";
 		$search['user_id'] = $param['user_id'];
 		if(isset($param['postno']) && strlen($param['postno'])>0 ){
@@ -651,8 +664,12 @@ class Posts extends DBModel
 				$search['post_level'] = $param['plevel'];
 			}
 			if(isset($param['status']) && strlen($param['status'])>0 ){
-				$sql .=" and p.status = :status";
-				$search['status'] = $param['status'];
+				if($param['status'] == '4'){
+					$sql .=" and v.end_date < now() ";
+				}else{
+					$sql .=" and p.status = :status";
+					$search['status'] = $param['status'];
+				}				
 			}
 			
 			if(isset($param['fdate']) && strlen($param['fdate'])>0 && isset($param['tdate']) && strlen($param['tdate'])>0){
@@ -671,7 +688,7 @@ class Posts extends DBModel
 		$sql .=" ORDER BY p.post_id DESC
 				limit $limit
 				OFFSET $start_row";
-		//PhoLog::debug_var('--search1----',$sql);
+		PhoLog::debug_var('--search1----',$sql);
 		//PhoLog::debug_var('--search1----',$search);
 		return $this->pho_query($sql, $search);
 	}	
@@ -680,6 +697,7 @@ class Posts extends DBModel
 				from posts p				
 				INNER JOIN posts_view v on v.post_id = p.post_id
 				where p.del_flg = 0
+				and v.hide_flg = 0
 				and p.add_user = :user_id";
 		$search['user_id'] = $param['user_id'];
 		if(isset($param['plevel']) && strlen($param['plevel'])>0 ){
@@ -687,8 +705,12 @@ class Posts extends DBModel
 			$search['post_level'] = $param['plevel'];
 		}
 		if(isset($param['status']) && strlen($param['status'])>0 ){
-			$sql .=" and p.status = :status";
-			$search['status'] = $param['status'];
+				if($param['status'] == '4'){
+					$sql .=" and v.end_date < now() ";
+				}else{
+					$sql .=" and p.status = :status";
+					$search['status'] = $param['status'];
+				}				
 		}
 		if(isset($param['postno']) && strlen($param['postno'])>0 ){
 			$sql .=" and p.post_no = :postno";
@@ -733,7 +755,7 @@ class Posts extends DBModel
 				(case p.status when 0 THEN 'Chờ duyệt' when 1 THEN 'đã duyệt' when 2 THEN 'Không duyệt' when 3 THEN 'Đã xóa' end) status_name,p.status
 				from posts p
 				LEFT JOIN category c on c.ctg_id = p.ctg_id
-				INNER JOIN posts_view v on v.post_id = p.post_id
+				INNER JOIN posts_view v on v.post_id = p.post_id and v.hide_flg = 0
 
 				where p.del_flg = $del_flg	";
 		if(strlen($param['status']) > 0){
@@ -791,7 +813,7 @@ class Posts extends DBModel
 		$sql = "select count(p.post_id) cnt
 				from posts p
 				LEFT JOIN category c on c.ctg_id = p.ctg_id
-				INNER JOIN posts_view v on v.post_id = p.post_id
+				INNER JOIN posts_view v on v.post_id = p.post_id and v.hide_flg = 0
 
 				where p.del_flg = $del_flg	";
 		if(strlen($param['status']) > 0){
@@ -910,6 +932,7 @@ class Posts extends DBModel
 				LEFT JOIN m_ward rd on rd.m_ward_id = p.m_ward_id
 				where p.del_flg = 0
 				and p.status =1
+				and v.hide_flg = 0
 				and v.end_date >= NOW()
 				and p.m_provin_id = :m_provin_id
 				and p.m_type_id = :m_type_id

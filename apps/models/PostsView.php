@@ -19,6 +19,7 @@ class PostsView extends DBModel
 	public $price;
 	public $vat;
 	public $total_amount ;
+	public $hide_flg ;
     public function initialize()
     {
         $this->setSource("posts_view");
@@ -37,6 +38,7 @@ class PostsView extends DBModel
 		$this->price= $param['price'];
 		$this->vat= $param['vat'];
 		$this->total_amount = $param['total_amount'];
+		$this->hide_flg = 0;
         //PhoLog::debug_var('date----',$param);
         //PhoLog::debug_var('date----','start:'.$this->start_date);
         //PhoLog::debug_var('date----','end:'.$this->end_date);
@@ -69,4 +71,9 @@ class PostsView extends DBModel
         $this->pho_execute($sql,$sql_par );  
         return TRUE;
     }
+    public function hide($id){
+		$sql =" update posts_view set hide_flg =1 where post_id =:post_id";
+		$this->pho_execute($sql,array('post_id'=>$id));  
+        return TRUE;
+	}
 }
