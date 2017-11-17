@@ -64,7 +64,7 @@ class CategoryController extends PHOController
         $param['start'] = $start;
         $param['end'] = $end;
         $param['dstlist'] = array();
-        PhoLog::debug_var('---abc--',$param);
+        //PhoLog::debug_var('---abc--',$param);
         if((isset($param['ctgid']) && strlen($param['ctgid']) > 0)|| (isset($param['type']) && strlen($param['type']) > 0)){
             $param['dstlist'] = $db->get_bydistrict($param);
             $param['district']='';

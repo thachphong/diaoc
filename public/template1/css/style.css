@@ -523,7 +523,7 @@ a.post_title:hover{
 	text-decoration: none;*/
 	color: var(--main_color_2);
 }
-a.post_title:visited,.viplist a:visited,.newsboxrow .boxleft a:visited h4,a.post_name:visited h4,.newsboxrow .boxright a:visited, a.linkpost:visited{
+a.post_title:visited,.viplist a:visited,.newsboxrow .boxleft a:visited h4,a.post_name:visited h4,.newsboxrow .boxright a:visited, a.linkpost:visited,.news_title:visited{
 	color: #888 !important;
 }
 .news_title{
@@ -1113,6 +1113,14 @@ a.hot{
 option:checked { 
     background-color: #168ad5;
     color: #fff;
+}
+.icon_play{
+	top: 30px;
+    position: absolute;
+    left: 58px;
+    width: 30px;
+    height: 30px;
+    border: 0;
 }
 /*.main_img{
     width: 100%;

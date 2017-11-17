@@ -6,6 +6,7 @@ use Multiple\PHOClass\PHOController;
 use Multiple\Models\Menu;
 use Multiple\Models\Category;
 use Multiple\Models\Page;
+use Multiple\PHOClass\PhoLog;
 class MenuController extends PHOController
 {
 
@@ -34,6 +35,9 @@ class MenuController extends PHOController
 				$param['parent_list2']= json_encode($db->get_menu_list(2,$position));
 			}
 		}
+		$gpar = $this->get_Gparam(array('level1'));
+		//PhoLog::debug_var('param',$gpar);
+		$param['level_1']= $gpar['level1'];
 		$this->set_template_share();
 		$this->ViewVAR($param);
 	}

@@ -17,16 +17,51 @@ class NewsController extends PHOController
     }
 	public function indexAction()
 	{
-		$param = self::get_param(array(
-			'search_user_name'
-		));
+		$param = $this->get_Gparam(array('page'));
 		$model = new News();
-		$rows = $model->get_news_all();		
 		
+		
+		$page = 1;
+		$param['limit'] = 50;
+	    if(isset($param['page']) && strlen($param['page']) > 0){
+	        $page= $param['page'];
+	    }       
+	        $start_row = 0;
+	        if( $page > 1){
+	            $start_row = ( $page-1)*$param['limit'] ;
+	        }
+
+	        $param['page'] = $page;
+	      
+	        $param['ctg_no'] = str_replace('/','', $_SERVER['REQUEST_URI']);
+        	$exp = explode('&page',$param['ctg_no'])  ;
+        	$param['ctg_no']=  $exp[0]; 
+	        	        
+	        $param['total_post'] = $model->get_news_all_count();
+	        $param['total_page']= round($param['total_post']/$param['limit']);
+	        
+	        $start = $page - 2;
+	        $end = $page + 2;
+	        if($page < 3){
+	            $start = 1;
+	            $end = $start + 4;
+	            if($end > $param['total_page']){
+	               $end = $param['total_page'];
+	            }
+	        }
+	        if($param['total_page']< $page + 2 ){
+	            $end = $param['total_page'];
+	            $start = $param['total_page'] - 4;
+	            if($start < 1){
+	               $start = 1;
+	            }
+	        }
+	        $rows = $model->get_news_all($start_row,$param['limit']);		
+	        $param['start'] = $start;
+	        $param['end'] = $end;
+			$param['news'] = $rows	;
 		//$this->set_template_share();
-		$this->ViewVAR( array(
-			'news' => $rows			
-		));
+		$this->ViewVAR( $param);
 	}	
 	
 	public function editAction($new_id)

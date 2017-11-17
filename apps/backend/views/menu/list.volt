@@ -50,7 +50,7 @@
                         <li><select class="form-control" id="level_1">
                             <option value=""></option>
                             {%for pa in parent_list1%}
-                              <option value="{{pa['menu_id']}}">{{pa['menu_name']}}</option>
+                              <option value="{{pa['menu_id']}}" {%if level_1 == pa['menu_id']%}selected="selected"{%endif%}>{{pa['menu_name']}}</option>
                             {% endfor %}
                         </select>
                         </li>
@@ -141,7 +141,7 @@
       for(i=0;i<list_level2.length;i++){
         //console.log(list_level2[i].parent_id);
         if(val == list_level2[i].parent_id){
-          str_op += '<option value="'+list_level2[i].menu_id+'">'+list_level2[i].menu_name+'</option>';
+           str_op += '<option value="'+list_level2[i].menu_id+'">'+list_level2[i].menu_name+'</option>';
         }
       };
       //console.log(str_op);
@@ -175,7 +175,7 @@
         if(datas.status =="OK"){
           Pho_modal_close("modal1");
           //Pho_message_box("Thông báo",datas.msg);
-          Pho_direct("{{url.get('menu/list/')}}{{level_flg}}/{{position}}");
+          Pho_direct("{{url.get('menu/list/')}}{{level_flg}}/{{position}}?level1="+$('#level_1').val());
         }else{
           Pho_message_box_error("Lỗi",datas.msg);
         }
@@ -256,6 +256,8 @@
           find_table(val);
           find_table_2(val_2);          
         });
+        
+	find_table($("#level_1 option:selected").text());
     function find_table(str_val){
       $("#fbody").find("tr").hide();
 

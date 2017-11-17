@@ -12,7 +12,11 @@
                   <div class="row margin_top_5 pn_background pn_border">
                      <div class="col-md-3 col-sm-3 col-xs-12 post_img">
                         <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}">
-                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/176x118/')}}{{item['img_path']}}{%endif%}" class="img_newlist" alt="{{item['post_name']}}" title="{{item['post_name']}}"></a>
+                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/176x118/')}}{{item['img_path']}}{%endif%}" class="img_newlist" alt="{{item['post_name']}}" title="{{item['post_name']}}">
+                        {%if item['youtube_key']|length > 0%}
+                        	<img class="icon_play" src="{{url.get('/template1/images/playicon.png')}}">
+                        {%endif%}
+                        </a>
                      </div>
                      <div class="col-md-9 col-sm-9 col-xs-12">
                         <a href="{{url.get('b/')}}{{item['post_no']}}_{{item['post_id']}}" class="post_title {%if item['post_level']==3%}sieu_vip{%elseif item['post_level']==2%}vip{%elseif item['post_level']==1%}hot{%endif%}">{%if item['post_level']==3%}<i class="fa fa-star"></i>{%endif%}{{item['post_name']}}</a>

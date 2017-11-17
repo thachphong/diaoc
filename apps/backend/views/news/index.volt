@@ -9,6 +9,20 @@
 
     <title>Admin! | </title>    
     {{ partial('includes/header') }}
+    <!-- page content -->
+	<style type="text/css">
+	.optionGroup{
+	    font-weight: bold;
+	    font-style: italic;
+	}
+	.pager .active a{
+			 background-color: rgba(10, 75, 166, 0.86);
+	    		color: #fff;
+		}
+		.pager .active a:hover{		 
+	    	color: #000;
+		}
+	</style>
   </head>
   {% set login_info= elements.getuser()%}
   <body class="nav-md">    
@@ -70,7 +84,7 @@
                       <tbody id="fbody">
                       {%for key,item in news%}
                         <tr>
-                          <td>{{key+1}}</td> 
+                          <td>{{item['news_id']}}</td> 
                           <td>{{item['ctg_name']}}</td>
                           <td id="name_{{item['news_id']}}">{{item['news_name']}}</td>
                           <td>                            
@@ -86,7 +100,26 @@
                       {%endfor%}                        
                       </tbody>
                     </table>
-                    
+                    {%if total_page > 1%}
+			         <div class="row margin_top" >
+			            <div class="col-md-12 col-sm-12 col-xs-12" style="display: flex;justify-content: center;">
+			               <ul class="pager">
+			                  {%if page > 1%}
+			                     <li><a href="{{url.get('')}}{{ctg_no}}&page=1">Trang đầu</a></li>
+			                     <li><a href="{{url.get('')}}{{ctg_no}}&page={{(page-1)}}">Trang trước</a></li>
+			                  {%endif%}                 
+			                  
+			                  {%for i in  start..end%} 
+			                    <li {%if page == i%}class="active"{%endif%}><a href="{%if page != i%}{{url.get('')}}{{ctg_no}}&page={{i}}{%else%}#{%endif%}">{{i}}</a></li>
+			                  {%endfor%}
+			                  {%if page < total_page%}
+			                     <li><a href="{{url.get('')}}{{ctg_no}}&page={{page+1}}">Trang sau</a></li>
+			                     <li><a href="{{url.get('')}}{{ctg_no}}&page={{total_page}}">Trang cuối</a></li>
+			                  {%endif%}       
+			               </ul>
+			            </div>
+			         </div>
+			         {%endif%}
                     </div>
           </div>
           

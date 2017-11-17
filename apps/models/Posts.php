@@ -294,7 +294,7 @@ class Posts extends DBModel
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
-				,rd.m_ward_name
+				,rd.m_ward_name,p.youtube_key
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
@@ -306,8 +306,9 @@ class Posts extends DBModel
 				and p.status =1
 				and v.hide_flg = 0
 				and v.end_date >= NOW()
+				and v.start_date <= now()
 				$where
-				order by v.post_level DESC, v.start_date DESC
+				order by v.post_level DESC, DATE_FORMAT(v.start_date ,'%Y%m%d') DESC
 				limit $limit";
 //		PhoLog::debug_var('vip',$sql);
 		return $this->pho_query($sql);
@@ -334,7 +335,7 @@ class Posts extends DBModel
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
-				,rd.m_ward_name
+				,rd.m_ward_name,p.youtube_key
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id
@@ -346,8 +347,9 @@ class Posts extends DBModel
 				and p.status =1
 				and v.hide_flg = 0
 				and v.end_date >= NOW()
+				and v.start_date <= now()
 				$where			
-				order by v.post_level DESC, v.start_date DESC			
+				order by v.post_level DESC,DATE_FORMAT(v.start_date ,'%Y%m%d') DESC		
 				limit $limit
 				OFFSET $start_row
 				";
@@ -374,6 +376,7 @@ class Posts extends DBModel
 				and p.status =1
 				and v.hide_flg = 0
 				and v.end_date >= NOW()
+				and v.start_date <= now()
 				$where
 				";
 		$res = $this->query_first($sql,$param);
@@ -520,7 +523,7 @@ class Posts extends DBModel
 				NULLIF(un.m_unit_name,'') m_unit_name,
 				NULLIF(im.img_path,'') img_path,
 				DATE_FORMAT(v.start_date ,'%d/%m/%Y')  start_date
-				,rd.m_ward_name
+				,rd.m_ward_name,p.youtube_key
 				from posts p
 				INNER JOIN m_provincial pro on pro.m_provin_id = p.m_provin_id
 				INNER JOIN m_district dis on dis.m_district_id = p.m_district_id

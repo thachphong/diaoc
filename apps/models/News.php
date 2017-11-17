@@ -25,7 +25,7 @@ class News extends DBModel
     {
         $this->setSource("news");
     }
-    public function get_news_all(){
+    public function get_news_all($start_row=0,$limit=50){
         $sql="select n.news_id,
                   n.news_no,
                   n.news_name,               
@@ -39,8 +39,19 @@ class News extends DBModel
                   n.del_flg,
                     c.ctg_name
               from news n
-                left JOIN category c on c.ctg_id = n.ctg_id    ";
+                left JOIN category c on c.ctg_id = n.ctg_id   
+                where n.del_flg = 0 
+                order by n.news_id desc
+                limit $limit
+				OFFSET $start_row";
         return $this->pho_query($sql);
+    }
+    public function get_news_all_count(){
+        $sql="select count(n.news_id)  cnt                
+              from news n             
+                where del_flg = 0  ";
+        $res = $this->query_first($sql);
+		return $res['cnt'];
     }
     public function get_news_info($news_id){
         $sql=" select n.news_id,
