@@ -105,7 +105,8 @@ var Pho_json_ajax= function (type,url,data,done_fun){
 		    done_fun(datajsion);
 		},
 		error: function() {
-			Pho_message_box_error('Lỗi','Lỗi Ajax !!!');
+			console.log('loi'+url);
+			Pho_message_box_error('Lỗi','Lỗi Ajax 1!!!');
 		},		
 		type: type
 	});
@@ -119,7 +120,8 @@ var Pho_upload= function (url,data,done_fun){
 		    done_fun(datajsion);
 		},
 		error: function() {
-			Pho_message_box_error('Lỗi','Lỗi Ajax !!!');
+			console.log('loi'+url);
+			Pho_message_box_error('Lỗi','Lỗi Ajax 2!!!');
 		},
 		contentType: false,
 	    cache: false,
@@ -147,7 +149,8 @@ var Pho_html_ajax= function (type,url,data,done_fun){
 		    done_fun(data);
 		},
 		error: function() {
-			Pho_message_box_error('Lỗi','Lỗi Ajax !!!');
+			console.log('loi'+url);
+			Pho_message_box_error('Lỗi','Lỗi Ajax 3!!!');
 		},
 		type: type
 	});
