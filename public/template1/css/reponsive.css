@@ -18,6 +18,9 @@
     .nav_top {
         display: none
     }
+    .logo{
+		height: 120px;
+	}
 }
 @media (max-width: 639px) and (min-width: 360px){
   
@@ -87,6 +90,9 @@
 		left: 26px;
 		top: 16px;
 	}
+	#myCarousel{
+		display: none;
+	}
 }
 @media (max-width: 320px){
 	.search_tab .tab_title{
@@ -107,5 +113,8 @@
 	}
 	ul.bxslider li{		
 		height: 220px;
+	}
+	#myCarousel{
+		display: none;
 	}
 }

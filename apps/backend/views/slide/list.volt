@@ -65,6 +65,9 @@
                         <tr>
                           <th>STT</th>                         
                           <th>Ảnh</th> 
+                          {%if banner_flg==0%}
+                          	<th>Vị trí</th>
+                          {%endif%}
                           <th>Link đến trang</th>                       
                           <th>Hiện</th>
                           <th>Sửa</th> 
@@ -82,6 +85,9 @@
                           <td>
                           	<img id="img_disp" class="img-rounded" src="{{url.get('')}}{{item.img_path}}" width="220" height="100"/>
                           </td> 
+                          {%if banner_flg==0%}
+                          	<th>{%if item.position=='1'%}Phía trên{%else%}Phía dưới{%endif%}</th>
+                          {%endif%}
                           <td>{{item.link_page}}</td>                        
                           <td>
                           	

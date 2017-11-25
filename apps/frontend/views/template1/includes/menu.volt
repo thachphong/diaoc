@@ -1,11 +1,20 @@
 <div class="row">
          <div class="container" id="header">
             <div class="row" >
-               <div class="col-md-4 col-sm-4 col-xs-12">
-                  <img src="{{url.get('template1/images/logo.png')}}" />  
+               <div class="col-md-3 col-sm-3 col-xs-12">
+                  <img src="{{url.get('template1/images/logo4.png')}}" class="logo"/>  
                </div>
                {% set login_info= elements.getuser()%}
-               <div class="col-md-8 col-sm-8 col-xs-12">
+               <div class="col-md-9 col-sm-9 col-xs-12 no_padding_right">
+               	  <div class="row carousel slide" id="myCarousel" data-ride="carousel" data-interval="10000">
+               	  	{% set slidetop= elements.get_slide_top()%}
+               	  	 <ul id="slide_top" class="carousel-inner">
+				    {%for key,item in slidetop%}
+	         		<li class="item {%if key==0%}active{%endif%}"><a href="{{item.link_page}}"><img src="{{url.get('crop/728x90/')}}{{item.img_path}}"></a></li>
+	         		{%endfor%}
+	  				</ul>
+               	  </div>
+               	  <div class="row">
                   <ul class="dang-tin-icon">
                      <li><span class="fa fa-pencil"></span><a href="{{url.get('dang-tin/0')}}">Đăng tin miễn phí</a></li>
                      {%if login_info is defined%}
@@ -17,6 +26,7 @@
                      {%endif%}
                      
                   </ul>
+                  </div>
                </div>        
             </div> 
          </div>

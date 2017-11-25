@@ -536,7 +536,25 @@ class Elements extends Component
 			PhoLog::debug_var('---Error---',$e);
 		}
 	}
-    
+    public function get_slide_top(){
+		try{
+	    	$options = ['lifetime' => 86400 ]; // thoi gian tinh bang giay ,1 ngay
+	        $frontendCache = new FrontData($options);   
+	        $cache = new BackFile( $frontendCache,  ['cacheDir' => PHO_CACHE_DIR ]);
+
+	        $cacheKey = 'slide_top.cache';
+	        $cdata  = $cache->get($cacheKey);
+	        if($cdata === NULL){
+				$model = new Slide();
+				$cdata = $model->get_slides_list(0,1); //1 la banner		
+				
+				$cache->save($cacheKey, $cdata);
+			}		
+			return $cdata;
+		}catch (\Exception $e) {
+			PhoLog::debug_var('---Error---',$e);
+		}
+	}
     
     public function getTabs()
     {
