@@ -11,8 +11,8 @@
    	{%endif%}
 </div>
 <script type="text/javascript">
-	$('.banner_left').css('top','92px');
-	$('.banner_right').css('top','92px');
+	$('.banner_left').css('top','184px');
+	$('.banner_right').css('top','184px');
 	  $(window).scroll(function() {
 		    var height = $(window).scrollTop();
 		    
@@ -20,15 +20,15 @@
 		    $('.banner_right').removeAttr("style");
 		    if(height  < 92) {
 		        // do something
-		        $('.banner_left').css('top',(92-height)+'px');
-		        $('.banner_right').css('top',(92-height)+'px');
+		        $('.banner_left').css('top',(184-height)+'px');
+		        $('.banner_right').css('top',(184-height)+'px');
 		    }else{
 		    	$('.banner_left').css('top','0px');
 		    	$('.banner_right').css('top','0px');
 		    }
 		    var wheight = $(document).height();
 		    var screen_height = window.innerHeight;
-		    var bottom = wheight - screen_height - 248;
+		    var bottom = wheight - screen_height - 275;
 		    //console.log('height:'+height);
 		    //console.log('bottom:'+bottom);
 		    //console.log('bottom2:'+(height-bottom));

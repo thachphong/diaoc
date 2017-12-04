@@ -19,6 +19,7 @@
 	         		</ul>
          		</div>  
          	</div>   -->
+         	<div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12" id="footer_col_1">               
                <p><strong style="color:#015f95;">CÔNG TY CỔ PHẦN DỊCH VỤ PHÁT TRIỂN NHÀ ĐẤT HÀ NỘI</strong></p>
                <p><strong style="color:#589b04;;">Địa chỉ:</strong> Tầng 7, tòa nhà BIGOFFICE 152  Vũ Phạm Hàm , Phường Yên Hòa , Quận Cầu Giấy, Hà Nội</p>
@@ -52,6 +53,12 @@
             		</li>
             	</ul>
             	             
+            </div>
+            </div>
+            <div class="row" style="text-align: center">
+            	<hr class="line"/>            
+            	<p> Bản quyền © 2017 diaocviet.vn - All rights reserved - Thiết kế bởi: thietkewes2giay.com</p>
+            	<p>Đây là phiên bản beta chạy thử nội dung trong quá trình xin các giấy phép.</p>
             </div>
          </div>
       </div>
