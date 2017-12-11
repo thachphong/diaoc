@@ -406,7 +406,7 @@ class Elements extends Component
                 if(strlen($item['img_path'])>0){
                     $html .= '<img src="'.BASE_URL_NAME.'crop/60x50/'.$item['img_path'].'"><div>';
                 }else{
-                    $html .= '<img src="'.BASE_URL_NAME.'template1/images/post1.png"><div>';
+                    $html .= '<img src="'.BASE_URL_NAME.'template1/images/post01.png"><div>';
                 }
                 
                 $html .= '<a href="'.BASE_URL_NAME.'b/'.$item['post_no'].'_'.$item['post_id'].'">'.$item['post_name'].'</a>';
@@ -441,7 +441,7 @@ class Elements extends Component
                 if(strlen($item['img_path'])>0){
                     $html .= '<img class="duan_img" src="'.BASE_URL_NAME.'crop/104x69/'.$item['img_path'].'"><div>';
                 }else{
-                    $html .= '<img class="duan_img" src="'.BASE_URL_NAME.'template1/images/post1.png"><div>';
+                    $html .= '<img class="duan_img" src="'.BASE_URL_NAME.'template1/images/post01.png"><div>';
                 }
                 
                 $html .= '<a href="'.BASE_URL_NAME.'da/'.$item['project_no'].'_'.$item['project_id'].'">'.$item['project_name'].'</a>';

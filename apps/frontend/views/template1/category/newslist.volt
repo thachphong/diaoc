@@ -14,7 +14,7 @@
                   <div class="row margin_top pn_background pn_border">
                      <div class="col-md-3 col-sm-3 col-xs-3 post_img">
                         <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">
-                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post0.png')}}{%else%}{{url.get('crop/140x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist"></a>
+                        <img src="{%if item['img_path']|length ==0%}{{url.get('crop/176x118/template1/images/post00.png')}}{%else%}{{url.get('crop/140x100/')}}{{item['img_path']}}{%endif%}" class="img_newlist"></a>
                      </div>
                      <div class="col-md-9 col-sm-9 col-xs-9">
                         <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}" class="news_title">{{item['news_name']}}</a>
