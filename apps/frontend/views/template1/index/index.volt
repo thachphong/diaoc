@@ -17,7 +17,7 @@
                	  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">
                   <img src="{{url.get('crop/354x236/')}}{{item['img_path']}}" alt="{{item['news_name']}}" title="{{item['news_name']}}">
                   </a>
-                  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}"><h4>{{item['news_name']}}</h4></a>
+                  <a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}"><h4 class="colblue">{{item['news_name']}}</h4></a>
                   </div>
                 {%endfor%}
                </div>
@@ -26,7 +26,7 @@
                		<!--<div id="tintuc_new_list" style="height: 300;margin-top: 5px;display: block; overflow: none">-->
 	                  <ul class="boxright" id="tintuc">
 	                  {%for key,item in kientruc%}	                    
-	                        <li data_item="{{key}}" style="height: 45px; width: 100%"> <i class="fa fa-circle"></i><a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}">{{item['news_name']}}</a></li>	                    
+	                        <li data_item="{{key}}" style="height: 45px; width: 100%"> <i class="fa fa-circle"></i><a href="{{url.get('t/')}}{{item['news_no']}}_{{item['news_id']}}" class="colblue">{{item['news_name']}}</a></li>	                    
 	                  {%endfor%}
 	                 </ul>
                   <!--</div>-->
