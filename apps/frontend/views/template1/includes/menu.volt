@@ -15,7 +15,10 @@
 	  				</ul>
                	  </div>
                	  <div class="row">
-                  <ul class="dang-tin-icon">
+               	  <div class="col-md-4 col-sm-4 col-xs-12">
+               	  	<div id="translate_select"></div>
+               	  </div>
+                  <ul class="dang-tin-icon">                  	 
                      <li><span class="fa fa-pencil"></span><a href="{{url.get('dang-tin/0')}}">Đăng tin miễn phí</a></li>
                      {%if login_info is defined%}
                         <li><span class="fa fa-users"></span><a href="{{url.get('thanh-vien')}}">{{login_info.user_name}}</a></li>
@@ -48,3 +51,4 @@
             </div>
          </div>
       </div>
+      

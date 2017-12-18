@@ -74,7 +74,7 @@ ul.dang-tin-icon{
     float: right;
 }
 ul.dang-tin-icon li{
-    display: inline;
+    display: inline-block;
     padding: 5px;
 }
 ul.dang-tin-icon li a{
@@ -1137,6 +1137,17 @@ option:checked {
 	padding-left: 0px;
     margin-bottom: 0px;
     margin-top: 10px;
+}
+#translate_select{
+	height: 37px;
+	overflow: hidden;
+	margin-top: 5px;
+}
+#translate_select .goog-te-combo{
+	padding: 7px;
+}
+#translate_select span{
+	display: none;
 }
 /*.main_img{
     width: 100%;

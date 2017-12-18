@@ -94,5 +94,14 @@
 jQuery('.fchat').toggle('slow');
   });
   });
+  
   </script>
 {{ javascript_include('template1/js/menu_active.js?ver=1.0.5') }}
+<script type="text/javascript"
+    src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'vi'}, 'translate_select');
+    }
+</script>
