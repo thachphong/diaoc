@@ -15,7 +15,7 @@
 	  				</ul>
                	  </div>
                	  <div class="row">
-               	  <div class="col-md-4 col-sm-4 col-xs-12">
+               	  <div class="col-md-6 col-sm-6 col-xs-12 no_padding_right">
                	  	<div id="translate_select"></div>
                	  </div>
                   <ul class="dang-tin-icon">                  	 

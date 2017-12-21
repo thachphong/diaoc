@@ -1139,12 +1139,14 @@ option:checked {
     margin-top: 10px;
 }
 #translate_select{
-	height: 37px;
+	height: 35px;
 	overflow: hidden;
-	margin-top: 5px;
+	margin-top: 7px;
+	float: right;
 }
 #translate_select .goog-te-combo{
-	padding: 7px;
+	padding: 5px;
+	border: none;
 }
 #translate_select span{
 	display: none;
