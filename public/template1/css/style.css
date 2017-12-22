@@ -70,12 +70,13 @@ a{
     background: var(--main_color );
 }
 ul.dang-tin-icon{
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     float: right;
 }
 ul.dang-tin-icon li{
     display: inline-block;
-    padding: 5px;
+    padding: 8px 5px;
 }
 ul.dang-tin-icon li a{
     font-size: 14px;
@@ -1138,11 +1139,10 @@ option:checked {
     margin-bottom: 0px;
     margin-top: 10px;
 }
-#translate_select{
-	height: 35px;
+#translate_select,#translate_select .goog-te-gadget{
+	height: 31px;
 	overflow: hidden;
-	margin-top: 7px;
-	float: right;
+	margin-top: 0px;
 }
 #translate_select .goog-te-combo{
 	padding: 5px;
