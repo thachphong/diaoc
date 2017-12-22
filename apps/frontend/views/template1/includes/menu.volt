@@ -14,12 +14,8 @@
 	         		{%endfor%}
 	  				</ul>
                	  </div>
-               	  <div class="row">
-               	  <!--<div class="col-md-6 col-sm-6 col-xs-12 no_padding_right">
-               	  	
-               	  </div>-->
-                  <ul class="dang-tin-icon">
-                  	<li style="padding-top: 5px;padding-bottom: 0px"><div id="translate_select"></div></li>              	 
+               	  <div class="row">               	  
+                  <ul class="dang-tin-icon">                  	 
                      <li><span class="fa fa-pencil"></span><a href="{{url.get('dang-tin/0')}}">Đăng tin miễn phí</a></li>
                      {%if login_info is defined%}
                         <li><span class="fa fa-users"></span><a href="{{url.get('thanh-vien')}}">{{login_info.user_name}}</a></li>
@@ -30,6 +26,9 @@
                      {%endif%}
                      
                   </ul>
+                  <div class="col-md-6 col-sm-6 col-xs-12 no_padding_right" style="float: right;">
+               	  	<div id="translate_select"></div>
+               	  </div>
                   </div>
                </div>        
             </div> 
