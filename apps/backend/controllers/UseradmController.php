@@ -100,4 +100,14 @@ class UserAdmController extends PHOController
 		$db->updatelevel($id,0);
 		return $this->response->redirect('useradm/list');
 	}
+	public function lockAction($id){
+		$db = new Users();
+		$db->updatelock($id,1);
+		return $this->response->redirect('useradm/list');
+	}
+	public function unlockAction($id){
+		$db = new Users();
+		$db->updatelock($id,0);
+		return $this->response->redirect('useradm/list');
+	}
 }

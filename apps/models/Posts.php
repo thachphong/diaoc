@@ -308,7 +308,7 @@ class Posts extends DBModel
 				and v.end_date >= NOW()
 				and v.start_date <= now()
 				$where
-				order by v.post_level DESC, DATE_FORMAT(v.start_date ,'%Y%m%d') DESC
+				order by v.post_level DESC, DATE_FORMAT(v.start_date ,'%Y%m%d') DESC,v.post_view_id desc
 				limit $limit";
 //		PhoLog::debug_var('vip',$sql);
 		return $this->pho_query($sql);
@@ -692,7 +692,7 @@ class Posts extends DBModel
 				limit $limit
 				OFFSET $start_row";
 		PhoLog::debug_var('--search1----',$sql);
-		//PhoLog::debug_var('--search1----',$search);
+		PhoLog::debug_var('--search1----',$search);
 		return $this->pho_query($sql, $search);
 	}	
 	public function get_byuser_count($param){

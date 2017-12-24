@@ -26,6 +26,7 @@ class Users extends DBModel
     public $facebook;
     public $skype;
     public $amount;
+    public $del_flg;
     public function initialize()
     {
         $this->setSource("user");
@@ -44,7 +45,7 @@ class Users extends DBModel
        // PhoLog::debug_var('---test---',$user_no);  
        // PhoLog::debug_var('---test---',$this->encodepass($pass)); 
 		return Users::findFirst(array(
-            "(email = :email: OR user_no = :email:) and pass= :pass:  ",
+            "(email = :email: OR user_no = :email:) and pass= :pass:  and del_flg = 0",
             'bind' => array('email' => $user_no,'pass'=>$this->encodepass($pass))
         ));
 	}
@@ -88,6 +89,7 @@ class Users extends DBModel
         $this->email =$param['email'];
         $this->sex =$param['sex'];
         $this->avata ='0.png';
+        $this->del_flg = 0;
         return $this->save();
     }
     public function get_validation($param){
@@ -141,7 +143,7 @@ class Users extends DBModel
 	public function get_user_rows($param)
 	{
 		$sql = "SELECT	user_id,user_name,user_no,email,mobile,level,
-				(case when level=1 then 'Admin' else 'Thường' end) level_name
+				(case when level=1 then 'Admin' else 'Thường' end) level_name,del_flg
 				 FROM	user ";
 		
 		if (isset($param['s_user_name'])) {
@@ -165,5 +167,11 @@ class Users extends DBModel
 						level = :level	
 				where user_id =:user_id ";		
 		return $this->pho_execute($sql,array('level'=>$level,'user_id'=>$user_id));
+	}
+	public function updatelock($user_id,$lock){
+		$sql ="update user set 
+						del_flg = :del_flg	
+				where user_id =:user_id ";		
+		return $this->pho_execute($sql,array('del_flg'=>$lock,'user_id'=>$user_id));
 	}
 }

@@ -56,7 +56,8 @@
                           <th>Email</th>
                           <th>Điện thoại</th>
                           <th>Loại user</th>                        
-                          <th>Phân quyền</th>                          
+                          <th>Phân quyền</th>
+                          <th>KHóa tài khoản</th>                          
                         </tr>
                       </thead>
                       <tbody id="fbody">
@@ -75,6 +76,13 @@
                           	  <a class="btn btn-warning btn-xs btn_edit" href="{{url.get('useradm/tonormal/')}}{{item['user_id']}}">Hạ xuống thường</a>
                           {%endif%}
                           	
+                          </td>
+                          <td>
+                          	{%if item['del_flg']==0%}
+                          	  <a class="btn btn-warning btn-xs btn_edit" href="{{url.get('useradm/lock/')}}{{item['user_id']}}">Khóa tài khoản</a>
+                            {%else%}
+                          	  <a class="btn btn-info btn-xs btn_edit" href="{{url.get('useradm/unlock/')}}{{item['user_id']}}">Mở khóa</a>
+                          {%endif%}
                           </td>
                         </tr>
                       {%endfor%}                        
