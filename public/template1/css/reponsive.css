@@ -1,3 +1,11 @@
+@media (max-width: 1280px) { 
+	.banner_left{
+		left: 21.5px;
+	}	
+	.banner_right{
+		right: 21.5px;
+	}
+}
 @media (max-width: 1199px) { 
 	.banner_left,.banner_right{
 		display: none;

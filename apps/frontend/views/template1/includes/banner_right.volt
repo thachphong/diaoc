@@ -20,8 +20,8 @@
 		    $('.banner_right').removeAttr("style");
 		    if(height  < 338) {
 		        // do something
-		        $('.banner_left').css('top',(428-height)+'px');
-		        $('.banner_right').css('top',(428-height)+'px');
+		        $('.banner_left').css('top',(438-height)+'px');
+		        $('.banner_right').css('top',(438-height)+'px');
 		    }else{
 		    	$('.banner_left').css('top','0px');
 		    	$('.banner_right').css('top','0px');
