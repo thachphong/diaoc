@@ -100,7 +100,7 @@ class PostsController extends PHOController
 	}
 	public function wardsAction(){		
 		$ckey ="m_wards.cache";
-		$cache = $this->createCache(['lifetime' => 86400 ]); // 1 ngay
+		$cache = $this->createCache(['lifetime' => 864000 ]); // 10 ngay
 		$data = $cache->get($ckey);
 		if($data === null){
 			$mw = new Ward();

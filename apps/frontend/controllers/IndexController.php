@@ -126,7 +126,7 @@ class IndexController extends PHOController
 	}
 	public function streetAction($m_district_id){
 		$ckey ="street_".$m_district_id;
-		$cache = $this->createCache(['lifetime' => 86400 ]); // 1 ngay
+		$cache = $this->createCache(['lifetime' => 864000 ]); // 10 ngay
 		$data = $cache->get($ckey);
 		if($data === null){			
 			$mw = new Street();	
