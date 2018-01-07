@@ -110,6 +110,19 @@ class PostsController extends PHOController
 	
 		return $this->ViewJSON($data);
 	}
+	public function wardsbyproAction(){	
+		$param = $this->get_Gparam(array('m_provin_id'))	;
+		$ckey ="m_wards_".$param['m_provin_id'].".cache";
+		$cache = $this->createCache(['lifetime' => 864000 ]); // 10 ngay
+		$data = $cache->get($ckey);
+		if($data === null){
+			$mw = new Ward();
+			$data['wards'] = $mw->get_rows_bypro($param['m_provin_id']);			
+			$cache->save($ckey,$data);
+		}	
+	
+		return $this->ViewJSON($data);
+	}
 	public function updateAction(){
 		try{
 			$param = $_POST;

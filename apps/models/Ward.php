@@ -24,4 +24,10 @@ class Ward extends DBModel
         $sql ="select m_ward_id,m_ward_name,m_district_id from m_ward ";
         return $this->pho_query($sql);
     }
+    public function get_rows_bypro($provin_id){
+        $sql ="select m.m_ward_id,m.m_ward_name,m.m_district_id 
+				from m_ward m
+				INNER JOIN m_district d on d.m_district_id = m.m_district_id and d.m_provin_id = $provin_id";
+        return $this->pho_query($sql);
+    }
 }

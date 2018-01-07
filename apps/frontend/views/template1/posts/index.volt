@@ -62,7 +62,7 @@
 						<div class="row row-margin-bottom">
 							<label class="col-md-2 col-sm-2 col-xs-12 title_col">Tiêu đề <span class="lab_red">(*)</span>:</label>
 							<div class="col-md-9 col-sm-9 col-xs-12">
-								<input type="text" name="post_name" required value="{{post_name}}" id="post_name">
+								<input type="text" name="post_name" required value="{{post_name}}" id="post_name" maxlength="99" placeholder="Tiêu đề tối đa là 99 ký tự">
 								<label class="lab_red lab_invisible" id="post_name_error">Bạn cần nhập tiêu đề !</label>
 							</div>												
 						</div>
@@ -439,9 +439,11 @@
           lang:'ru'
     	});
 		//console.log(district_list);
-		function get_basic(){
+		function get_basic(provin_id){
+			//console.log(provin_id);
+			if(provin_id =='') return;
 			loading_flg = false;
-	        jsion_ajax("{{url.get('posts/wards')}}" ,null,function(datas){               
+	        jsion_ajax("{{url.get('posts/wardsbypro')}}" ,{m_provin_id:provin_id},function(datas){               
 	            ward_list = datas.wards;  
 	            change_war_option('{{m_ward_id}}');
 	        });
@@ -466,10 +468,11 @@
 				$('#m_street_id').append(option);
 	        });
 	    }
-	    setTimeout(get_basic(),10);
+	    setTimeout(get_basic('{{m_provin_id}}'),10);
 		$(document).off('change','#m_provin_id');
 		$(document).on('change','#m_provin_id',function(){			
 			change_district_option('');
+			get_basic($(this).val());
 			change_map();
 		});
 		var change_district_option= function(district_id){
@@ -501,6 +504,7 @@
 			var val = $('#m_district_id').val();
 			var option = '<option value="">--Chọn Phường/Xã--</option>';
 			$.each(ward_list,function(key,item){
+				//console.log(m_ward_id);
 				//console.log(item);
 				if(val == item['m_district_id']){
 					if(m_ward_id == item['m_ward_id']){

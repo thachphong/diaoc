@@ -54,7 +54,11 @@ class Slide extends DBModel
 	    $this->add_user= $param['user_id'];	  
 	    $this->upd_user= $param['user_id'];
 	    $this->link_page= $param['link_page'];
-	    $this->banner_flg= $param['banner_flg'];
+	    $this->banner_flg= 0;
+	    if(strlen($param['banner_flg']) > 0){
+			$this->banner_flg= $param['banner_flg'];
+		}
+	    
 	    if(isset($param['position'])){
 			$this->position = $param['position'];
 		}
